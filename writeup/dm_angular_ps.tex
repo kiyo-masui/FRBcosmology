@@ -82,6 +82,10 @@
 \newcommand{\Zparity}{\mathbb{Z}_2}
 \newcommand{\BLambda}{\boldsymbol{\lambda}}
 
+
+\newcommand{\ud}{\,\mathrm{d}}
+
+
 \begin{document}
 
 \title{Fast Radio Burst Cosmology}
@@ -203,11 +207,47 @@ estimator. We parameterized the variance from this term as
 \begin{equation}
     \langle D^{\rm src}_i D^{\rm src}_j \rangle
     - \langle D^{\rm src}_i \rangle \langle D^{\rm src}_j \rangle
-    = \delta_{ij} \sigma^2_{\rm src}
+    = \delta_{ij} \sigma^2_{\rm src}.
 \end{equation}
 
+The cosmological information lies in the correlations within the set
+$\{D^{\delta_e}_i\}$. If the redshifts of the observed FRBs where known, we
+would write the probability density function of this set as
+$p(\{D^{\delta_e}_i\} | \{z_i\})$, which has second moments
+\begin{equation}
+    w^{z_i z_j}(\hat{n}_i\cdot\hat{n}_j) \equiv \int \ud \{D^{\delta_e}_i\}
+        D^{\delta_e}_i D^{\delta_e}_j p(\{D^{\delta_e}_i\} | \{z_i\}).
+\end{equation}
+$w^{z_i z_j}(\hat{n}_i\cdot\hat{n}_j)$ is the redshift dependant DM angular
+correlation function, whose dependence on cosmology is derived below.
+Marginalizing $p(\{D^{\delta_e}_i\} | \{z_i\})$ over the unknown redshifts
+yields
+\begin{equation}
+    p(\{D^{\delta_e}_i\}) = \int_0^\infty \ud \{z_i\}
+        p(\{z_i\}) p(\{D^{\delta_e}_i\} | \{z_i\}).
+\end{equation}
+The second moment of the marginalized distribution is
+\begin{align}
+    \langle D^{\delta_e}_i D^{\delta_e}_j \rangle =& \\
+        =& \textrm{stuff} \\
+    =& \int \ud z \ud z' p(z) p(z') w^{z z'}(\hat{n}_i\cdot\hat{n}_j) \qquad (i \neq j) \\
+    =& \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(\hat{n}_i\cdot\hat{n}_j)
+    \qquad (i = j)
+\end{align}
+I think.
 
-We further assume that the terms in Equation \ref{e:D_sep} are mutually uncorrelated
+The covariance matrix is
+\begin{align}
+    C_{ij} =& \langle D_i D_j \rangle - \langle D_i \rangle \langle D_j \rangle
+           = \textrm{a bunch of things we know (special case for $i=j$)}.
+\end{align}
+
+Now that we have the covariance matrix, the estimator is Equation~11.94 from
+Dodelson, although we have to modify it slightly to exclude the
+auto-correlations.  The error (assuming Gaussianity) is Equation~11.100.
+
+
+%We further assume that the terms in Equation \ref{e:D_sep} are mutually uncorrelated
 
 
 \begin{comment}
