@@ -1,0 +1,223 @@
+%\documentclass[onecolumn,amsmath,amssymb,floatfix,12pt,nofootinbib]{revtex4}
+\documentclass[twocolumn,prd,noshowpacs,nofootinbib,amsmath,amssymb]{revtex4}
+\usepackage{graphicx,epsfig,psfrag,bm,amssymb}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage{mciteplus}
+\usepackage{color}
+\usepackage{mathrsfs,amsfonts,hepunits, color}
+\usepackage{mciteplus}
+\usepackage{tikz}
+\usepackage{slashed}
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{trees}
+\usetikzlibrary{matrix,arrows} 				% For commutative diagram
+											% http://www.felixl.de/commu.pdf
+\usetikzlibrary{positioning}				% For "above of=" commands
+\usetikzlibrary{calc,through}				% For coordinates
+\usetikzlibrary{decorations.pathreplacing}  % For curly braces
+\usepackage{pgffor}							% For repeating patterns
+
+\usetikzlibrary{decorations.pathmorphing}	% For Feynman Diagrams
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{snakes}
+
+\tikzset{
+	% >=stealth', %%  Uncomment for more conventional arrows
+    vector/.style={decorate, decoration={snake}, draw},
+	provector/.style={decorate, decoration={snake,amplitude=2.5pt}, draw},
+	antivector/.style={decorate, decoration={snake,amplitude=-2.5pt}, draw},
+    fermion/.style={draw, postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow[draw]{>}}}},
+    fermionbar/.style={draw, postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow[draw=black]{<}}}},
+    fermionnoarrow/.style={draw},
+    gluon/.style={decorate, draw,decoration={coil,amplitude=4pt, segment length=6pt}, line width=1},
+    scalar/.style={dashed,draw, postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow[draw]{>}}}},
+    scalarbar/.style={dashed,draw, postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow[draw]{<}}}},
+    scalarnoarrow/.style={dash pattern = on 6 pt off 3 pt,draw},
+    electron/.style={draw, postaction={decorate},
+        decoration={markings,mark=at position .55 with {\arrow[draw]{>}}}},
+	bigvector/.style={decorate, decoration={snake,amplitude=4pt}, draw},
+	vectorscalar/.style={loosely dotted,draw, postaction={decorate}},
+}
+\RequirePackage{xspace}
+\usepackage{relsize}
+\usepackage{slashed}
+\newcommand{\fb}{{\rm fb}}
+\newcommand{\ab}{{\rm ab}}
+
+\newcommand{\be}{\begin{eqnarray}}
+\newcommand{\ee}{\end{eqnarray}}
+\def\lsim{\mathrel{\rlap{\lower4pt\hbox{\hskip 0.5 pt$\sim$}}
+    \raise1pt\hbox{$<$}}}                % less than or approx. symbol
+\def\gsim{\mathrel{\rlap{\lower4pt\hbox{\hskip1pt$\sim$}}
+    \raise1pt\hbox{$>$}}} 
+    
+\newcommand{\schi}{s_{\chi\bar\chi}}  % tried to use this throughout off-shell derivation so that we can change notation later if desired.
+\newcommand{\scratch}[1]{{\textcolor{red}{ #1}}}
+\newcommand{\f}{\frac}
+\newcommand{\pf}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\g}{{\rm g}}
+\newcommand{\s}{{\rm s}}
+\newcommand{\m}{{\rm m}}
+\def\lsim{\mathrel{\rlap{\lower4pt\hbox{\hskip1pt$\sim$}}
+    \raise1pt\hbox{$<$}}}
+\def\gsim{\mathrel{\rlap{\lower4pt\hbox{\hskip1pt$\sim$}}
+    \raise1pt\hbox{$>$}}}
+\newcommand{\vev}[1]{ \left\langle {#1} \right\rangle }
+\newcommand{\bra}[1]{ \langle {#1} | }
+\newcommand{\ket}[1]{ | {#1} \rangle }
+\newcommand{\ev}{ {\rm eV} }
+\newcommand{\kev}{{\rm keV}}
+\newcommand{\mev}{{\rm MeV}}
+\newcommand{\gev}{{\rm GeV}}
+\newcommand{\tev}{{\rm TeV}}
+\newcommand{\mpl}{$M_{Pl}$}
+\newcommand{\mw}{$M_{W}$}
+\newcommand{\Ft}{F_{T}}
+\newcommand{\Zparity}{\mathbb{Z}_2}
+\newcommand{\BLambda}{\boldsymbol{\lambda}}
+
+\begin{document}
+
+\title{Fast Radio Burst Cosmology}
+
+\author{Kris Sigurdson}
+ \affiliation{Department of Physics and Astronomy, University of British 
+Columbia, Vancouver, BC, Canada V6T 1Z1}
+
+
+\begin{abstract}
+In recent years a new astrophysical phenomena, fast radio bursts (FRBs), has been detected that potentially originates from cosmological distances.  These broadband radio bursts  typically last for only milliseconds and are a \emph{standard ping} that can be used to map the properties of the Universe.  In this paper,  under the assumption that these bursts originate from cosmological distances, we discuss how the detection of a large enough population of these events can be used to map the cosmological properties of the Universe.    We first discuss one point statistics and show that, even if FRBs are not standard candles, the dispersion-measure distance vs. luminosity-distance distribution of any observed population is a strong constraint on cosmology.  We then discuss how the two point statistics of an observed population of FRBs traces the large-scale structure of the Universe and make predictions for the angular power spectra of dispersion-measure distance.  It is possible that FRBs do not originate at cosmological distances, but if they do, we argue that they could open a remarkable window to observe the properties of the Universe.
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%					Introduction
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+Several years ago an unusual radio event was discovered at the Parks radio telescope while searching for millisecond pulsars.  In a direction out of the plane of the Galaxy an event was discovered with an unusually large dispersion-measure, implying a column of electrons much large than expected in the Galaxy.
+
+In this \emph{ Letter} we consider the implications of of a cosmological population of fast radio bursts (FRBs). 
+ If FRBs originate at cosmological distances they provide a new window on the Universe. The key insight into the potential power of FRBs is that, while it is interesting and helpful to know the redshift of the burst, it is not necessary to do interesting studies of cosmology.
+ 
+ The outline of this \emph{Letter} is as follows. In Section \ref{sec:notes} we discuss how dispersion measure provides a new distance measure in cosmology and how the joint distribution of dispersion-distance and luminosity-distance of a population of FRBs depends on cosmology and the intrinsic luminosity distance distribution.   In Section \ref{sec:notes} we then show how to calculate the angular power spectra of dispersion distance.  We then forecast how well these cosmological observables can be measured.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%					Basic Ingredients 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Notes}\label{sec:notes}
+
+%Let's define the dispersion-measure distance.
+
+%The lets discuss how a given luminosity relationship and cosmology dictates an expected joint distribution of dispersion measure.
+
+For some line of sight originating from redshift $z$
+
+\begin{equation}
+{\rm DM}^{z}(\hat{n}) = \int_0^{\eta^z} d\eta \frac{n_e(\eta\hat{n})}{(1+z(\eta))^2}
+\end{equation}
+is the dispersion-measure random field in angular direction $\hat{n}$ where
+\begin{equation}
+n_e(\eta^z\hat{n}) \equiv n_e(z,\hat{n}) =  \bar{n}_{e0} (1+z)^3 \left[1+\delta_e(z,\hat{n})\right]
+\end{equation}
+is the electron distribution of the Universe and $\bar{n}_{e0}$ is the mean cosmological density of free electrons today, and $\delta_e(z,\hat{n})$ is 
+the fractional overdensity of electrons.
+We define the dispersion-measure distance (or dispersion distance), the equivalent distance required to
+produce a given amount of dispersion in an observed radio signal in the Universe today, as 
+$ D = {{\rm DM}}/{\bar{n}_{e0}}$
+
+The angular correlation function of dispersion distance between two lines of sight at redshift $z$ and direction $\hat{n}$ and redshift $z'$ and direction $\hat{n}'$ is
+\begin{equation}
+w^{z z'}(\hat{n}\cdot\hat{n}') = \langle D^z(\hat{n}) D^{z'}(\hat{n}') \rangle
+\end{equation}
+and the corresponding angular power spectrum is
+\begin{equation}
+w^{z z'}(\hat{n}\cdot\hat{n}') = \sum_l \frac{2l+1}{4 \pi} C_l^{z z'} P_l(\hat{n}\cdot\hat{n}')
+\end{equation}
+
+We can decompose the dispersion-distance field into spherical harmonics as
+\begin{equation}
+D^z(\hat{n}) = \sum_{l m} D^z_{l m} Y_{l m} (\hat{n})
+\end{equation}
+
+A plane wave can be expanded in terms of spherical eigenfunctions using the Rayleigh expansion
+\begin{equation}
+e^{i \vec{k}\cdot \hat{n} \eta} = 4\pi \sum_{l m} i^l j_{l}(k\eta) Y^*_{lm}(\hat{k})Y_{lm}(\hat{n})
+\end{equation}
+If we define 
+\begin{equation}
+N_e(\vec{k}) = \int d^3 \vec{x} e^{-i \vec{x}\cdot\vec{k}} n_e(\vec{x})
+\end{equation}
+to be the Fourier transform of the comoving electron density field then we can write
+\begin{equation}
+D^z_{l m} = \frac{4 \pi i^{l}}{\bar{n}_{e0}} \int \frac{d^3 \vec{k}}{(2\pi)^3} N_e(\vec{k}) Y^*_{l m}(\hat{k}) \int_0^{\eta^z} d\eta a^{-1}(\eta) j_{l}(k\eta)
+\end{equation}
+and the angular power spectra of dispersion-distance, assumed to be an isotropic random field, is thus
+\begin{equation}
+\langle D^z_{l m} D^{z'}_{l' m'} \rangle = C_l^{z z'} \delta_{l l'} \delta_{m m'}
+\end{equation}
+Now since we have 
+\begin{equation}
+\langle N_e(\vec{k}) N_e(\vec{k}')\rangle = \bar{n}_{e0}^2\left[\langle \delta_e(\vec{k})\delta_e(\vec{k}')\rangle + 1 \right]
+\end{equation}
+where
+\begin{equation}
+\langle \delta_e(\vec{k})\delta_e(\vec{k}')\rangle = (2\pi)^3 \delta_{D}^3(\vec{k}-\vec{k}') P_{ee}(k)
+\end{equation}
+we finally have
+\begin{equation}
+C_l^{zz'}=\frac{2}{\pi} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z'}}\frac{d\eta'}{a(\eta')}  j_l(k\eta) j_l(k\eta')
+\end{equation}
+The one-point variance in the dispersion-distance from a redshift $z$ is just
+\begin{equation}
+(\sigma^2)^{zz}=\sum_{l} \frac{2l+1}{4\pi} C_l^{zz}
+\end{equation}
+Using the addition identify for a complete sum over spherical bessel functions we find that
+\begin{equation}
+(\sigma^2)^{zz}= \frac{1}{2\pi^2} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z}}\frac{d\eta'}{a(\eta')}  j_0(k\eta-k\eta')
+\end{equation}
+
+
+Given a source-population redshift distribution ${\cal P}(\eta^z)$, where 
+\begin{equation}
+\int d\eta^z {\cal P}(\eta^z) = 1
+\end{equation}
+
+The observable power spectrum of mean dispersion distance $\bar{D}$ is then
+\begin{equation}
+C_l^{\bar{D}\bar{D}} = \int d\eta^z \int d\eta^{z'} {\cal P}(\eta^z){\cal P}(\eta^{z'}) C_l^{z z'}
+\end{equation}
+
+
+
+
+We use the halo model to calculate $P_{ee}(k)$ and a potential ${\cal P}(z)$.
+
+
+\bigskip
+\section*{Acknowledgments}
+\medskip
+
+ 
+\bibliographystyle{apsrevM}
+\bibliography{BBD-Draft}
+
+\end{document}
+
+
+
