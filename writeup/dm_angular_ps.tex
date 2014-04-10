@@ -9,6 +9,7 @@
 \usepackage{mciteplus}
 \usepackage{tikz}
 \usepackage{slashed}
+\usepackage{verbatim}
 \usetikzlibrary{arrows,shapes}
 \usetikzlibrary{trees}
 \usetikzlibrary{matrix,arrows} 				% For commutative diagram
@@ -55,7 +56,7 @@
     \raise1pt\hbox{$<$}}}                % less than or approx. symbol
 \def\gsim{\mathrel{\rlap{\lower4pt\hbox{\hskip1pt$\sim$}}
     \raise1pt\hbox{$>$}}} 
-    
+
 \newcommand{\schi}{s_{\chi\bar\chi}}  % tried to use this throughout off-shell derivation so that we can change notation later if desired.
 \newcommand{\scratch}[1]{{\textcolor{red}{ #1}}}
 \newcommand{\f}{\frac}
@@ -88,6 +89,11 @@
 \author{Kris Sigurdson}
  \affiliation{Department of Physics and Astronomy, University of British 
 Columbia, Vancouver, BC, Canada V6T 1Z1}
+
+\author{Kiyoshi Wesley Masui}
+ \affiliation{Department of Physics and Astronomy, University of British 
+Columbia, Vancouver, BC, Canada V6T 1Z1}
+
 
 
 \begin{abstract}
@@ -122,24 +128,98 @@ In this \emph{ Letter} we consider the implications of of a cosmological populat
 
 \section{Notes}\label{sec:notes}
 
+\subsection{Dispersion measure and PDF}
+
 %Let's define the dispersion-measure distance.
 
 %The lets discuss how a given luminosity relationship and cosmology dictates an expected joint distribution of dispersion measure.
 
-For some line of sight originating from redshift $z$
-
+The dispersion measure of a FRB observed in some angular direction $\hat{n}$ and
+originating from redshift $z$ is
 \begin{equation}
-{\rm DM}^{z}(\hat{n}) = \int_0^{\eta^z} d\eta \frac{n_e(\eta\hat{n})}{(1+z(\eta))^2}
+{\rm DM}^{z}(\hat{n}) = \int_0^{\eta^z} d\eta
+\frac{n_e(\eta\hat{n})}{(1+z(\eta))^2}.
 \end{equation}
+Here, $\eta$ is the conformal distance as a function of redshift, and
+$n_e(\eta^z\hat{n})$ is the three dimensional electron density.  We choose to
+separate $n_e$ into four components as follows:
+\begin{equation}
+\label{e:ne_sep}
+n_e(\hat{n}, z) = n_e^{\rm gal}(\hat{n}, z) + \bar{n}_e(z) +
+    \bar{n}_e(z)\delta_e(\hat{n}, z) + n_e^{\rm src}(\hat{n}, z).
+\end{equation}
+Here $n_e^{\rm gal}(\hat{n}, z)$ is the contribution to the electron density
+from the Milky Way galaxy and other local structures and only contributes at
+low redshift. $\bar{n}_e(z)$ is the mean electron density is and related to the
+current day electron density by $\bar{n}_e = \bar{n}_{e0} (1+z)^3$. 
+$\delta_e(z,\hat{n})$ is the large-scale fractional over-density of electrons.
+$n_e^{\rm src}(\hat{n}, z)$ are the electrons associated with the FRB source,
+which only contributes as $z \approx z^{\rm src}$ and accounts for two effects.
+First the FRB itself
+may have some intrinsic dispersion measure due to the environment of the
+progenitor.  Second, it is unlikely that FRB events are uniformly distributed
+throughout the Universe and they presumably trace matter in some way. When
+considering statics of FRB dispersion measures it is necessary to account for
+this bias.
+
+We define the dispersion-measure distance (or dispersion distance),
+the equivalent distance required to
+produce a given amount of dispersion in an observed radio signal in the
+Universe today, as $ D = {{\rm DM}}/{\bar{n}_{e0}}$
+We separate the dispersion distance into the contributions from each
+term in \ref{e:ne_sep}:
+\begin{equation}
+\label{e:D_sep}
+D = D^{\rm gal} + D^{\bar{n}_e} + D^{\delta_e}
+         + D^{\rm src}.
+\end{equation}
+For a population of FRBs originating at cosmological distances, ${\rm DM}^{\rm
+src}$ is only a single function of $\hat{n}$ which can presumably be well
+measured.  In addition, this function could in principal be well characterized
+by independent data such as observations of pulsars.  As such, we will
+here-after we ignore this term.
+
+To relate observations to cosmology, we wish to determine how a set of observed
+dispersion measures $\{D_i\}$ with known angular positions but with unknown
+redshifts depends on cosmological parameters.  We begin by defining the
+redshift probability distribution function $p(\{z_i\})$. We assume that the
+redshifts of the FRB sources are independent, \emph{i.e.}~we assume
+\begin{equation}
+    p(\{z_i\}) = \prod_i p(z_i).
+\end{equation}
+This may not be strictly true since FRBs are expected to cluster and trace the
+large-scale structure. This is a potential source of bias in the estimator we
+derive.  From this assumption it follows that the $\{D^{\bar{n_e}}_i\}$ are
+uncorrelated:
+\begin{equation}
+\langle D^{\bar{n}_e}_i D^{\bar{n}_e}_j \rangle
+    - \langle D^{\bar{n}_e}_i \rangle \langle D^{\bar{n}_e}_j \rangle
+    = \delta_{ij} \times \textrm{(something to do with $p(z_i)$)}
+\end{equation}
+
+We further assume that $\{D^{\rm src}_i\}$ are uncorrelated. Again this may not
+be strictly true due to clustering of FRB sources and again this may bias our
+estimator. We parameterized the variance from this term as 
+\begin{equation}
+    \langle D^{\rm src}_i D^{\rm src}_j \rangle
+    - \langle D^{\rm src}_i \rangle \langle D^{\rm src}_j \rangle
+    = \delta_{ij} \sigma^2_{\rm src}
+\end{equation}
+
+
+We further assume that the terms in Equation \ref{e:D_sep} are mutually uncorrelated
+
+
+\begin{comment}
 is the dispersion-measure random field in angular direction $\hat{n}$ where
 \begin{equation}
 n_e(\eta^z\hat{n}) \equiv n_e(z,\hat{n}) =  \bar{n}_{e0} (1+z)^3 \left[1+\delta_e(z,\hat{n})\right]
 \end{equation}
 is the electron distribution of the Universe and $\bar{n}_{e0}$ is the mean cosmological density of free electrons today, and $\delta_e(z,\hat{n})$ is 
-the fractional overdensity of electrons.
-We define the dispersion-measure distance (or dispersion distance), the equivalent distance required to
-produce a given amount of dispersion in an observed radio signal in the Universe today, as 
-$ D = {{\rm DM}}/{\bar{n}_{e0}}$
+the fractional over-density of electrons.
+\end{comment}
+
+\subsection{Relating dispersion measure angular power-spectrum to cosmology}
 
 The angular correlation function of dispersion distance between two lines of sight at redshift $z$ and direction $\hat{n}$ and redshift $z'$ and direction $\hat{n}'$ is
 \begin{equation}
