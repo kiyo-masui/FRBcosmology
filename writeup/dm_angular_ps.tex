@@ -195,11 +195,13 @@ This may not be strictly true since FRBs are expected to cluster and trace the
 large-scale structure. This is a potential source of bias in the estimator we
 derive.  From this assumption it follows that the $\{D^{\bar{n_e}}_i\}$ are
 uncorrelated:
-\begin{equation}
+\begin{align}
 \langle D^{\bar{n}_e}_i D^{\bar{n}_e}_j \rangle
     - \langle D^{\bar{n}_e}_i \rangle \langle D^{\bar{n}_e}_j \rangle
-    = \delta_{ij} \times \textrm{(something to do with $p(z_i)$)}
-\end{equation}
+    =& \delta_{ij} \int_0^\infty \ud z p(z) \int_0^{\eta(z)} \ud \eta'
+        (1 + z'(\eta')) \textrm{(not quite right, subtract off the mean.)}
+        \equiv& \sigma_{\bar{n}_e}^2
+\end{align}
 
 We further assume that $\{D^{\rm src}_i\}$ are uncorrelated. Again this may not
 be strictly true due to clustering of FRB sources and again this may bias our
@@ -238,14 +240,42 @@ I think.
 
 The covariance matrix is
 \begin{align}
-    C_{ij} =& \langle D_i D_j \rangle - \langle D_i \rangle \langle D_j \rangle
-           = \textrm{a bunch of things we know (special case for $i=j$)}.
+    C_{ij} \equiv& \langle D_i D_j \rangle - \langle D_i \rangle \langle D_j \rangle
+           =& \textrm{a bunch of things we know (special case for $i=j$)}.
+           =& w(\hat{n}_i\cdot\hat{n}_j) \quad (i \neq j)
+    =& \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src} + \textrm(the $w$ term) \quad (i = j)
 \end{align}
 
-Now that we have the covariance matrix, the estimator is Equation~11.94 from
+Now that we have the covariance matrix, we construct a quadratic estimator for
+a chosen set of parameters $\{\lambda_\alpha\}$. The estimator is Equation~11.94 from
 Dodelson, although we have to modify it slightly to exclude the
 auto-correlations.  The error (assuming Gaussianity) is Equation~11.100.
 
+The dispersion measure angular correlation function 
+$w(\hat{n}_i\cdot\hat{n}_j)$ depends on the cosmology
+and the redshift distribution function $p(z)$, for which we may parameterize
+our ignorance. The
+cross-correlations between the observed dispersion measures are thus useful
+probes of cosmology.  The auto-correlations on the other hand are contaminated
+by the highly uncertain $\sigma^2_{\rm src}$ as well as the $C^{zz'}_\ell$ on
+very small scales and zero redshift separation, which is difficult to model
+theoretically.  As such they do not carry useful information.
+
+To explicitly ignore the information in the auto-correlations we define
+\begin{equation}
+    \tilde{C}_{ij,\alpha} \equiv
+\begin{cases}
+    C_{ij,\alpha} & \text{if } i \neq j,\\
+0 & \text{if } i = j
+\end{cases}.
+\end{equation}
+By replacing $C_{ij,\alpha}$ with this quantity in the above estimator, we
+obtain an estimator which explicitly excludes information in the auto-products
+and only uses the diagonal of the covariance in the noise weights. Our
+ignorance of $\sigma^2_{\rm src}$ then only affects the optimality of the
+estimator, although in practise
+$\langle D_i D_i \rangle - \langle D_i \rangle \langle D_i \rangle$ would
+simply be measured directly from the data to obtain accurate noise weights.
 
 %We further assume that the terms in Equation \ref{e:D_sep} are mutually uncorrelated
 
@@ -323,10 +353,21 @@ The observable power spectrum of mean dispersion distance $\bar{D}$ is then
 C_l^{\bar{D}\bar{D}} = \int d\eta^z \int d\eta^{z'} {\cal P}(\eta^z){\cal P}(\eta^{z'}) C_l^{z z'}
 \end{equation}
 
-
-
-
 We use the halo model to calculate $P_{ee}(k)$ and a potential ${\cal P}(z)$.
+
+\section{Sensitivity}
+
+In this section we calculate the sensitivity of a hypothetical survey observing
+X FRBs. Because $C_\ell$ contains the all the information we use bins
+of $C_\ell$ as our parameters. We use the error bar on these parameters given
+in Equation~\ref{e:error}.  We note that it is highly unlikely that an observed
+set $\{D_i\}$ is even remotely Gaussian, and as such our error-bars are likely
+underestimated and out estimator sub-optimal at the order unity level. 
+However since given that the statistics of FRBs are currently essentially
+unconstrained, we continue with this assumption.
+
+We assume parameters X, Y, Z etc.
+
 
 
 \bigskip
