@@ -141,11 +141,11 @@ In this \emph{ Letter} we consider the implications of of a cosmological populat
 The dispersion measure of a FRB observed in some angular direction $\hat{n}$ and
 originating from redshift $z$ is
 \begin{equation}
-{\rm DM}^{z}(\hat{n}) = \int_0^{\eta^z} d\eta
-\frac{n_e(\eta\hat{n})}{(1+z(\eta))^2}.
+    {\rm DM}(\hat{n}, z) = \int_0^{\eta(z)} d\eta'
+        \frac{n_e(\hat{n}, z')}{(1+z')^2}.
 \end{equation}
 Here, $\eta$ is the conformal distance as a function of redshift, and
-$n_e(\eta^z\hat{n})$ is the three dimensional electron density.  We choose to
+$n_e(\hat{n}, z)$ is the three dimensional electron density.  We choose to
 separate $n_e$ into four components as follows:
 \begin{equation}
 \label{e:ne_sep}
@@ -241,11 +241,12 @@ The second moment of the marginalized distribution is
 \begin{align}
     \langle D^{\delta_e}_i D^{\delta_e}_j \rangle =& \\
         =& \textrm{stuff} \\
-    =& \int \ud z \ud z' p(z) p(z') w^{z z'}(\hat{n}_i\cdot\hat{n}_j) \qquad (i \neq j) \\
-    =& \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(\hat{n}_i\cdot\hat{n}_j)
+    \begin{cases}
+        =& \int \ud z \ud z' p(z) p(z') w^{z z'}(\hat{n}_i\cdot\hat{n}_j) \qquad (i \neq j) \\
+        =& \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(\hat{n}_i\cdot\hat{n}_j)
     \qquad (i = j)
+    \end{cases}
 \end{align}
-I think.
 
 The covariance matrix is
 \begin{align}
