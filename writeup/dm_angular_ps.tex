@@ -132,7 +132,7 @@ In this \emph{ Letter} we consider the implications of of a cosmological populat
 
 \section{Notes}\label{sec:notes}
 
-\subsection{Dispersion measure and PDF}
+\subsection{Dispersion measure}
 
 %Let's define the dispersion-measure distance.
 
@@ -174,14 +174,90 @@ We separate the dispersion distance into the contributions from each
 term in \ref{e:ne_sep}:
 \begin{equation}
 \label{e:D_sep}
-D = D^{\rm gal} + D^{\bar{n}_e} + D^{\delta_e}
-         + D^{\rm src}.
+D = D^{\rm gal} + D^{\bar{n}_e} + D^{\delta_e} + D^{\rm src}.
 \end{equation}
 For a population of FRBs originating at cosmological distances, ${\rm DM}^{\rm
 src}$ is only a single function of $\hat{n}$ which can presumably be well
 measured.  In addition, this function could in principal be well characterized
 by independent data such as observations of pulsars.  As such, we will
 here-after we ignore this term.
+
+We are principally interested in the $D^{\delta_e}$ term as it is a probe of
+large-scale structure. In the next section we relate the statistics of this
+term to cosmology.
+
+
+\subsection{Relating dispersion measure angular power-spectrum to cosmology}
+
+The angular correlation function of dispersion distance between two lines of sight at redshift $z$ and direction $\hat{n}$ and redshift $z'$ and direction $\hat{n}'$ is
+\begin{equation}
+w^{z z'}(\hat{n}\cdot\hat{n}') = \langle D^{\delta_e}(\hat{n}, z) D^{\delta_e}(\hat{n}', z') \rangle
+\end{equation}
+and the corresponding angular power spectrum is
+\begin{equation}
+w^{z z'}(\hat{n}\cdot\hat{n}') = \sum_l \frac{2l+1}{4 \pi} C_l^{z z'} P_l(\hat{n}\cdot\hat{n}')
+\end{equation}
+
+We can decompose the dispersion-distance field into spherical harmonics as
+\begin{equation}
+    D^{\delta_e}(\hat{n}, z) = \sum_{l m} D^{\delta_e}_{l m}(z) Y_{l m} (\hat{n})
+\end{equation}
+
+A plane wave can be expanded in terms of spherical eigenfunctions using the Rayleigh expansion
+\begin{equation}
+e^{i \vec{k}\cdot \hat{n} \eta} = 4\pi \sum_{l m} i^l j_{l}(k\eta) Y^*_{lm}(\hat{k})Y_{lm}(\hat{n})
+\end{equation}
+If we define 
+\begin{equation}
+n_e(\vec{k}) = \int d^3 \vec{x} e^{-i \vec{x}\cdot\vec{k}} n_e(\vec{x})
+\end{equation}
+to be the Fourier transform of the comoving electron density field then we can write
+\begin{equation}
+    D^{\delta_e}_{l m}(z) = \frac{4 \pi i^{l}}{\bar{n}_{e0}} \int \frac{d^3
+    \vec{k}}{(2\pi)^3} n_e(\vec{k}) Y^*_{l m}(\hat{k}) \int_0^{\eta^z} d\eta a^{-1}(\eta) j_{l}(k\eta)
+\end{equation}
+and the angular power spectra of dispersion-distance, assumed to be an isotropic random field, is thus
+\begin{equation}
+    \langle D^{\delta_e}_{l m}(z) D^{\delta_e}_{l' m'}(z') \rangle = C_l^{z z'} \delta_{l l'} \delta_{m m'}
+\end{equation}
+Now since we have 
+\begin{equation}
+\langle n_e(\vec{k}) n_e(\vec{k}')\rangle = \bar{n}_{e0}^2\left[\langle \delta_e(\vec{k})\delta_e(\vec{k}')\rangle + 1 \right]
+\end{equation}
+where
+\begin{equation}
+\langle \delta_e(\vec{k})\delta_e(\vec{k}')\rangle = (2\pi)^3 \delta_{D}^3(\vec{k}-\vec{k}') P_{ee}(k)
+\end{equation}
+we finally have
+\begin{equation}
+C_l^{zz'}=\frac{2}{\pi} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z'}}\frac{d\eta'}{a(\eta')}  j_l(k\eta) j_l(k\eta')
+\end{equation}
+The one-point variance in the dispersion-distance from a redshift $z$ is just
+\begin{equation}
+(\sigma^2)^{zz}=\sum_{l} \frac{2l+1}{4\pi} C_l^{zz}
+\end{equation}
+Using the addition identify for a complete sum over spherical bessel functions we find that
+\begin{equation}
+(\sigma^2)^{zz}= \frac{1}{2\pi^2} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z}}\frac{d\eta'}{a(\eta')}  j_0(k\eta-k\eta')
+\end{equation}
+
+
+Given a source-population redshift distribution ${\cal P}(\eta^z)$, where 
+\begin{equation}
+\int d\eta^z {\cal P}(\eta^z) = 1
+\end{equation}
+
+The observable power spectrum of mean dispersion distance $\bar{D}$ is then
+\begin{equation}
+C_l^{\bar{D}\bar{D}} = \int d\eta^z \int d\eta^{z'} {\cal P}(\eta^z){\cal P}(\eta^{z'}) C_l^{z z'}
+\end{equation}
+
+We use the halo model to calculate $P_{ee}(k)$ and a potential ${\cal P}(z)$.
+
+
+
+\subsection{Estimating the DM angular power spectrum from a sample of observed
+FRBs}
 
 To relate observations to cosmology, we wish to determine how a set of observed
 dispersion measures $\boldsymbol D$ (whose members are $D_i$)
@@ -241,19 +317,27 @@ The second moment of the marginalized distribution is
 \begin{align}
     \langle D^{\delta_e}_i D^{\delta_e}_j \rangle =& \\
         =& \textrm{stuff} \\
-    \begin{cases}
-        =& \int \ud z \ud z' p(z) p(z') w^{z z'}(\hat{n}_i\cdot\hat{n}_j) \qquad (i \neq j) \\
-        =& \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(\hat{n}_i\cdot\hat{n}_j)
-    \qquad (i = j)
-    \end{cases}
+        =&
+        \begin{cases}
+            \int \ud z \ud z' p(z) p(z') w^{z z'}(\hat{n}_i\cdot\hat{n}_j) 
+                &  \text{if } (i \neq j) \\
+            \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(\hat{n}_i\cdot\hat{n}_j)
+                &  \text{if } (i = j)
+        \end{cases}
 \end{align}
 
 The covariance matrix is
 \begin{align}
     C_{ij} \equiv& \langle D_i D_j \rangle - \langle D_i \rangle \langle D_j
     \rangle\\
-           =& w(\hat{n}_i\cdot\hat{n}_j) \quad (i \neq j)\\
-    =& \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src} + \textrm{(the $w$ term)} \quad (i = j)
+    =&
+        \begin{cases}
+            w(\hat{n}_i\cdot\hat{n}_j)
+                &  \text{if } (i \neq j) \\
+            \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src}
+                + \textrm{(the $w$ term)}
+                &  \text{if } (i = j)
+        \end{cases}
 \end{align}
 
 Now that we have the covariance matrix, we construct a quadratic estimator for
@@ -299,71 +383,7 @@ is the electron distribution of the Universe and $\bar{n}_{e0}$ is the mean cosm
 the fractional over-density of electrons.
 \end{comment}
 
-\subsection{Relating dispersion measure angular power-spectrum to cosmology}
 
-The angular correlation function of dispersion distance between two lines of sight at redshift $z$ and direction $\hat{n}$ and redshift $z'$ and direction $\hat{n}'$ is
-\begin{equation}
-w^{z z'}(\hat{n}\cdot\hat{n}') = \langle D^z(\hat{n}) D^{z'}(\hat{n}') \rangle
-\end{equation}
-and the corresponding angular power spectrum is
-\begin{equation}
-w^{z z'}(\hat{n}\cdot\hat{n}') = \sum_l \frac{2l+1}{4 \pi} C_l^{z z'} P_l(\hat{n}\cdot\hat{n}')
-\end{equation}
-
-We can decompose the dispersion-distance field into spherical harmonics as
-\begin{equation}
-D^z(\hat{n}) = \sum_{l m} D^z_{l m} Y_{l m} (\hat{n})
-\end{equation}
-
-A plane wave can be expanded in terms of spherical eigenfunctions using the Rayleigh expansion
-\begin{equation}
-e^{i \vec{k}\cdot \hat{n} \eta} = 4\pi \sum_{l m} i^l j_{l}(k\eta) Y^*_{lm}(\hat{k})Y_{lm}(\hat{n})
-\end{equation}
-If we define 
-\begin{equation}
-N_e(\vec{k}) = \int d^3 \vec{x} e^{-i \vec{x}\cdot\vec{k}} n_e(\vec{x})
-\end{equation}
-to be the Fourier transform of the comoving electron density field then we can write
-\begin{equation}
-D^z_{l m} = \frac{4 \pi i^{l}}{\bar{n}_{e0}} \int \frac{d^3 \vec{k}}{(2\pi)^3} N_e(\vec{k}) Y^*_{l m}(\hat{k}) \int_0^{\eta^z} d\eta a^{-1}(\eta) j_{l}(k\eta)
-\end{equation}
-and the angular power spectra of dispersion-distance, assumed to be an isotropic random field, is thus
-\begin{equation}
-\langle D^z_{l m} D^{z'}_{l' m'} \rangle = C_l^{z z'} \delta_{l l'} \delta_{m m'}
-\end{equation}
-Now since we have 
-\begin{equation}
-\langle N_e(\vec{k}) N_e(\vec{k}')\rangle = \bar{n}_{e0}^2\left[\langle \delta_e(\vec{k})\delta_e(\vec{k}')\rangle + 1 \right]
-\end{equation}
-where
-\begin{equation}
-\langle \delta_e(\vec{k})\delta_e(\vec{k}')\rangle = (2\pi)^3 \delta_{D}^3(\vec{k}-\vec{k}') P_{ee}(k)
-\end{equation}
-we finally have
-\begin{equation}
-C_l^{zz'}=\frac{2}{\pi} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z'}}\frac{d\eta'}{a(\eta')}  j_l(k\eta) j_l(k\eta')
-\end{equation}
-The one-point variance in the dispersion-distance from a redshift $z$ is just
-\begin{equation}
-(\sigma^2)^{zz}=\sum_{l} \frac{2l+1}{4\pi} C_l^{zz}
-\end{equation}
-Using the addition identify for a complete sum over spherical bessel functions we find that
-\begin{equation}
-(\sigma^2)^{zz}= \frac{1}{2\pi^2} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z}}\frac{d\eta'}{a(\eta')}  j_0(k\eta-k\eta')
-\end{equation}
-
-
-Given a source-population redshift distribution ${\cal P}(\eta^z)$, where 
-\begin{equation}
-\int d\eta^z {\cal P}(\eta^z) = 1
-\end{equation}
-
-The observable power spectrum of mean dispersion distance $\bar{D}$ is then
-\begin{equation}
-C_l^{\bar{D}\bar{D}} = \int d\eta^z \int d\eta^{z'} {\cal P}(\eta^z){\cal P}(\eta^{z'}) C_l^{z z'}
-\end{equation}
-
-We use the halo model to calculate $P_{ee}(k)$ and a potential ${\cal P}(z)$.
 
 \section{Sensitivity}
 
