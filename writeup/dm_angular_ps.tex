@@ -184,26 +184,35 @@ by independent data such as observations of pulsars.  As such, we will
 here-after we ignore this term.
 
 To relate observations to cosmology, we wish to determine how a set of observed
-dispersion measures $\{D_i\}$ with known angular positions but with unknown
-redshifts depends on cosmological parameters.  We begin by defining the
-redshift probability distribution function $p(\{z_i\})$. We assume that the
+dispersion measures $\boldsymbol D$ (whose members are $D_i$)
+with known angular positions, $\hat n_i$, but with unknown
+redshifts, $z_i$, depends on cosmological parameters.  We begin by defining the
+redshift probability distribution function $p(\boldsymbol z)$. We assume that the
 redshifts of the FRB sources are independent, \emph{i.e.}~we assume
 \begin{equation}
-    p(\{z_i\}) = \prod_i p(z_i).
+    p(\boldsymbol z) = \prod_i p(z_i).
 \end{equation}
 This may not be strictly true since FRBs are expected to cluster and trace the
 large-scale structure. This is a potential source of bias in the estimator we
-derive.  From this assumption it follows that the $\{D^{\bar{n_e}}_i\}$ are
-uncorrelated:
+derive.  From this assumption it follows that the $D^{\bar{n}_e}_i$ have
+uncorrelated probability distributions
 \begin{align}
-\langle D^{\bar{n}_e}_i D^{\bar{n}_e}_j \rangle
-    - \langle D^{\bar{n}_e}_i \rangle \langle D^{\bar{n}_e}_j \rangle
-    =& \delta_{ij} \int_0^\infty \ud z p(z) \int_0^{\eta(z)} \ud \eta'
-        (1 + z'(\eta')) \textrm{(not quite right, subtract off the mean.)}
-        \equiv& \sigma_{\bar{n}_e}^2
+    p(D^{\bar{n}_e}_i)
+    &= p(z_i) \left|\frac{\ud D^{\bar{n}_e}}{\ud z} \right|_{z_i}^{-1} \\
+        &= p(z_i) \left(\frac{\ud \eta}{\ud z} \right)_{z_i}^{-1},
+\end{align}
+whose second moment is
+\begin{align}
+    \langle D^{\bar{n}_e}_i D^{\bar{n}_e}_j \rangle
+        &- \langle D^{\bar{n}_e}_i \rangle \langle D^{\bar{n}_e}_j \rangle \\
+        &= \delta_{ij} \left[ \int_0^\infty \ud D^{\bar{n}_e} (D^{\bar{n}_e})^2
+            p(D^{\bar{n}_e})
+            - \left( \int_0^\infty \ud D^{\bar{n}_e} D^{\bar{n}_e}
+        p(D^{\bar{n}_e}) \right)^2 \right]\\
+        &\equiv \delta_{ij} \sigma_{\bar{n}_e}^2\\
 \end{align}
 
-We further assume that $\{D^{\rm src}_i\}$ are uncorrelated. Again this may not
+We further assume that $D^{\rm src}_i$ are uncorrelated. Again this may not
 be strictly true due to clustering of FRB sources and again this may bias our
 estimator. We parameterized the variance from this term as 
 \begin{equation}
@@ -212,21 +221,21 @@ estimator. We parameterized the variance from this term as
     = \delta_{ij} \sigma^2_{\rm src}.
 \end{equation}
 
-The cosmological information lies in the correlations within the set
-$\{D^{\delta_e}_i\}$. If the redshifts of the observed FRBs where known, we
+The cosmological information lies in the correlations between the
+$D^{\delta_e}_i$. If the redshifts of the observed FRBs where known, we
 would write the probability density function of this set as
-$p(\{D^{\delta_e}_i\} | \{z_i\})$, which has second moments
+$p(\boldsymbol D^{\delta_e} | \boldsymbol z)$, which has second moments
 \begin{equation}
-    w^{z_i z_j}(\hat{n}_i\cdot\hat{n}_j) \equiv \int \ud \{D^{\delta_e}_i\}
-        D^{\delta_e}_i D^{\delta_e}_j p(\{D^{\delta_e}_i\} | \{z_i\}).
+    w^{z_i z_j}(\hat{n}_i\cdot\hat{n}_j) \equiv \int \ud \boldsymbol D^{\delta_e}
+        D^{\delta_e}_i D^{\delta_e}_j p(\boldsymbol D^{\delta_e} | \boldsymbol z).
 \end{equation}
 $w^{z_i z_j}(\hat{n}_i\cdot\hat{n}_j)$ is the redshift dependant DM angular
 correlation function, whose dependence on cosmology is derived below.
-Marginalizing $p(\{D^{\delta_e}_i\} | \{z_i\})$ over the unknown redshifts
+Marginalizing $p(\boldsymbol D^{\delta_e} | \boldsymbol z)$ over the unknown redshifts
 yields
 \begin{equation}
-    p(\{D^{\delta_e}_i\}) = \int_0^\infty \ud \{z_i\}
-        p(\{z_i\}) p(\{D^{\delta_e}_i\} | \{z_i\}).
+    p(\boldsymbol D^{\delta_e}) = \int_0^\infty \ud \boldsymbol z
+        p(\boldsymbol z) p(\boldsymbol D^{\delta_e} | \boldsymbol z).
 \end{equation}
 The second moment of the marginalized distribution is
 \begin{align}
@@ -240,14 +249,14 @@ I think.
 
 The covariance matrix is
 \begin{align}
-    C_{ij} \equiv& \langle D_i D_j \rangle - \langle D_i \rangle \langle D_j \rangle
-           =& \textrm{a bunch of things we know (special case for $i=j$)}.
-           =& w(\hat{n}_i\cdot\hat{n}_j) \quad (i \neq j)
-    =& \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src} + \textrm(the $w$ term) \quad (i = j)
+    C_{ij} \equiv& \langle D_i D_j \rangle - \langle D_i \rangle \langle D_j
+    \rangle\\
+           =& w(\hat{n}_i\cdot\hat{n}_j) \quad (i \neq j)\\
+    =& \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src} + \textrm{(the $w$ term)} \quad (i = j)
 \end{align}
 
 Now that we have the covariance matrix, we construct a quadratic estimator for
-a chosen set of parameters $\{\lambda_\alpha\}$. The estimator is Equation~11.94 from
+chosen parameters $\lambda_\alpha$. The estimator is Equation~11.94 from
 Dodelson, although we have to modify it slightly to exclude the
 auto-correlations.  The error (assuming Gaussianity) is Equation~11.100.
 
