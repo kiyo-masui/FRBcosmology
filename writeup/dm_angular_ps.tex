@@ -83,7 +83,17 @@
 \newcommand{\BLambda}{\boldsymbol{\lambda}}
 
 
+% shortcuts
 \newcommand{\ud}{\,\mathrm{d}}
+\newcommand{\bD}{\boldsymbol D}
+\newcommand{\bC}{\boldsymbol C}
+\newcommand{\bDelta}{\boldsymbol \Delta}
+
+% for draft comments.
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\green}{\textcolor{green}}
+
 
 
 \begin{document}
@@ -332,7 +342,7 @@ The covariance matrix is
     \rangle\\
     =&
         \begin{cases}
-            w(\hat{n}_i\cdot\hat{n}_j)
+            \sum_l \frac{2l+1}{4 \pi} C_l P_l(\hat{n}_i\cdot\hat{n}_j)
                 &  \text{if } (i \neq j) \\
             \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src}
                 + \textrm{(the $w$ term)}
@@ -340,10 +350,43 @@ The covariance matrix is
         \end{cases}
 \end{align}
 
-Now that we have the covariance matrix, we construct a quadratic estimator for
+\red{The cosmological term is probably negligible for the diagonal elements.}
+
+We have written the covariance matrix in terms of $C_l$, the
+redshift distribution function for FRBs, $p(z)$, and the unknown parameter
+$\sigma^2_{\rm src}$.  This will enable us to construct a quadratic estimator
+for a desired set of cosmological parameters from the observed set of
+dispersion measures.
+
+Now that we have the covariance matrix, we construct a quadratic estimator
+($\hat{\lambda}_\alpha$) for
 chosen parameters $\lambda_\alpha$. The estimator is Equation~11.94 from
 Dodelson, although we have to modify it slightly to exclude the
 auto-correlations.  The error (assuming Gaussianity) is Equation~11.100.
+
+Defining data vector $\bDelta = \bD - \bar{D}$ where $\bar{D}$ is the sample
+mean of dispersion measures.
+
+\begin{equation}
+    \hat{\lambda}_\alpha = \lambda_0
+    + \frac{F^{-1}_{\alpha\beta}}{2} 
+    \left[ \bDelta^t \bC^{-1} \bC_{,\beta} \bC^{-1} \bDelta
+    - \mathrm{Tr}\left[\bC^{-1} \bC_{,\beta}\right] \right],
+\end{equation}
+for some fiducial value of the parameter $\lambda_0$.  $F_{\alpha\beta}$ is the
+Fisher matrix, given by
+\begin{equation}
+    F_{\alpha \beta} = \frac{1}{2} \mathrm{Tr} 
+        \left[ \bC_{,\alpha} \bC^{-1} \bC_{,\beta} \bC^{-1} \right]
+\end{equation}
+
+The covariance of this estimator (assuming Gaussianity of the original
+data) is
+\begin{equation}
+    \langle \lambda_\alpha \lambda_\beta \rangle
+        - \langle \lambda_\alpha \rangle \langle \lambda_\beta \rangle
+        = F^{-1}_{\alpha\beta}
+\end{equation}
 
 The dispersion measure angular correlation function 
 $w(\hat{n}_i\cdot\hat{n}_j)$ depends on the cosmology
