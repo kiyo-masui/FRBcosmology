@@ -368,10 +368,11 @@ Defining data vector $\bDelta = \bD - \bar{D}$ where $\bar{D}$ is the sample
 mean of dispersion measures.
 
 \begin{equation}
+    \label{e:est_dod}
     \hat{\lambda}_\alpha = \lambda_0
-    + \frac{F^{-1}_{\alpha\beta}}{2} 
-    \left[ \bDelta^T \bC^{-1} \bC_{,\beta} \bC^{-1} \bDelta
-    - \mathrm{Tr}\left[\bC^{-1} \bC_{,\beta}\right] \right],
+        + \frac{F^{-1}_{\alpha\beta}}{2} 
+        \left[ \bDelta^T \bC^{-1} \bC_{,\beta} \bC^{-1} \bDelta
+        - \mathrm{Tr}\left[\bC^{-1} \bC_{,\beta}\right] \right],
 \end{equation}
 for some fiducial value of the parameter $\lambda_0$.  $F_{\alpha\beta}$ is the
 Fisher matrix, given by
@@ -413,6 +414,34 @@ ignorance of $\sigma^2_{\rm src}$ then only affects the optimality of the
 estimator, although in practise
 $\langle D_i D_i \rangle - \langle D_i \rangle \langle D_i \rangle$ would
 simply be measured directly from the data to obtain accurate noise weights.
+
+We can simplify our estimator by choosing band powers of $C_l$ as our
+parameters:
+\begin{equation}
+    C_l \approx c_\alpha \quad \textrm{for $l^{min}_\alpha \leq l <
+        l^{min}_{\alpha +1}$}
+\end{equation}
+giving
+\begin{equation}
+    C_{ij, \alpha} = \sum_{l = l^{min}_\alpha}^{l^{min}_{\alpha +1} - 1}
+        \frac{2l+1}{4 \pi} P_l(\hat{n}_i\cdot\hat{n}_j)
+        \quad\textrm{for $i \neq j$}.
+\end{equation}
+
+Because the covariance matrix is linear in our parameters, and because we are
+explicitly ignoring the noise biased auto-products in our estimator, we can
+safely drop the first and third terms in Equation~\ref{e:est_dod}.  Our final
+estimator is
+\begin{equation}
+    \hat{c}_\alpha = \frac{\tilde F^{-1}_{\alpha\beta}}{2} 
+        \left[ \bDelta^T \bC^{-1} \tilde\bC_{,\beta} \bC^{-1} \bDelta \right],
+\end{equation}
+with
+\begin{equation}
+    \tilde F_{\alpha \beta} = \frac{1}{2} \mathrm{Tr} 
+        \left[ \tilde \bC_{,\alpha} \bC^{-1} \tilde\bC_{,\beta} \bC^{-1}
+        \right].
+\end{equation}
 
 %We further assume that the terms in Equation \ref{e:D_sep} are mutually uncorrelated
 
