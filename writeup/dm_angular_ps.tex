@@ -289,19 +289,21 @@ uncorrelated probability distributions
 \end{align}
 whose second moment is
 \begin{align}
+    \label{e:sig_nebar}
     \langle D^{\bar{n}_e}_i D^{\bar{n}_e}_j \rangle
         &- \langle D^{\bar{n}_e}_i \rangle \langle D^{\bar{n}_e}_j \rangle \\
         &= \delta_{ij} \left[ \int_0^\infty \ud D^{\bar{n}_e} (D^{\bar{n}_e})^2
             p(D^{\bar{n}_e})
             - \left( \int_0^\infty \ud D^{\bar{n}_e} D^{\bar{n}_e}
         p(D^{\bar{n}_e}) \right)^2 \right]\\
-        &\equiv \delta_{ij} \sigma_{\bar{n}_e}^2\\
+        &\equiv \delta_{ij} \sigma_{\bar{n}_e}^2
 \end{align}
 
 We further assume that $D^{\rm src}_i$ are uncorrelated. Again this may not
 be strictly true due to clustering of FRB sources and again this may bias our
 estimator. We parameterized the variance from this term as 
 \begin{equation}
+    \label{e:sig_src}
     \langle D^{\rm src}_i D^{\rm src}_j \rangle
     - \langle D^{\rm src}_i \rangle \langle D^{\rm src}_j \rangle
     = \delta_{ij} \sigma^2_{\rm src}.
@@ -495,7 +497,9 @@ theoretical parameters is
 \sigma_D^2 = \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src} + \int \ud z \ud z'
 \delta(z - z') p(z) w^{z z'}(1),
 \end{equation}
-where the first two terms are defined above. The third term is likely
+where the first two terms are defined above in equations \ref{e:sig_nebar}
+through
+\ref{e:sig_src}. The third term is likely
 neglidgable and could also be written as
 \begin{equation}
     \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(1) = \int \ud z \ud z'
