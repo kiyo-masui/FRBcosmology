@@ -1,5 +1,5 @@
 %\documentclass[onecolumn,amsmath,amssymb,floatfix,12pt,nofootinbib]{revtex4}
-\documentclass[twocolumn,prd,noshowpacs,nofootinbib,amsmath,amssymb]{revtex4}
+\documentclass[onecolumn,prd,noshowpacs,nofootinbib,amsmath,amssymb]{revtex4}
 \usepackage{graphicx,epsfig,psfrag,bm,amssymb}
 \usepackage{dcolumn}
 \usepackage{bm}
@@ -90,7 +90,8 @@
 \newcommand{\bDelta}{\boldsymbol \Delta}
 
 % for draft comments.
-\newcommand{\red}{\textcolor{red}}
+%\newcommand{\red}{\textcolor{red}}
+\newcommand{\red}{}
 \newcommand{\blue}{\textcolor{blue}}
 \newcommand{\green}{\textcolor{green}}
 
@@ -332,7 +333,6 @@ yields
 The second moment of the marginalized distribution is
 \begin{align}
     \langle D^{\delta_e}_i D^{\delta_e}_j \rangle =& \\
-        =& \textrm{stuff} \\
         =&
         \begin{cases}
             \int \ud z \ud z' p(z) p(z') w^{z z'}(\hat{n}_i\cdot\hat{n}_j) 
@@ -488,7 +488,8 @@ where the noise power spectrum is
     C^N_l = \frac{4 \pi \sigma_D^2 \sqrt{f_{\rm sky}}}{N_{\rm FRB}}.
 \end{equation}
 Here $N_{\rm FRB}$ is the number of dispersion measures measured from fast
-radio bursts. \red{I'm only 80\% sure about the factors of $f_{\rm sky}$}.
+radio bursts.
+%\red{I'm only 80\% sure about the factors of $f_{\rm sky}$}.
 
 $\sigma_D^2$ is the variance of the dispersion measures.  This would in
 practice be measured directly from the observed set, but in terms of
