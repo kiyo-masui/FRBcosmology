@@ -257,8 +257,61 @@ LOS election perturbations cause non-stationarity/non-gaussianity in clustered F
 
 \section{Notes}\label{sec:notes}
 
+\subsection{Random notes about correlation function normalization}
 
+\begin{equation}
+\langle D_i \rangle =  \langle D^{\rm src}_i \rangle
+    + \langle D^{\bar{n}_e}_i \rangle
+\end{equation}
 
+If $i \neq j$:
+\begin{align}
+\langle D_i D_j \rangle - \langle D_i \rangle \langle D_j \rangle
+    =& \langle (D^{\delta_e}_i + D^{\rm src}_i +  D^{\bar{n}_e}_i)
+              (D^{\delta_e}_j + D^{\rm src}_j +  D^{\bar{n}_e}_j) \rangle
+              - \langle D_i \rangle \langle D_j \rangle
+    \\
+    =& \langle [
+        D^{\delta_e}_i
+        + (D^{\rm src}_i - \langle D^{\rm src}_i \rangle)
+        + \langle D^{\rm src}_i \rangle
+        +  (D^{\bar{n}_e}_i -  \langle D^{\bar{n}_e}_i \rangle)
+        + \langle D^{\bar{n}_e}_i \rangle
+    ]
+    \nonumber \\
+    & \qquad [
+        D^{\delta_e}_j
+       + (D^{\rm src}_j - \langle D^{\rm src}_j \rangle)
+        + \langle D^{\rm src}_j \rangle
+        +  (D^{\bar{n}_e}_j -  \langle D^{\bar{n}_e}_j \rangle)
+        + \langle D^{\bar{n}_e}_j \rangle
+    ] \rangle
+    \nonumber \\
+    & \qquad - \langle D_i \rangle \langle D_j \rangle
+    \\
+    =& \langle D^{\delta_e}_i D^{\delta_e}_j \rangle
+        + \langle (D^{\rm src}_i - \langle D^{\rm src}_i \rangle)
+                 (D^{\rm src}_j - \langle D^{\rm src}_j \rangle) \rangle
+        + \langle (D^{\bar{n}_e}_i -  \langle D^{\bar{n}_e}_i \rangle)
+                  (D^{\bar{n}_e}_j -  \langle D^{\bar{n}_e}_j \rangle) \rangle
+    \nonumber \\
+    & \qquad
+        + \langle D^{\rm src}_i \rangle \langle D^{\rm src}_j \rangle
+        + \langle D^{\bar{n}_e}_i \rangle \langle D^{\bar{n}_e}_j \rangle
+        + \langle D^{\rm src}_i \rangle \langle D^{\bar{n}_e}_j \rangle
+        + \langle D^{\bar{n}_e}_i \rangle \langle D^{\rm src}_j \rangle
+    \nonumber \\
+    & \qquad - \langle D_i \rangle \langle D_j \rangle
+    \\
+    =& \langle D^{\delta_e}_i D^{\delta_e}_j \rangle
+        + \langle (D^{\rm src}_i - \langle D^{\rm src}_i \rangle)
+                 (D^{\rm src}_j - \langle D^{\rm src}_j \rangle) \rangle
+        + \langle (D^{\bar{n}_e}_i -  \langle D^{\bar{n}_e}_i \rangle)
+                  (D^{\bar{n}_e}_j -  \langle D^{\bar{n}_e}_j \rangle) \rangle
+\end{align}
+In the last equation, the first term is the term we've been dealing with, the
+second term is hopefully zero, and the third term is what Ue-Li is worried
+about, which we still have to calculate. I don't see anything unexpeced.
 
 \subsection{Relating dispersion measure angular power-spectrum to cosmology}
 
