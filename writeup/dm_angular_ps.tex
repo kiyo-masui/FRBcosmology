@@ -88,18 +88,25 @@
 \newcommand{\bD}{\boldsymbol D}
 \newcommand{\bC}{\boldsymbol C}
 \newcommand{\bDelta}{\boldsymbol \Delta}
+\newcommand{\Dgal}{D^{\rm gal}}
+\newcommand{\Dne}{D^{\bar{n}_e}}
+\newcommand{\Dde}{D^{\delta_e}}
+\newcommand{\Dsrc}{D^{\rm src}}
+\newcommand{\del}{\delta\!}
+\newcommand{\calP}{{\cal P}}
+
 
 % for draft comments.
-%\newcommand{\red}{\textcolor{red}}
-\newcommand{\red}{}
+\newcommand{\red}{\textcolor{red}}
 \newcommand{\blue}{\textcolor{blue}}
 \newcommand{\green}{\textcolor{green}}
 
 
 
+
 \begin{document}
 
-\title{Fast Radio Burst Cosmology}
+\title{Fast radio burst cosmology: dispersion measure angular power spectrum}
 
 \author{Kris Sigurdson}
  \affiliation{Department of Physics and Astronomy, University of British 
@@ -129,9 +136,31 @@ In recent years a new astrophysical phenomena, fast radio bursts (FRBs), has bee
 Several years ago an unusual radio event was discovered at the Parks radio telescope while searching for millisecond pulsars.  In a direction out of the plane of the Galaxy an event was discovered with an unusually large dispersion-measure, implying a column of electrons much large than expected in the Galaxy.
 
 In this \emph{ Letter} we consider the implications of of a cosmological population of fast radio bursts (FRBs). 
- If FRBs originate at cosmological distances they provide a new window on the Universe. The key insight into the potential power of FRBs is that, while it is interesting and helpful to know the redshift of the burst, it is not necessary to do interesting studies of cosmology.
- 
- The outline of this \emph{Letter} is as follows. In Section \ref{sec:notes} we discuss how dispersion measure provides a new distance measure in cosmology and how the joint distribution of dispersion-distance and luminosity-distance of a population of FRBs depends on cosmology and the intrinsic luminosity distance distribution.   In Section \ref{sec:notes} we then show how to calculate the angular power spectra of dispersion distance.  We then forecast how well these cosmological observables can be measured.
+If FRBs originate at cosmological distances they provide a new window on the Universe. The key insight into the potential power of FRBs is that, while it is interesting and helpful to know the redshift of the burst, it is not necessary to do interesting studies of cosmology.
+
+In this paper we consider only the simplest statistic that captures some of
+the cosmological information present in an FRB survey.  This is the dispersion
+measure angular power-spectrum, which is conceptually in vary close analogy to
+the galaxy weak-lensing shear angular power spectrum. We start with a
+population of FRB events (the analogue of lensed galaxies) whose redshifts are
+unknown.  In the first instance we ignore the intrinsic clustering of these
+background sources.  The principal observable is the dispersion measure
+(shear) which is a line-of-sight integral of the intervening large-scale
+structure.  This is contaminated by a noise term (analogue of intrinsic
+ellipticity) which is the dispersion
+measure originating from the host halo as well as the dispersion measure
+originating from the spacial mean electron density coupled with the unknown
+redshift.  In both cases there is a systematic effect originating from the
+intrinsic clustering of source objects, which is that pairs of sources with
+small angular separation are likely associated with the same large-scale
+structure and thus have similar redshifts.  This induces correlations in the
+noise tern associated with the unknown distance through the mean electron
+density. The analogue in galaxy lensing is intrinsic alignments, however while
+intrinsic alignments are a non-linear effect, the redshift clustering term occurs
+at linear order.
+
+The outline of this \emph{Letter} is as follows. In Section \ref{sec:notes} we discuss how dispersion measure provides a new distance measure in cosmology and how the joint distribution of dispersion-distance and luminosity-distance of a population of FRBs depends on cosmology and the intrinsic luminosity distance distribution.   In Section \ref{sec:notes} we then show how to calculate the angular power spectra of dispersion distance.  We then forecast how well these cosmological observables can be measured.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -143,10 +172,6 @@ In this \emph{ Letter} we consider the implications of of a cosmological populat
 
 
 \section{Preliminaries}
-
-
-
-\subsection{Dispersion measure}
 
 %Let's define the dispersion-measure distance.
 
@@ -188,7 +213,7 @@ We separate the dispersion distance into the contributions from each
 term in \ref{e:ne_sep}:
 \begin{equation}
 \label{e:D_sep}
-D = D^{\rm gal} + D^{\bar{n}_e} + D^{\delta_e} + D^{\rm src}.
+D = \Dgal + \Dne + \Dde + \Dsrc
 \end{equation}
 For a population of FRBs originating at cosmological distances, ${\rm DM}^{\rm
 src}$ is only a single function of $\hat{n}$ which can presumably be well
@@ -196,13 +221,104 @@ measured.  In addition, this function could in principal be well characterized
 by independent data such as observations of pulsars.  As such, we will
 here-after we ignore this term.
 
+In addition, we define the mean subtracted values of the of the variouse dispersion
+measure quantites, $\del D = D - \langle D \rangle$. Here the angular brackets represent
+the ensemble average.
+
 We are principally interested in the $D^{\delta_e}$ term as it is a probe of
 large-scale structure. In the next section we relate the statistics of this
 term to cosmology.
 
+\red{Introduce the redshift distribution function, assumption that FRB's trace
+LSS, bias, etc.}
+
+\red{Convensions: we use subscripts $i$, $j$, etc.~on coordinate-like
+    quantities to label observed FRB events. Thus $\vec x_i$ and $\hat{n}_i$
+    are respectively the 3D coordinates of and unit vector pointing to event $i$.
+    This should not be confused with superscripts, denoting the
+component of a vector, such that $x^1$ is the first componenent of vector $\vec
+x$.  }
+
+\red{$\calP$ is a probability, while $p$ is a PDF. $\calP(x < X < x + \ud x) =
+p(x) \ud x$ always.}
 
 
-\section{2D statistics}
+\section{Dispersion measure angular correlations}
+
+The principle observable which we would like to consider is the correlations
+between the dispersion measures of observed fast radio bursts as a function of
+their angular separation.  For observed FRB events labeled by the indices $i$
+and $j$, and assuming $i \neq j$, we define the dispersion measure angular
+correlation function as
+\begin{equation}
+    w(\hat{n}_i\cdot\hat{n}_j) \equiv \langle \del D_i \del D_j \rangle.
+\end{equation}
+A move convienient quantity to work with is the corresponding angular
+power spectrum
+\begin{equation}
+w(\hat{n}_i \cdot\hat{n}_j) = \sum_l \frac{2l+1}{4 \pi} C_l
+P_l(\hat{n}_i\cdot\hat{n}_j).
+\end{equation}
+
+We have identified two effects that dominate the angular
+correlations and which depend on the large-scale structure of the Universe and
+thus cosmology.  The first effect is that the signals from two FRB events may
+propagate through shared structures along the line of sight.  Thus correlations
+in the election overdensities along the line of sight will correlate the 
+$\Dde$.  The second effect is that due to the intrisic clustering of source
+events, a pair of FRBs that are nearby in the angular coordinates are more
+likely to also be nearby in the line of sight coordinate, thus causing
+correations in $\Dne$.  In the remainder of this section we will calculate the
+contributions from each of these effects.
+
+\subsection{Correlations in $\Dde$}
+
+\begin{equation}
+C_l^{zz'}=\frac{2}{\pi} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z'}}\frac{d\eta'}{a(\eta')}  j_l(k\eta) j_l(k\eta')
+\end{equation}
+\begin{equation}
+C_l^{\Dde \Dde} = \int d\eta^z \int d\eta^{z'} {\cal P}(\eta^z){\cal P}(\eta^{z'}) C_l^{z z'}
+\end{equation}
+
+
+\subsection{Correlations in $\Dne$}
+
+The joint probablility of observing a pair of FRB events at 3D coordinates
+$\vec x_i$ and $\vec x_j$ in infintessimal volumes $\ud^3\vec x_i$ and
+$\ud^3\vec x_j$ is porportional to
+\begin{equation}
+    \calP(\vec x_i, \vec x_j) = \calP(\eta_i) \calP(\eta_j) \left[ 1 + b(z_i)
+    b(z_j) \xi(\vec x_i - \vec x_j) \right] \frac{\ud^3\vec x_i}{\eta_i^2}
+    \frac{\ud^3\vec x_j}{\eta_j^2}.
+\end{equation}
+The factors of $1/\eta^2$ are nessisary to achive the proper volume weighting,
+a fact that can be seen by taking the limit of $\xi \to 0$ and integrating of
+the angular coordinates.
+
+An observed event has known angular coordinates, and we are interested in
+correlations in $\Dne$ which is directly related to the line of sight
+coordinate.  Fixing the angular coordinates:
+\begin{equation}
+    \calP(\eta_i, \eta_j | \hat{n}_i, \hat{n}_i) = N(\hat{n}_i, \hat{n}_i)
+    \calP(\eta_i) \calP(\eta_j) \left[ 1 + b(z_i)
+    b(z_j) \xi(\vec x_i - \vec x_j) \right] \ud \eta_i \ud \eta_j,
+\end{equation}
+where $N(\hat{n}_i, \hat{n}_i)$ is a normalizing factor which ensures the
+expression integrates to unity over $\eta_i$ and $\eta_j$. \red{How to deal
+with the $1/\eta^2$ factors?.}
+Transforming to $\Dne$ as our distance measure, we obtain
+\begin{equation}
+\calP(\Dne_i, \Dne_j | \hat{n}_i, \hat{n}_i) = \calP(\eta_i, \eta_j |
+\hat{n}_i, \hat{n}_i) \frac{\ud }{}
+\end{equation}
+
+
+
+
+
+\section{Notes}\label{sec:notes}
+
+\subsection{2D statistics}
 % Need beter section title.
 
 Here we consider two dimentional statistics where the cosmological information
@@ -229,33 +345,12 @@ correlated to some degree, however we believe that the two effect described
 here are the dominatnt contributions and defer investications of other effect
 to future work.
 
-\subsection{The dispersion measure angular power-spectrum}
+\subsubsection{The dispersion measure angular power-spectrum}
 
-\subsection{estimating the dispersion measure angular power-spectrum}
+\subsubsection{estimating the dispersion measure angular power-spectrum}
 
-\subsection{sensitivity estimates}
+\subsubsection{sensitivity estimates}
 
-
-\section{3D statistics}
-
-3D clustering of FRBs using DM as distance proxy.
-
-Dispersion measure space distortions.
-
-\subsection{First order DM space distortions}
-
-LOS election perturbations cause clusturing in unclustered FRBs.
-
-\subsection{Second order DM space distortions}
-
-LOS election perturbations cause non-stationarity/non-gaussianity in clustered FRBs.
-
-
-
-
-
-
-\section{Notes}\label{sec:notes}
 
 \subsection{Random notes about correlation function normalization}
 
@@ -579,7 +674,7 @@ the fractional over-density of electrons.
 
 \begin{comment}
 
-\section{Sensitivity}
+\subsection{Sensitivity}
 
 In this section we calculate the sensitivity of a hypothetical survey observing
 X FRBs. Because $C_\ell$ contains the all the information we use bins
@@ -594,7 +689,7 @@ unconstrained, we continue with this assumption.
 
 \end{comment}
 
-\section{Simplified sensitivity calculation}
+\subsection{Simplified sensitivity calculation}
 
 In this section we present a simplified calculation for the sensitivity of the
 above estimator which is valid for sample of observed
