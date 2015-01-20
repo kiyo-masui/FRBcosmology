@@ -293,25 +293,46 @@ $\ud^3\vec x_j$ is porportional to
 \end{equation}
 The factors of $1/\eta^2$ are nessisary to achive the proper volume weighting,
 a fact that can be seen by taking the limit of $\xi \to 0$ and integrating of
-the angular coordinates.
+the angular coordinates. Noting that $\calP(\eta_i)$ has units 
+$({\rm MPc}\,{\rm rad}^2)^{-1}$.
 
 An observed event has known angular coordinates, and we are interested in
 correlations in $\Dne$ which is directly related to the line of sight
 coordinate.  Fixing the angular coordinates:
 \begin{equation}
     \calP(\eta_i, \eta_j | \hat{n}_i, \hat{n}_i) = N(\hat{n}_i, \hat{n}_i)
-    \calP(\eta_i) \calP(\eta_j) \left[ 1 + b(z_i)
+    \calP(\eta_i)\calP(\eta_j) \left[ 1 + b(z_i)
     b(z_j) \xi(\vec x_i - \vec x_j) \right] \ud \eta_i \ud \eta_j,
 \end{equation}
 where $N(\hat{n}_i, \hat{n}_i)$ is a normalizing factor which ensures the
-expression integrates to unity over $\eta_i$ and $\eta_j$. \red{How to deal
-with the $1/\eta^2$ factors?.}
+expression integrates to unity over $\eta_i$ and $\eta_j$. The factors of
+$1/\eta^2$ have been canceled when converting $\ud^3 \vec x = \eta^2 \ud \eta \ud^2
+\vec \theta$. If the second term in brackets is small, then the normalizations
+$N$ is 1 (since the distributions $\calP{\eta_i}$ are already normalized. 
+This expression is
+only valid if $i \ne j$.
 Transforming to $\Dne$ as our distance measure, we obtain
+\begin{align}
+\calP(\Dne_i, \Dne_j | \hat{n}_i, \hat{n}_i)
+    &= \calP(\eta_i)\calP(\eta_j) \left[ 1 + b(z_i)
+        b(z_j) \xi(\vec x_i - \vec x_j) \right]
+        \frac{\ud \eta_i}{\ud \Dne_i} \frac{\ud \eta_j}{\ud \Dne_j}
+        \ud \Dne_i\ud \Dne_j
+        \\
+    &= \calP(\eta_i)\calP(\eta_j) \left[ 1 + b(z_i)
+        b(z_j) \xi(\vec x_i - \vec x_j) \right]
+        \frac{\ud \Dne_i}{1 + z_i}\frac{\ud \Dne_j}{1 + z_j}
+\end{align}
+Finally, taking the second moment and subtracting off the product of the first
+moments:
 \begin{equation}
-\calP(\Dne_i, \Dne_j | \hat{n}_i, \hat{n}_i) = \calP(\eta_i, \eta_j |
-\hat{n}_i, \hat{n}_i) \frac{\ud }{}
+\langle \Dne_i \Dne_j \rangle
+    - \langle \Dne_i \rangle \langle \Dne_j \rangle =
+    \int \Dne_i \Dne_j
+    \frac{\calP(\eta_i)}{1 + z_i}\frac{\calP(\eta_j)}{1 + z_j}
+    b(z_i) b(z_j) \xi(\vec x_i - \vec x_j)
+        \ud \Dne_i\ud \Dne_j
 \end{equation}
-
 
 
 
