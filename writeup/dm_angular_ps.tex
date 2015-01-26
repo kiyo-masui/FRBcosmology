@@ -1,4 +1,3 @@
-%\documentclass[onecolumn,amsmath,amssymb,floatfix,12pt,nofootinbib]{revtex4}
 \documentclass[onecolumn,prd,noshowpacs,nofootinbib,amsmath,amssymb]{revtex4}
 \usepackage{graphicx,epsfig,psfrag,bm,amssymb}
 \usepackage{dcolumn}
@@ -10,81 +9,10 @@
 \usepackage{tikz}
 \usepackage{slashed}
 \usepackage{verbatim}
-\usetikzlibrary{arrows,shapes}
-\usetikzlibrary{trees}
-\usetikzlibrary{matrix,arrows} 				% For commutative diagram
-											% http://www.felixl.de/commu.pdf
-\usetikzlibrary{positioning}				% For "above of=" commands
-\usetikzlibrary{calc,through}				% For coordinates
-\usetikzlibrary{decorations.pathreplacing}  % For curly braces
-\usepackage{pgffor}							% For repeating patterns
-
-\usetikzlibrary{decorations.pathmorphing}	% For Feynman Diagrams
-\usetikzlibrary{decorations.markings}
-\usetikzlibrary{snakes}
-
-\tikzset{
-	% >=stealth', %%  Uncomment for more conventional arrows
-    vector/.style={decorate, decoration={snake}, draw},
-	provector/.style={decorate, decoration={snake,amplitude=2.5pt}, draw},
-	antivector/.style={decorate, decoration={snake,amplitude=-2.5pt}, draw},
-    fermion/.style={draw, postaction={decorate},
-        decoration={markings,mark=at position .55 with {\arrow[draw]{>}}}},
-    fermionbar/.style={draw, postaction={decorate},
-        decoration={markings,mark=at position .55 with {\arrow[draw=black]{<}}}},
-    fermionnoarrow/.style={draw},
-    gluon/.style={decorate, draw,decoration={coil,amplitude=4pt, segment length=6pt}, line width=1},
-    scalar/.style={dashed,draw, postaction={decorate},
-        decoration={markings,mark=at position .55 with {\arrow[draw]{>}}}},
-    scalarbar/.style={dashed,draw, postaction={decorate},
-        decoration={markings,mark=at position .55 with {\arrow[draw]{<}}}},
-    scalarnoarrow/.style={dash pattern = on 6 pt off 3 pt,draw},
-    electron/.style={draw, postaction={decorate},
-        decoration={markings,mark=at position .55 with {\arrow[draw]{>}}}},
-	bigvector/.style={decorate, decoration={snake,amplitude=4pt}, draw},
-	vectorscalar/.style={loosely dotted,draw, postaction={decorate}},
-}
-\RequirePackage{xspace}
-\usepackage{relsize}
-\usepackage{slashed}
-\newcommand{\fb}{{\rm fb}}
-\newcommand{\ab}{{\rm ab}}
-
-\newcommand{\be}{\begin{eqnarray}}
-\newcommand{\ee}{\end{eqnarray}}
-\def\lsim{\mathrel{\rlap{\lower4pt\hbox{\hskip 0.5 pt$\sim$}}
-    \raise1pt\hbox{$<$}}}                % less than or approx. symbol
-\def\gsim{\mathrel{\rlap{\lower4pt\hbox{\hskip1pt$\sim$}}
-    \raise1pt\hbox{$>$}}} 
-
-\newcommand{\schi}{s_{\chi\bar\chi}}  % tried to use this throughout off-shell derivation so that we can change notation later if desired.
-\newcommand{\scratch}[1]{{\textcolor{red}{ #1}}}
-\newcommand{\f}{\frac}
-\newcommand{\pf}[2]{\left(\frac{#1}{#2}\right)}
-\newcommand{\g}{{\rm g}}
-\newcommand{\s}{{\rm s}}
-\newcommand{\m}{{\rm m}}
-\def\lsim{\mathrel{\rlap{\lower4pt\hbox{\hskip1pt$\sim$}}
-    \raise1pt\hbox{$<$}}}
-\def\gsim{\mathrel{\rlap{\lower4pt\hbox{\hskip1pt$\sim$}}
-    \raise1pt\hbox{$>$}}}
-\newcommand{\vev}[1]{ \left\langle {#1} \right\rangle }
-\newcommand{\bra}[1]{ \langle {#1} | }
-\newcommand{\ket}[1]{ | {#1} \rangle }
-\newcommand{\ev}{ {\rm eV} }
-\newcommand{\kev}{{\rm keV}}
-\newcommand{\mev}{{\rm MeV}}
-\newcommand{\gev}{{\rm GeV}}
-\newcommand{\tev}{{\rm TeV}}
-\newcommand{\mpl}{$M_{Pl}$}
-\newcommand{\mw}{$M_{W}$}
-\newcommand{\Ft}{F_{T}}
-\newcommand{\Zparity}{\mathbb{Z}_2}
-\newcommand{\BLambda}{\boldsymbol{\lambda}}
 
 
 % shortcuts
-\newcommand{\ud}{\,\mathrm{d}}
+%\newcommand{\ud}{\,\mathrm{d}}
 \newcommand{\bD}{\boldsymbol D}
 \newcommand{\bC}{\boldsymbol C}
 \newcommand{\bDelta}{\boldsymbol \Delta}
@@ -94,6 +22,8 @@
 \newcommand{\Dsrc}{D^{\rm src}}
 \newcommand{\del}{\delta\!}
 \newcommand{\calP}{{\cal P}}
+\newcommand{\ud}{\,\mathrm{d}}
+
 
 
 % for draft comments.
@@ -115,24 +45,18 @@ Columbia, Vancouver, BC, Canada V6T 1Z1}
 \author{Kiyoshi Wesley Masui}
  \affiliation{Department of Physics and Astronomy, University of British 
 Columbia, Vancouver, BC, Canada V6T 1Z1}
-
-
+ \affiliation{Canadian Institute for Advanced Research, CIFAR Program in
+Cosmology and Gravity, Toronto, ON, M5G 1Z8}
 
 \begin{abstract}
-In recent years a new astrophysical phenomena, fast radio bursts (FRBs), has been detected that potentially originates from cosmological distances.  These broadband radio bursts  typically last for only milliseconds and are a \emph{standard ping} that can be used to map the properties of the Universe.  In this paper,  under the assumption that these bursts originate from cosmological distances, we discuss how the detection of a large enough population of these events can be used to map the cosmological properties of the Universe.    We first discuss one point statistics and show that, even if FRBs are not standard candles, the dispersion-measure distance vs. luminosity-distance distribution of any observed population is a strong constraint on cosmology.  We then discuss how the two point statistics of an observed population of FRBs traces the large-scale structure of the Universe and make predictions for the angular power spectra of dispersion-measure distance.  It is possible that FRBs do not originate at cosmological distances, but if they do, we argue that they could open a remarkable window to observe the properties of the Universe.
+
 \end{abstract}
 
 \maketitle
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%					Introduction
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
+
 Several years ago an unusual radio event was discovered at the Parks radio telescope while searching for millisecond pulsars.  In a direction out of the plane of the Galaxy an event was discovered with an unusually large dispersion-measure, implying a column of electrons much large than expected in the Galaxy.
 
 In this \emph{ Letter} we consider the implications of of a cosmological population of fast radio bursts (FRBs). 
@@ -159,23 +83,8 @@ density. The analogue in galaxy lensing is intrinsic alignments, however while
 intrinsic alignments are a non-linear effect, the redshift clustering term occurs
 at linear order.
 
-The outline of this \emph{Letter} is as follows. In Section \ref{sec:notes} we discuss how dispersion measure provides a new distance measure in cosmology and how the joint distribution of dispersion-distance and luminosity-distance of a population of FRBs depends on cosmology and the intrinsic luminosity distance distribution.   In Section \ref{sec:notes} we then show how to calculate the angular power spectra of dispersion distance.  We then forecast how well these cosmological observables can be measured.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%					Basic Ingredients 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \section{Preliminaries}
-
-%Let's define the dispersion-measure distance.
-
-%The lets discuss how a given luminosity relationship and cosmology dictates an expected joint distribution of dispersion measure.
 
 The dispersion measure of a FRB observed in some angular direction $\hat{n}$ and
 originating from redshift $z$ is
@@ -210,13 +119,13 @@ the equivalent distance required to
 produce a given amount of dispersion in an observed radio signal in the
 Universe today, as $ D = {{\rm DM}}/{\bar{n}_{e0}}$
 We separate the dispersion distance into the contributions from each
-term in \ref{e:ne_sep}:
+term in Equation~\ref{e:ne_sep}:
 \begin{equation}
 \label{e:D_sep}
 D = \Dgal + \Dne + \Dde + \Dsrc
 \end{equation}
-For a population of FRBs originating at cosmological distances, ${\rm DM}^{\rm
-src}$ is only a single function of $\hat{n}$ which can presumably be well
+For a population of FRBs originating at cosmological distances, $\Dgal$
+is only a single function of $\hat{n}$ which can presumably be well
 measured.  In addition, this function could in principal be well characterized
 by independent data such as observations of pulsars.  As such, we will
 here-after we ignore this term.
@@ -224,10 +133,6 @@ here-after we ignore this term.
 In addition, we define the mean subtracted values of the of the variouse dispersion
 measure quantites, $\del D = D - \langle D \rangle$. Here the angular brackets represent
 the ensemble average.
-
-We are principally interested in the $D^{\delta_e}$ term as it is a probe of
-large-scale structure. In the next section we relate the statistics of this
-term to cosmology.
 
 \red{Introduce the redshift distribution function, assumption that FRB's trace
 LSS, bias, etc.}
@@ -243,7 +148,7 @@ x$.  }
 p(x) \ud x$ always.}
 
 
-\section{Dispersion measure angular correlations}
+\section{Dispersion Measure angular correlations}
 
 The principle observable which we would like to consider is the correlations
 between the dispersion measures of observed fast radio bursts as a function of
@@ -271,13 +176,19 @@ likely to also be nearby in the line of sight coordinate, thus causing
 correations in $\Dne$.  In the remainder of this section we will calculate the
 contributions from each of these effects.
 
+We assume that $D^{\rm src}_i$ are uncorrelated. Again this may not
+be strictly true due to clustering of FRB sources and environmental effects
+and this may bias results.  In addition $\Dsrc$ and $\Dne$ may be correlated due
+to redshift evolution of source events.
+
+
 \subsection{Correlations in $\Dde$}
 
 \begin{equation}
 C_l^{zz'}=\frac{2}{\pi} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z'}}\frac{d\eta'}{a(\eta')}  j_l(k\eta) j_l(k\eta')
 \end{equation}
 \begin{equation}
-C_l^{\Dde \Dde} = \int d\eta^z \int d\eta^{z'} {\cal P}(\eta^z){\cal P}(\eta^{z'}) C_l^{z z'}
+C_l^{\Dde \Dde} = \int d\eta^z \int d\eta^{z'} p(\eta^z)p(\eta^{z'}) C_l^{z z'}
 \end{equation}
 
 
@@ -285,41 +196,41 @@ C_l^{\Dde \Dde} = \int d\eta^z \int d\eta^{z'} {\cal P}(\eta^z){\cal P}(\eta^{z'
 
 The joint probablility of observing a pair of FRB events at 3D coordinates
 $\vec x_i$ and $\vec x_j$ in infintessimal volumes $\ud^3\vec x_i$ and
-$\ud^3\vec x_j$ is porportional to
+$\ud^3\vec x_j$ is
 \begin{equation}
-    \calP(\vec x_i, \vec x_j) = \calP(\eta_i) \calP(\eta_j) \left[ 1 + b(z_i)
+    \calP(\vec x_i, \vec x_j) = p(\eta_i) p(\eta_j) \left[ 1 + b(z_i)
     b(z_j) \xi(\vec x_i - \vec x_j) \right] \frac{\ud^3\vec x_i}{\eta_i^2}
     \frac{\ud^3\vec x_j}{\eta_j^2}.
 \end{equation}
 The factors of $1/\eta^2$ are nessisary to achive the proper volume weighting,
 a fact that can be seen by taking the limit of $\xi \to 0$ and integrating of
-the angular coordinates. Noting that $\calP(\eta_i)$ has units 
-$({\rm MPc}\,{\rm rad}^2)^{-1}$.
+the angular coordinates. Noting that $p(\eta_i)$ has units 
+\red{$({\rm MPc}\,{\rm rad}^2)^{-1}$ (conflicts with being normalized)}.
 
 An observed event has known angular coordinates, and we are interested in
 correlations in $\Dne$ which is directly related to the line of sight
 coordinate.  Fixing the angular coordinates:
 \begin{equation}
     \calP(\eta_i, \eta_j | \hat{n}_i, \hat{n}_i) = N(\hat{n}_i, \hat{n}_i)
-    \calP(\eta_i)\calP(\eta_j) \left[ 1 + b(z_i)
+    p(\eta_i)p(\eta_j) \left[ 1 + b(z_i)
     b(z_j) \xi(\vec x_i - \vec x_j) \right] \ud \eta_i \ud \eta_j,
 \end{equation}
 where $N(\hat{n}_i, \hat{n}_i)$ is a normalizing factor which ensures the
 expression integrates to unity over $\eta_i$ and $\eta_j$. The factors of
 $1/\eta^2$ have been canceled when converting $\ud^3 \vec x = \eta^2 \ud \eta \ud^2
 \vec \theta$. If the second term in brackets is small, then the normalizations
-$N$ is 1 (since the distributions $\calP{\eta_i}$ are already normalized. 
+$N$ is 1 (since the distributions $p{\eta_i}$ are already normalized. 
 This expression is
 only valid if $i \ne j$.
 Transforming to $\Dne$ as our distance measure, we obtain
 \begin{align}
 \calP(\Dne_i, \Dne_j | \hat{n}_i, \hat{n}_i)
-    &= \calP(\eta_i)\calP(\eta_j) \left[ 1 + b(z_i)
+    &= p(\eta_i)p(\eta_j) \left[ 1 + b(z_i)
         b(z_j) \xi(\vec x_i - \vec x_j) \right]
         \frac{\ud \eta_i}{\ud \Dne_i} \frac{\ud \eta_j}{\ud \Dne_j}
         \ud \Dne_i\ud \Dne_j
         \\
-    &= \calP(\eta_i)\calP(\eta_j) \left[ 1 + b(z_i)
+    &= p(\eta_i)p(\eta_j) \left[ 1 + b(z_i)
         b(z_j) \xi(\vec x_i - \vec x_j) \right]
         \frac{\ud \Dne_i}{1 + z_i}\frac{\ud \Dne_j}{1 + z_j}
 \end{align}
@@ -329,254 +240,72 @@ moments:
 \langle \Dne_i \Dne_j \rangle
     - \langle \Dne_i \rangle \langle \Dne_j \rangle =
     \int \Dne_i \Dne_j
-    \frac{\calP(\eta_i)}{1 + z_i}\frac{\calP(\eta_j)}{1 + z_j}
+    \frac{p(\eta_i)}{1 + z_i}\frac{p(\eta_j)}{1 + z_j}
     b(z_i) b(z_j) \xi(\vec x_i - \vec x_j)
         \ud \Dne_i\ud \Dne_j
 \end{equation}
-
-
-
-
-\section{Notes}\label{sec:notes}
-
-\subsection{2D statistics}
-% Need beter section title.
-
-Here we consider two dimentional statistics where the cosmological information
-lies in the correlations between dispersion measures at a given angular
-separation.  The information that is in principle available in the angular
-clustering of the FRB events is ignored.
-
-As a cosmological probe this almost perfectly analogouse to the weak lensing 
-of galaxies.
-We wish to estimate the line of site electron column density,
-which, like lensing shear, is an integral along the line-of-site to a source at an
-uncertain redshift. Our observerable the dispersion measure, like galaxy
-elipticity, gives a noisy estimate.  In both cases the angular clustering of
-the sources is ignored.
-
-The dispersion measures of two different FRBs are correlated by two effects.
-The first is correlations in the intervening line-of-site large-scale
-structure.  This correlates the $D^{\delta_e}$ part of the dispersion measures.
-The second effect is that two FRBs with small angular separation are likely to
-be at small redshift separations if FRB events trace large-scale structure.
-This correlates the $D^{\bar{n}_e}$ of the two FRBs.  In principle all
-permutations of $D^{\bar{n}_e}$, $D^{\delta_e}$ and $D^{\rm src}$ should be
-correlated to some degree, however we believe that the two effect described
-here are the dominatnt contributions and defer investications of other effect
-to future work.
-
-\subsubsection{The dispersion measure angular power-spectrum}
-
-\subsubsection{estimating the dispersion measure angular power-spectrum}
-
-\subsubsection{sensitivity estimates}
-
-
-\subsection{Random notes about correlation function normalization}
-
+And thus we have:
 \begin{equation}
-\langle D_i \rangle =  \langle D^{\rm src}_i \rangle
-    + \langle D^{\bar{n}_e}_i \rangle
+    w^{\bar{n}_e \bar{n}_e}(\hat{n}_i\cdot\hat{n}_j)
+        =\int \Dne_i \Dne_j
+    \frac{p(\eta_i)}{1 + z_i}\frac{p(\eta_j)}{1 + z_j}
+    b(z_i) b(z_j) \xi(\eta_i \hat{n}_i - \eta_j \hat{n}_j)
+        \ud \Dne_i\ud \Dne_j
 \end{equation}
-
-If $i \neq j$:
-\begin{align}
-\langle D_i D_j \rangle - \langle D_i \rangle \langle D_j \rangle
-    =& \langle (D^{\delta_e}_i + D^{\rm src}_i +  D^{\bar{n}_e}_i)
-              (D^{\delta_e}_j + D^{\rm src}_j +  D^{\bar{n}_e}_j) \rangle
-              - \langle D_i \rangle \langle D_j \rangle
-    \\
-    =& \langle [
-        D^{\delta_e}_i
-        + (D^{\rm src}_i - \langle D^{\rm src}_i \rangle)
-        + \langle D^{\rm src}_i \rangle
-        +  (D^{\bar{n}_e}_i -  \langle D^{\bar{n}_e}_i \rangle)
-        + \langle D^{\bar{n}_e}_i \rangle
-    ]
-    \nonumber \\
-    & \qquad [
-        D^{\delta_e}_j
-       + (D^{\rm src}_j - \langle D^{\rm src}_j \rangle)
-        + \langle D^{\rm src}_j \rangle
-        +  (D^{\bar{n}_e}_j -  \langle D^{\bar{n}_e}_j \rangle)
-        + \langle D^{\bar{n}_e}_j \rangle
-    ] \rangle
-    \nonumber \\
-    & \qquad - \langle D_i \rangle \langle D_j \rangle
-    \\
-    =& \langle D^{\delta_e}_i D^{\delta_e}_j \rangle
-        + \langle (D^{\rm src}_i - \langle D^{\rm src}_i \rangle)
-                 (D^{\rm src}_j - \langle D^{\rm src}_j \rangle) \rangle
-        + \langle (D^{\bar{n}_e}_i -  \langle D^{\bar{n}_e}_i \rangle)
-                  (D^{\bar{n}_e}_j -  \langle D^{\bar{n}_e}_j \rangle) \rangle
-    \nonumber \\
-    & \qquad
-        + \langle D^{\rm src}_i \rangle \langle D^{\rm src}_j \rangle
-        + \langle D^{\bar{n}_e}_i \rangle \langle D^{\bar{n}_e}_j \rangle
-        + \langle D^{\rm src}_i \rangle \langle D^{\bar{n}_e}_j \rangle
-        + \langle D^{\bar{n}_e}_i \rangle \langle D^{\rm src}_j \rangle
-    \nonumber \\
-    & \qquad - \langle D_i \rangle \langle D_j \rangle
-    \\
-    =& \langle D^{\delta_e}_i D^{\delta_e}_j \rangle
-        + \langle (D^{\rm src}_i - \langle D^{\rm src}_i \rangle)
-                 (D^{\rm src}_j - \langle D^{\rm src}_j \rangle) \rangle
-        + \langle (D^{\bar{n}_e}_i -  \langle D^{\bar{n}_e}_i \rangle)
-                  (D^{\bar{n}_e}_j -  \langle D^{\bar{n}_e}_j \rangle) \rangle
-\end{align}
-In the last equation, the first term is the term we've been dealing with, the
-second term is hopefully zero, and the third term is what Ue-Li is worried
-about, which we still have to calculate. I don't see anything unexpeced.
-
-\subsection{Relating dispersion measure angular power-spectrum to cosmology}
-
-The angular correlation function of dispersion distance between two lines of sight at redshift $z$ and direction $\hat{n}$ and redshift $z'$ and direction $\hat{n}'$ is
-\begin{equation}
-w^{z z'}(\hat{n}\cdot\hat{n}') = \langle D^{\delta_e}(\hat{n}, z) D^{\delta_e}(\hat{n}', z') \rangle
-\end{equation}
-and the corresponding angular power spectrum is
-\begin{equation}
-w^{z z'}(\hat{n}\cdot\hat{n}') = \sum_l \frac{2l+1}{4 \pi} C_l^{z z'} P_l(\hat{n}\cdot\hat{n}')
-\end{equation}
-
-We can decompose the dispersion-distance field into spherical harmonics as
-\begin{equation}
-    D^{\delta_e}(\hat{n}, z) = \sum_{l m} D^{\delta_e}_{l m}(z) Y_{l m} (\hat{n})
-\end{equation}
-
-A plane wave can be expanded in terms of spherical eigenfunctions using the Rayleigh expansion
-\begin{equation}
-e^{i \vec{k}\cdot \hat{n} \eta} = 4\pi \sum_{l m} i^l j_{l}(k\eta) Y^*_{lm}(\hat{k})Y_{lm}(\hat{n})
-\end{equation}
-If we define 
-\begin{equation}
-n_e(\vec{k}) = \int d^3 \vec{x} e^{-i \vec{x}\cdot\vec{k}} n_e(\vec{x})
-\end{equation}
-to be the Fourier transform of the comoving electron density field then we can write
-\begin{equation}
-    D^{\delta_e}_{l m}(z) = \frac{4 \pi i^{l}}{\bar{n}_{e0}} \int \frac{d^3
-    \vec{k}}{(2\pi)^3} n_e(\vec{k}) Y^*_{l m}(\hat{k}) \int_0^{\eta^z} d\eta a^{-1}(\eta) j_{l}(k\eta)
-\end{equation}
-and the angular power spectra of dispersion-distance, assumed to be an isotropic random field, is thus
-\begin{equation}
-    \langle D^{\delta_e}_{l m}(z) D^{\delta_e}_{l' m'}(z') \rangle = C_l^{z z'} \delta_{l l'} \delta_{m m'}
-\end{equation}
-Now since we have 
-\begin{equation}
-\langle n_e(\vec{k}) n_e(\vec{k}')\rangle = \bar{n}_{e0}^2\left[\langle \delta_e(\vec{k})\delta_e(\vec{k}')\rangle + 1 \right]
-\end{equation}
-where
-\begin{equation}
-\langle \delta_e(\vec{k})\delta_e(\vec{k}')\rangle = (2\pi)^3 \delta_{D}^3(\vec{k}-\vec{k}') P_{ee}(k)
-\end{equation}
-we finally have
-\begin{equation}
-C_l^{zz'}=\frac{2}{\pi} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z'}}\frac{d\eta'}{a(\eta')}  j_l(k\eta) j_l(k\eta')
-\end{equation}
-The one-point variance in the dispersion-distance from a redshift $z$ is just
-\begin{equation}
-(\sigma^2)^{zz}=\sum_{l} \frac{2l+1}{4\pi} C_l^{zz}
-\end{equation}
-Using the addition identify for a complete sum over spherical bessel functions we find that
-\begin{equation}
-(\sigma^2)^{zz}= \frac{1}{2\pi^2} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\eta}{a(\eta)} \int_0^{\eta^{z}}\frac{d\eta'}{a(\eta')}  j_0(k\eta-k\eta')
-\end{equation}
-
-
-Given a source-population redshift distribution ${\cal P}(\eta^z)$, where 
-\begin{equation}
-\int d\eta^z {\cal P}(\eta^z) = 1
-\end{equation}
-
-The observable power spectrum of mean dispersion distance $\bar{D}$ is then
-\begin{equation}
-C_l^{\bar{D}\bar{D}} = \int d\eta^z \int d\eta^{z'} {\cal P}(\eta^z){\cal P}(\eta^{z'}) C_l^{z z'}
-\end{equation}
-
-We use the halo model to calculate $P_{ee}(k)$ and a potential ${\cal P}(z)$.
+Where $\eta$ and $z$ are understood to be functions of $\Dne$.
 
 
 
-\subsection{Estimating the DM angular power spectrum from a sample of observed
-FRBs}
+\section{Modeling angular correlations}
 
-To relate observations to cosmology, we wish to determine how a set of observed
-dispersion measures $\boldsymbol D$ (whose members are $D_i$)
+
+\section{Estimating angular correlations}
+
+We observe a set of observed dispersion measures
+$\boldsymbol \Delta$ (whose members are $\delta D_i$)
 with known angular positions, $\hat n_i$, but with unknown
-redshifts, $z_i$, depends on cosmological parameters.  We begin by defining the
-redshift probability distribution function $p(\boldsymbol z)$. We assume that the
-redshifts of the FRB sources are independent, \emph{i.e.}~we assume
-\begin{equation}
-    p(\boldsymbol z) = \prod_i p(z_i).
-\end{equation}
-This may not be strictly true since FRBs are expected to cluster and trace the
-large-scale structure. This is a potential source of bias in the estimator we
-derive.  From this assumption it follows that the $D^{\bar{n}_e}_i$ have
-uncorrelated probability distributions
-\begin{align}
-    p(D^{\bar{n}_e}_i)
-    &= p(z_i) \left|\frac{\ud D^{\bar{n}_e}}{\ud z} \right|_{z_i}^{-1} \\
-        &= p(z_i) \left(\frac{\ud \eta}{\ud z} \right)_{z_i}^{-1},
-\end{align}
-whose second moment is
+redshifts, $z_i$.  The Covariance matrix is
+${\boldsymbol C} \equiv
+\langle \boldsymbol \Delta \boldsymbol \Delta^T \rangle$.
+The off diagonal elements depend on cosmology
+$C_{ij} = w(\hat{n}_i\cdot\hat{n}_j)$ while the diagonal part is dominated by noise.
+
+\subsection{Noise}
+
+The noise will be dominated by contributions from $\Dsrc$, $\Dne$ and $\Dde$.
+
 \begin{align}
     \label{e:sig_nebar}
-    \langle D^{\bar{n}_e}_i D^{\bar{n}_e}_j \rangle
-        &- \langle D^{\bar{n}_e}_i \rangle \langle D^{\bar{n}_e}_j \rangle \\
-        &= \delta_{ij} \left[ \int_0^\infty \ud D^{\bar{n}_e} (D^{\bar{n}_e})^2
+    \langle \delta D^{\bar{n}_e}_i \delta D^{\bar{n}_e}_i \rangle
+        &= \left[ \int_0^\infty \ud D^{\bar{n}_e} (D^{\bar{n}_e})^2
             p(D^{\bar{n}_e})
             - \left( \int_0^\infty \ud D^{\bar{n}_e} D^{\bar{n}_e}
         p(D^{\bar{n}_e}) \right)^2 \right]\\
-        &\equiv \delta_{ij} \sigma_{\bar{n}_e}^2
+        &\equiv  \sigma_{\bar{n}_e}^2
 \end{align}
 
-We further assume that $D^{\rm src}_i$ are uncorrelated. Again this may not
-be strictly true due to clustering of FRB sources and again this may bias our
-estimator. We parameterized the variance from this term as 
 \begin{equation}
     \label{e:sig_src}
-    \langle D^{\rm src}_i D^{\rm src}_j \rangle
-    - \langle D^{\rm src}_i \rangle \langle D^{\rm src}_j \rangle
-    = \delta_{ij} \sigma^2_{\rm src}.
+    \langle \delta D^{\rm src}_i \delta D^{\rm src}_i \rangle
+    \equiv \sigma^2_{\rm src}.
 \end{equation}
 
-\red{$D^{\bar{n}_e}_i$ and $D^{\rm src}_i$ are likely correlated due to
-    redshift evolution of source events, but this does not affect the
-    measurement since both are treated as noise terms.}
-
-The cosmological information lies in the correlations between the
-$D^{\delta_e}_i$. If the redshifts of the observed FRBs where known, we
-would write the probability density function of this set as
-$p(\boldsymbol D^{\delta_e} | \boldsymbol z)$, which has second moments
 \begin{equation}
-    w^{z_i z_j}(\hat{n}_i\cdot\hat{n}_j) \equiv \int \ud \boldsymbol D^{\delta_e}
-        D^{\delta_e}_i D^{\delta_e}_j p(\boldsymbol D^{\delta_e} | \boldsymbol z).
+    \label{e:sig_delta}
+    \langle \delta \Dde_i \delta \Dde_i \rangle
+		= \int d\eta^z \int d\eta^{z'} \delta(\eta^z - \eta^{z'}) 
+		p(\eta^{z}) w^{z z'}(0)
 \end{equation}
-$w^{z_i z_j}(\hat{n}_i\cdot\hat{n}_j)$ is the redshift dependant DM angular
-correlation function, whose dependence on cosmology is derived below.
-Marginalizing $p(\boldsymbol D^{\delta_e} | \boldsymbol z)$ over the unknown redshifts
-yields
-\begin{equation}
-    p(\boldsymbol D^{\delta_e}) = \int_0^\infty \ud \boldsymbol z
-        p(\boldsymbol z) p(\boldsymbol D^{\delta_e} | \boldsymbol z).
-\end{equation}
-The second moment of the marginalized distribution is
-\begin{align}
-    \langle D^{\delta_e}_i D^{\delta_e}_j \rangle =& \\
-        =&
-        \begin{cases}
-            \int \ud z \ud z' p(z) p(z') w^{z z'}(\hat{n}_i\cdot\hat{n}_j) 
-                &  \text{if } (i \neq j) \\
-            \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(\hat{n}_i\cdot\hat{n}_j)
-                &  \text{if } (i = j)
-        \end{cases}
-\end{align}
 
-The covariance matrix is
+\subsection{Estimators}
+
+Here we sketch how the dispersion mearure angular power-spectrum, $C_l$
+could be estimated from a sample of observed dispersion-measures.
+
+The covariance matrix of the sample is:
+
 \begin{align}
-    C_{ij} \equiv& \langle D_i D_j \rangle - \langle D_i \rangle \langle D_j
-    \rangle\\
+    C_{ij} \equiv& \langle \delta D_i \delta D_j \rangle \\
     =&
         \begin{cases}
             \sum_l \frac{2l+1}{4 \pi} C_l P_l(\hat{n}_i\cdot\hat{n}_j)
@@ -587,56 +316,13 @@ The covariance matrix is
         \end{cases}
 \end{align}
 
-\red{The cosmological term is probably negligible for the diagonal elements.}
-
-We have written the covariance matrix in terms of $C_l$, the
-redshift distribution function for FRBs, $p(z)$, and the unknown parameter
-$\sigma^2_{\rm src}$.  This will enable us to construct a quadratic estimator
-for a desired set of cosmological parameters from the observed set of
-dispersion measures.
-
-Now that we have the covariance matrix, we construct a quadratic estimator
-($\hat{\lambda}_\alpha$) for
-chosen parameters $\lambda_\alpha$. The estimator is Equation~11.94 from
-Dodelson, although we have to modify it slightly to exclude the
-auto-correlations.  The error (assuming Gaussianity) is Equation~11.100.
-
-Defining data vector $\bDelta = \bD - \bar{D}$ where $\bar{D}$ is the sample
-mean of dispersion measures.
-
-\begin{equation}
-    \label{e:est_dod}
-    \hat{\lambda}_\alpha = \lambda_0
-        + \frac{F^{-1}_{\alpha\beta}}{2} 
-        \left[ \bDelta^T \bC^{-1} \bC_{,\beta} \bC^{-1} \bDelta
-        - \mathrm{Tr}\left[\bC^{-1} \bC_{,\beta}\right] \right],
-\end{equation}
-for some fiducial value of the parameter $\lambda_0$.  $F_{\alpha\beta}$ is the
-Fisher matrix, given by
-\begin{equation}
-    F_{\alpha \beta} = \frac{1}{2} \mathrm{Tr} 
-        \left[ \bC_{,\alpha} \bC^{-1} \bC_{,\beta} \bC^{-1} \right]
-\end{equation}
-
-The covariance of this estimator (assuming Gaussianity of the original
-data) is
-\begin{equation}
-    \langle \lambda_\alpha \lambda_\beta \rangle
-        - \langle \lambda_\alpha \rangle \langle \lambda_\beta \rangle
-        = F^{-1}_{\alpha\beta}
-\end{equation}
-
-The dispersion measure angular correlation function 
-$w(\hat{n}_i\cdot\hat{n}_j)$ depends on the cosmology
-and the redshift distribution function $p(z)$, for which we may parameterize
-our ignorance. The
-cross-correlations between the observed dispersion measures are thus useful
-probes of cosmology.  The auto-correlations on the other hand are contaminated
-by the highly uncertain $\sigma^2_{\rm src}$ as well as the $C^{zz'}_\ell$ on
-very small scales and zero redshift separation, which is difficult to model
-theoretically.  As such they do not carry useful information.
-
-To explicitly ignore the information in the auto-correlations we define
+We see that the off diagonal terms depend on the angular power-spectrum of
+interest while the diagonal is contaminiated by the unknown parameter
+$\sigma_{\rm src}^2$. This is again in analogue to weak lensing where the
+correlations between galaxy elipticty are caused primarily by cosmic leansing shear
+while an individual galaxies elipticity is dominated the galaxy's intrinsic
+elipticity. To remove the information in the diagonal, we define a
+modified covariance matrix derivative such that:
 \begin{equation}
     \tilde{C}_{ij,\alpha} \equiv
 \begin{cases}
@@ -644,16 +330,8 @@ To explicitly ignore the information in the auto-correlations we define
 0 & \text{if } i = j
 \end{cases}.
 \end{equation}
-By replacing $C_{ij,\alpha}$ with this quantity in the above estimator, we
-obtain an estimator which explicitly excludes information in the auto-products
-and only uses the diagonal of the covariance in the noise weights. Our
-ignorance of $\sigma^2_{\rm src}$ then only affects the optimality of the
-estimator, although in practise
-$\langle D_i D_i \rangle - \langle D_i \rangle \langle D_i \rangle$ would
-simply be measured directly from the data to obtain accurate noise weights.
 
-We can simplify our estimator by choosing band powers of $C_l$ as our
-parameters:
+We will parameterize the angular power spectrum using band powers, such that:
 \begin{equation}
     C_l \approx c_\alpha \quad \textrm{for $l^{min}_\alpha \leq l <
         l^{min}_{\alpha +1}$}
@@ -665,10 +343,8 @@ giving
         \quad\textrm{for $i \neq j$}.
 \end{equation}
 
-Because the covariance matrix is linear in our parameters, and because we are
-explicitly ignoring the noise biased auto-products in our estimator, we can
-safely drop the first and third terms in Equation~\ref{e:est_dod}.  Our final
-estimator is
+The estimator is then
+
 \begin{equation}
     \hat{c}_\alpha = \frac{\tilde F^{-1}_{\alpha\beta}}{2} 
         \left[ \bDelta^T \bC^{-1} \tilde\bC_{,\beta} \bC^{-1} \bDelta \right],
@@ -680,82 +356,21 @@ with
         \right].
 \end{equation}
 
-%We further assume that the terms in Equation \ref{e:D_sep} are mutually uncorrelated
 
 
-\begin{comment}
-is the dispersion-measure random field in angular direction $\hat{n}$ where
-\begin{equation}
-n_e(\eta^z\hat{n}) \equiv n_e(z,\hat{n}) =  \bar{n}_{e0} (1+z)^3 \left[1+\delta_e(z,\hat{n})\right]
-\end{equation}
-is the electron distribution of the Universe and $\bar{n}_{e0}$ is the mean cosmological density of free electrons today, and $\delta_e(z,\hat{n})$ is 
-the fractional over-density of electrons.
-\end{comment}
+\subsection{Sensitivity Estimates}
 
 
-\begin{comment}
+\section{Extensions to 3D}
 
-\subsection{Sensitivity}
+\subsection{Dispersion measure space distortions}
 
-In this section we calculate the sensitivity of a hypothetical survey observing
-X FRBs. Because $C_\ell$ contains the all the information we use bins
-of $C_\ell$ as our parameters. We use the error bar on these parameters given
-in Equation~\ref{e:error}.  We note that it is highly unlikely that an observed
-set $\{D_i\}$ is even remotely Gaussian, and as such our error-bars are likely
-underestimated and out estimator sub-optimal at the order unity level. 
-However since given that the statistics of FRBs are currently essentially
-unconstrained, we continue with this assumption.
-
-% Note about cosmological parameters
-
-\end{comment}
-
-\subsection{Simplified sensitivity calculation}
-
-In this section we present a simplified calculation for the sensitivity of the
-above estimator which is valid for sample of observed
-FRBs distributed roughly uniformly over some fraction of the sky.
-
-The error bar on the redshift averaged dispersion measure angular power spectrum
-is
-\begin{equation}
-    \sigma_{C_l} = \sqrt{\frac{2}{(2 l + 1) f_{\rm sky}}} (C_l + C^N_l),
-\end{equation}
-where the noise power spectrum is
-\begin{equation}
-    C^N_l = \frac{4 \pi \sigma_D^2 \sqrt{f_{\rm sky}}}{N_{\rm FRB}}.
-\end{equation}
-Here $N_{\rm FRB}$ is the number of dispersion measures measured from fast
-radio bursts.
-%\red{I'm only 80\% sure about the factors of $f_{\rm sky}$}.
-
-$\sigma_D^2$ is the variance of the dispersion measures.  This would in
-practise be measured directly from the observed set, but in terms of
-theoretical parameters is
-\begin{equation}
-\sigma_D^2 = \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src} + \int \ud z \ud z'
-\delta(z - z') p(z) w^{z z'}(1),
-\end{equation}
-where the first two terms are defined above in equations \ref{e:sig_nebar}
-through
-\ref{e:sig_src}. The third term is likely
-negligible and could also be written as
-\begin{equation}
-    \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(1) = \int \ud z \ud z'
-    \delta(z - z') p(z) \sum_{l} \frac{2l+1}{4\pi} C_l^{zz}.
-\end{equation}
+\subsection{Four point statistics}
 
 
+\section{Conclusions}
 
-\bigskip
-\section*{Acknowledgments}
-\medskip
-
- 
-\bibliographystyle{apsrevM}
-\bibliography{BBD-Draft}
-
-\end{document}
 
 
 
+\end{document}
