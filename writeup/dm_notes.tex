@@ -724,42 +724,6 @@ unconstrained, we continue with this assumption.
 
 \end{comment}
 
-\subsection{Simplified sensitivity calculation}
-
-In this section we present a simplified calculation for the sensitivity of the
-above estimator which is valid for sample of observed
-FRBs distributed roughly uniformly over some fraction of the sky.
-
-The error bar on the redshift averaged dispersion measure angular power spectrum
-is
-\begin{equation}
-    \sigma_{C_l} = \sqrt{\frac{2}{(2 l + 1) f_{\rm sky}}} (C_l + C^N_l),
-\end{equation}
-where the noise power spectrum is
-\begin{equation}
-    C^N_l = \frac{4 \pi \sigma_D^2 \sqrt{f_{\rm sky}}}{N_{\rm FRB}}.
-\end{equation}
-Here $N_{\rm FRB}$ is the number of dispersion measures measured from fast
-radio bursts.
-%\red{I'm only 80\% sure about the factors of $f_{\rm sky}$}.
-
-$\sigma_D^2$ is the variance of the dispersion measures.  This would in
-practise be measured directly from the observed set, but in terms of
-theoretical parameters is
-\begin{equation}
-\sigma_D^2 = \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src} + \int \ud z \ud z'
-\delta(z - z') p(z) w^{z z'}(1),
-\end{equation}
-where the first two terms are defined above in equations \ref{e:sig_nebar}
-through
-\ref{e:sig_src}. The third term is likely
-negligible and could also be written as
-\begin{equation}
-    \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(1) = \int \ud z \ud z'
-    \delta(z - z') p(z) \sum_{l} \frac{2l+1}{4\pi} C_l^{zz}.
-\end{equation}
-
-
 
 \bigskip
 \section*{Acknowledgments}

@@ -40,13 +40,13 @@
 
 \author{Kris Sigurdson}
  \affiliation{Department of Physics and Astronomy, University of British 
-Columbia, Vancouver, BC, Canada V6T 1Z1}
+Columbia, Vancouver, BC, Canada, V6T 1Z1}
 
 \author{Kiyoshi Wesley Masui}
  \affiliation{Department of Physics and Astronomy, University of British 
-Columbia, Vancouver, BC, Canada V6T 1Z1}
+Columbia, Vancouver, BC, Canada, V6T 1Z1}
  \affiliation{Canadian Institute for Advanced Research, CIFAR Program in
-Cosmology and Gravity, Toronto, ON, M5G 1Z8}
+Cosmology and Gravity, Toronto, ON, Canada, M5G 1Z8}
 
 \begin{abstract}
 
@@ -85,6 +85,8 @@ at linear order.
 
 
 \section{Preliminaries}
+
+% Dodelson uses \chi not \eta... should we used \chi?
 
 The dispersion measure of a FRB observed in some angular direction $\hat{n}$ and
 originating from redshift $z$ is
@@ -360,12 +362,125 @@ with
 
 \subsection{Sensitivity Estimates}
 
+In this section we present a simplified calculation for the sensitivity of the
+above estimator which is valid for sample of observed
+FRBs distributed roughly uniformly over some fraction of the sky.
+
+The error bar on the redshift averaged dispersion measure angular power spectrum
+is
+\begin{equation}
+    \sigma_{C_l} = \sqrt{\frac{2}{(2 l + 1) f_{\rm sky}}} (C_l + C^N_l),
+\end{equation}
+where the noise power spectrum is
+\begin{equation}
+    C^N_l = \frac{4 \pi \sigma_D^2 \sqrt{f_{\rm sky}}}{N_{\rm FRB}}.
+\end{equation}
+Here $N_{\rm FRB}$ is the number of dispersion measures measured from fast
+radio bursts. \red{this depends on the off diagonals of the covariance being
+small compared to the diagonals}.
+%\red{I'm only 80\% sure about the factors of $f_{\rm sky}$}.
+
+$\sigma_D^2$ is the variance of the dispersion measures.  This would in
+practise be measured directly from the observed set, but in terms of
+theoretical parameters is
+\begin{equation}
+\sigma_D^2 = \sigma_{\bar{n}_e}^2 + \sigma^2_{\rm src} + \int \ud z \ud z'
+\delta(z - z') p(z) w^{z z'}(1),
+\end{equation}
+where the first two terms are defined above in equations \ref{e:sig_nebar}
+through
+\ref{e:sig_src}. The third term is likely
+negligible and could also be written as
+\begin{equation}
+    \int \ud z \ud z' \delta(z - z') p(z) w^{z z'}(1) = \int \ud z \ud z'
+    \delta(z - z') p(z) \sum_{l} \frac{2l+1}{4\pi} C_l^{zz}.
+\end{equation}
+
+
 
 \section{Extensions to 3D}
 
+In the above discussions we have focused on the dispersion measure angular
+power spectrum due to its conceptual and mathematical simplicity.
+However, it is unlikely that this 2D statistic captures all or even most of the
+LSS information in a survey.  In this section we discuss possible extensions to
+3D statistics that might capture a larger portion of the total available
+information.
+
+When discussing the DM angular power spectrum, we treated the dispersion
+measure as the \emph{dependant} variable and considered statics. However,
+$\Dne$ is in one to one relation to source redshift, and as such the dispersion
+measure can be used as a proxy for radial distance.  As such we promote the
+dispersion measure to be the \emph{independent} variable and consider the
+statistics of the 3D number density field of FRB source events.
+If $\Dne$ were the only contribution to the dispersion measure then, assuming
+the FRB source events are a biased tracer of matter structure on large scales,
+this probe would be broadly similar to galaxy redshift surveys.  Variations in
+$\Dsrc$ produce a 'redshift smearing', limiting the effective resolution in the
+radial direction. The contributions to the dispersion measure from the electron
+over densities, $\Dde$, produce a variety of cosmological signals which we
+describe below.
+
+
 \subsection{Dispersion measure space distortions}
 
+Perturbations in the electron column density due to the intervening large-scale
+structure of free electrons results in a mis-estimation of radial distance
+from dispersion measure.  We've identified two effects through which this
+mis-estimation can cause \emph{unclustered} FRB source events to appear
+clustered, which we call the 'dilution effect' and the 'scattering effect'.
+
+In the dilution effect, FRB events embedded in electron over densities have
+additional elections (relative to the mean electron density) between them and
+thus appear to be more separated along the line of sight and less
+clustered.  If both the free electrons and the FRB source events trace the
+large-scale structure, this effect is anti correlated with the intrinsic
+clustering of the source events, although highly anisotropic.
+
+The scattering effect occurs when perturbations in the foreground free electrons
+cause the radial distances to background source events to be mis-estimated. 
+When coupled with a non-constant radial distribution
+function, $p(\eta)$, this can cause FRB source events to
+appear clustered. For instance, if there is an electron over-density in some
+direction background FRB events in that direction will be interpreted to be at
+a greater radial distance than they are. If $\ud p(\eta) /\ud \eta)$ is
+negative, there will be an excess of source events assigned to a given radial
+distance behind the electron over density which can be interpreted as apparent
+clustering of intrinsically unclustered source events.
+
+Collectively we dub these effects 'dispersion measure space distortions' due
+to its broad
+similarity to redshift space distortions. In redshift space distortions peculiar
+velocities of tracers induce a mis-estimation of radial distance using redshift.
+The convergence of these mis-estimations, proportional to the convergence of the
+peculiar velocities causes unclustered tracers to appear clustered along the line
+of sight. Since the velocity convergence and the over density are perfectly
+correlated in linear theory this manifests as an enhancement of line of sight
+clustering.
+
+By moving to 3D we fully exploit the redshift information inherent in $\Dne$ as
+opposed to treating it largely as a noise term as in our above discussion on
+the dispersion measure angular power spectrum. As such we expect such a
+treatment would greatly increase the amount of information extracted from an
+FRB survey, although we make no effort to quantify this statement.
+
+In addition we expect that in such a treatment the degeneracy between FRB
+source clustering and free electron clustering would be significantly less
+severe. This is because in 3D, the intrinsic source clustering should be perfectly
+isotropic while the electron clustering induces apparent source clustering
+only in the radial direction and should thus be highly anisotropic.
+
+
 \subsection{Four point statistics}
+
+In the above dispersion measure space distortions discussion, we discussed how
+scattering and dilution can cause unclustered FRB source events to appear to
+be clustered in three dimensions.  These effects also have an effect on the
+clustered source events. By scattering or diluting the radial distance of
+clustered source events, the free electron density field modulates the
+statistics of the source clustering. The two point statistics become
+non-stationary, which can be measure in the four-point statistics of the source
+event density as a non-gaussianity.
 
 
 \section{Conclusions}
