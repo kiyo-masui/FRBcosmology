@@ -59,7 +59,7 @@ Cosmology and Gravity, Toronto, ON, Canada, M5G 1Z8}
 
 Several years ago an unusual radio event was discovered at the Parks radio telescope while searching for millisecond pulsars.  In a direction out of the plane of the Galaxy an event was discovered with an unusually large dispersion-measure, implying a column of electrons much large than expected in the Galaxy.
 
-In this \emph{ Letter} we consider the implications of of a cosmological population of fast radio bursts (FRBs). 
+In this \emph{Letter} we consider the implications of of a cosmological population of fast radio bursts (FRBs). 
 If FRBs originate at cosmological distances they provide a new window on the Universe. The key insight into the potential power of FRBs is that, while it is interesting and helpful to know the redshift of the burst, it is not necessary to do interesting studies of cosmology.
 
 In this paper we consider only the simplest statistic that captures some of
@@ -132,35 +132,46 @@ measured.  In addition, this function could in principal be well characterized
 by independent data such as observations of pulsars.  As such, we will
 here-after we ignore this term.
 
-In addition, we define the mean subtracted values of the of the variouse dispersion
-measure quantites, $\del D = D - \langle D \rangle$. Here the angular brackets represent
+In addition, we define the mean subtracted values of the of the various dispersion
+measure quantities, $\del D = D - \langle D \rangle$. Here the angular brackets represent
 the ensemble average.
 
 \red{Introduce the redshift distribution function, assumption that FRB's trace
 LSS, bias, etc.}
 
-\red{Convensions: we use subscripts $i$, $j$, etc.~on coordinate-like
+\red{Conventions: we use subscripts $i$, $j$, etc.~on coordinate-like
     quantities to label observed FRB events. Thus $\vec x_i$ and $\hat{n}_i$
     are respectively the 3D coordinates of and unit vector pointing to event $i$.
     This should not be confused with superscripts, denoting the
-component of a vector, such that $x^1$ is the first componenent of vector $\vec
+component of a vector, such that $x^1$ is the first component of vector $\vec
 x$.  }
 
 \red{$\calP$ is a probability, while $p$ is a PDF. $\calP(x < X < x + \ud x) =
 p(x) \ud x$ always.}
 
+An important characteristic for an FRB survey is the ensemble radial distribution
+function $p(\eta_i)$ which gives the probability density that an FRB source event 
+occurred at radial distance $\eta_i$. The number events between radial distance
+$\eta$ and $\eta + \ud \eta$ is
+$N p(\eta)$ where $N$ is the cumulative number of events in the sample. The 3D source
+event density is $\bar{n}(\eta) = N p(\eta) / (4 \pi \eta^2)$. Because the
+radial distance cannot be measured directly, this function is unknown and must
+be fit for in the analysis.
+
 
 \section{Dispersion Measure angular correlations}
 
+
+
 The principle observable which we would like to consider is the correlations
 between the dispersion measures of observed fast radio bursts as a function of
-their angular separation.  For observed FRB events labeled by the indices $i$
+their angular separation.  For observed FRB events labelled by the indices $i$
 and $j$, and assuming $i \neq j$, we define the dispersion measure angular
 correlation function as
 \begin{equation}
     w(\hat{n}_i\cdot\hat{n}_j) \equiv \langle \del D_i \del D_j \rangle.
 \end{equation}
-A move convienient quantity to work with is the corresponding angular
+A more convenient quantity to work with is the corresponding angular
 power spectrum
 \begin{equation}
 w(\hat{n}_i \cdot\hat{n}_j) = \sum_l \frac{2l+1}{4 \pi} C_l
@@ -170,18 +181,22 @@ P_l(\hat{n}_i\cdot\hat{n}_j).
 We have identified two effects that dominate the angular
 correlations and which depend on the large-scale structure of the Universe and
 thus cosmology.  The first effect is that the signals from two FRB events may
-propagate through shared structures along the line of sight.  Thus correlations
-in the election overdensities along the line of sight will correlate the 
-$\Dde$.  The second effect is that due to the intrisic clustering of source
+propagate through shared large-scale structure along the line of sight.
+Thus correlations
+in the election over densities along the line of sight will correlate
+$\Dde$.  The second effect is that due to the intrinsic clustering of source
 events, a pair of FRBs that are nearby in the angular coordinates are more
 likely to also be nearby in the line of sight coordinate, thus causing
-correations in $\Dne$.  In the remainder of this section we will calculate the
+correlations in $\Dne$.  In the remainder of this section we will calculate the
 contributions from each of these effects.
 
 We assume that $D^{\rm src}_i$ are uncorrelated. Again this may not
 be strictly true due to clustering of FRB sources and environmental effects
-and this may bias results.  In addition $\Dsrc$ and $\Dne$ may be correlated due
-to redshift evolution of source events.
+and this may bias results.  \red{I don't thing the following matter for $i \neq
+j$} In addition $\Dsrc$ and $\Dne$ may be correlated due
+to redshift evolution of source events. Finally, redshift evolution of the
+source events and their environments could correlate $\Dsrc$ with $\Dde$. Here
+we do not attempt to quantify these correlations.
 
 
 \subsection{Correlations in $\Dde$}
@@ -193,18 +208,24 @@ C_l^{zz'}=\frac{2}{\pi} \int_0^{\infty}k^2 dk P_{ee}(k) \int_0^{\eta^z}\frac{d\e
 C_l^{\Dde \Dde} = \int d\eta^z \int d\eta^{z'} p(\eta^z)p(\eta^{z'}) C_l^{z z'}
 \end{equation}
 
+\red{I think this is wrong. It is missing factors of $1/(1+z)$.}
+
+This would be true if FRB's we uniformly distributed on the sky.  However their
+locations correlate with LSS, and as such we get cross terms.
 
 \subsection{Correlations in $\Dne$}
 
-The joint probablility of observing a pair of FRB events at 3D coordinates
-$\vec x_i$ and $\vec x_j$ in infintessimal volumes $\ud^3\vec x_i$ and
+
+The joint probability of observing a pair of FRB events at 3D coordinates
+$\vec x_i$ and $\vec x_j$ in infinitesimal volumes $\ud^3\vec x_i$ and
 $\ud^3\vec x_j$ is
 \begin{equation}
-    \calP(\vec x_i, \vec x_j) = p(\eta_i) p(\eta_j) \left[ 1 + b(z_i)
-    b(z_j) \xi(\vec x_i - \vec x_j) \right] \frac{\ud^3\vec x_i}{\eta_i^2}
-    \frac{\ud^3\vec x_j}{\eta_j^2}.
+    \calP(\vec x_i, \vec x_j) =
+    \frac{N^2 p(\eta_i) p(\eta_j)}{(4 \pi)^2 \eta_i^2 \eta_j^2}
+    \left[ 1 + b(z_i) b(z_j) \xi(\vec x_i - \vec x_j) \right]
+    \ud^3\vec x_i \ud^3\vec x_j.
 \end{equation}
-The factors of $1/\eta^2$ are nessisary to achive the proper volume weighting,
+The factors of $1/\eta^2$ are necessary to achieve the proper volume weighting,
 a fact that can be seen by taking the limit of $\xi \to 0$ and integrating of
 the angular coordinates. Noting that $p(\eta_i)$ has units 
 \red{$({\rm MPc}\,{\rm rad}^2)^{-1}$ (conflicts with being normalized)}.
@@ -219,9 +240,9 @@ coordinate.  Fixing the angular coordinates:
 \end{equation}
 where $N(\hat{n}_i, \hat{n}_i)$ is a normalizing factor which ensures the
 expression integrates to unity over $\eta_i$ and $\eta_j$. The factors of
-$1/\eta^2$ have been canceled when converting $\ud^3 \vec x = \eta^2 \ud \eta \ud^2
+$1/\eta^2$ have been cancelled when converting $\ud^3 \vec x = \eta^2 \ud \eta \ud^2
 \vec \theta$. If the second term in brackets is small, then the normalizations
-$N$ is 1 (since the distributions $p{\eta_i}$ are already normalized. 
+$N$ is 1 (since the distributions $p(\eta_i)$ are already normalized. 
 This expression is
 only valid if $i \ne j$.
 Transforming to $\Dne$ as our distance measure, we obtain
@@ -301,7 +322,7 @@ The noise will be dominated by contributions from $\Dsrc$, $\Dne$ and $\Dde$.
 
 \subsection{Estimators}
 
-Here we sketch how the dispersion mearure angular power-spectrum, $C_l$
+Here we sketch how the dispersion measure angular power-spectrum, $C_l$
 could be estimated from a sample of observed dispersion-measures.
 
 The covariance matrix of the sample is:
@@ -319,11 +340,11 @@ The covariance matrix of the sample is:
 \end{align}
 
 We see that the off diagonal terms depend on the angular power-spectrum of
-interest while the diagonal is contaminiated by the unknown parameter
+interest while the diagonal is contaminated by the unknown parameter
 $\sigma_{\rm src}^2$. This is again in analogue to weak lensing where the
-correlations between galaxy elipticty are caused primarily by cosmic leansing shear
-while an individual galaxies elipticity is dominated the galaxy's intrinsic
-elipticity. To remove the information in the diagonal, we define a
+correlations between galaxy ellipticity are caused primarily by cosmic lensing shear
+while an individual galaxies ellipticity is dominated the galaxy's intrinsic
+ellipticity. To remove the information in the diagonal, we define a
 modified covariance matrix derivative such that:
 \begin{equation}
     \tilde{C}_{ij,\alpha} \equiv

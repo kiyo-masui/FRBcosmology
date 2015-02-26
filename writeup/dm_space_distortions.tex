@@ -1,0 +1,220 @@
+\documentclass[onecolumn,prd,nofootinbib]{revtex4-1}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{verbatim}
+
+
+% shortcuts
+%\newcommand{\ud}{\,\mathrm{d}}
+\newcommand{\bD}{\boldsymbol D}
+\newcommand{\bC}{\boldsymbol C}
+\newcommand{\bDelta}{\boldsymbol \Delta}
+\newcommand{\Dgal}{D^{\rm gal}}
+\newcommand{\Dne}{D^{\bar{n}_e}}
+\newcommand{\Dde}{D^{\delta_e}}
+\newcommand{\Dsrc}{D^{\rm src}}
+\newcommand{\del}{\delta\!}
+\newcommand{\calP}{{\cal P}}
+\newcommand{\ud}{\,\mathrm{d}}
+
+
+
+% for draft comments.
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\green}{\textcolor{green}}
+
+
+\begin{document}
+
+\title{The large scale clustering of fast radio bursts in dispersion measure space}
+
+\author{Kiyoshi Wesley Masui}
+ \affiliation{Department of Physics and Astronomy, University of British 
+Columbia, Vancouver, BC, Canada, V6T 1Z1}
+ \affiliation{Canadian Institute for Advanced Research, CIFAR Program in
+Cosmology and Gravity, Toronto, ON, Canada, M5G 1Z8}
+
+\author{Kris Sigurdson}
+ \affiliation{Department of Physics and Astronomy, University of British 
+Columbia, Vancouver, BC, Canada, V6T 1Z1}
+
+
+\begin{abstract}
+
+\end{abstract}
+
+\maketitle
+
+\section{FRB density perturnbations in DM space}
+
+\begin{equation}
+D(\hat n, \chi) = \int_0^\chi \ud \chi' a(\chi')^2
+   \left[1 + \delta_e(\hat{n}\chi')\right]
+\end{equation}
+
+This defines DM space:
+\begin{equation}
+D(\chi_s) =  \int_0^{\chi_s} \ud \chi' a(\chi')^2
+\end{equation}
+
+Combining the above, we find that:
+\begin{equation}
+\frac{\ud \chi_s}{\ud \chi} = (1 + \delta_e),
+\end{equation}
+and
+\begin{equation}
+\chi_s - \chi = \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
+\end{equation}
+
+\begin{equation}
+\label{e:density}
+n_{fs}(\vec x_s) \ud^3\vec x_s = n_{f}(\vec x) \ud^3\vec x
+\end{equation}
+
+Averaged over the sky, the galaxy density should be the same in DM 
+space as in real space.
+\begin{equation}
+\bar{n}_{fs}(\chi_s)\left[ 1 + \delta_f(\vec x_s)\right] \ud^3\vec x_s
+    = \bar{n}_{f}(\chi)\left[ 1 + \delta_f(\vec x)\right] \ud^3\vec x
+\end{equation}
+
+\begin{equation}
+\bar{n}_{fs}(\chi) = \bar{n}_f(\chi)
+\end{equation}
+Therefore,
+\begin{align}
+\bar{n}_{fs}(\chi_s) 
+    &= \bar{n}_{f}(\chi) + (\chi_s - \chi)\frac{\ud \bar{n}_f}{\ud \chi}\\
+    &= \bar{n}_{f}(\chi)
+       + \frac{\ud \bar{n}_f}{\ud \chi}\int_0^\chi \ud \chi' \delta_e(\hat n \chi')
+       \label{e:nfs}
+\end{align}
+
+The jacobian in spherical coordinates is:
+\begin{align}
+\left| \frac{\ud^3\vec x}{\ud^3\vec x_s} \right|
+    &= \frac{\ud \chi}{\ud \chi_s}\frac{\chi^2}{\chi_s^2}\\
+    &= (1 + \delta_e)^{-1}
+       \left(1 + \frac{\int_0^\chi \ud \chi' \delta_e(\hat n \chi')}
+                      {\chi}\right)^{-2}\\
+    &\approx 1 - \delta_e
+        - \frac{2}{\chi}\int_0^\chi \ud \chi' \delta_e(\hat n \chi')
+        \label{e:jac}
+\end{align}
+Following Kaiser, the third line follows since the
+second factor in parenthases on the second line, which is the
+average overdensity along the line of sight, is much
+closer to unity than the first due to cancelations.
+
+Substituting Equations~\ref{e:nfs}~and~\ref{e:jac} into Equation~\ref{e:density},
+we obtain:
+\begin{equation}
+\label{e:delta_s}
+    \delta_{fs} = \delta_f - \delta_e
+    - \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+        \int_0^\chi \ud \chi' \delta_e(\hat n \chi')
+\end{equation}
+
+\section{Two-point statistics in DM space}
+
+In this section all quantities are already first order in the perturbations so
+there is no need to distinguish between the DM space coordinates and the real
+space coordintes. The correction is higher order. Still need to distinguish
+between DM space and real space fields ($\delta_{fs} \neq \delta_f$, but
+$\delta_f(\vec x_s) \approx \delta_f(\vec x)$).
+
+Unlike in redshift-space distortions, Equation~\ref{e:delta_s} does not have a
+simple form in harmonic space. The equations third term couples harmonic modes
+and thus the two-point statistic cannot be phrased as a simple power spectrum.
+We will phrase the two point statistic in terms of $C^{ss}_{\ell D D'}$, which is
+the cross-correlation angular power-spectrum of the DM space source overdensity
+on DM shells at $D$ and $D'$.
+
+Because the expression for the density perturbations in DM space involves an
+integral over the line of sight, which for far off sources may cover a
+significant amount of the Universe's expansion, it is nessisary to explicitly
+account for light cone effects. This is most easily done in linear theory,
+where these effects are scale independant, a factorization that allows certian
+integral to be performed. In reality, non-linear growth causes both the bias
+and the growth factor to be scale and time dependant. As in weak lensing, this
+would need to be simulated.
+
+We use the following convensions:
+\begin{equation}
+    P_X(k, \chi) = b_X^2 g(\chi)^2 a(\chi)^2 P(k, 0)
+\end{equation}
+
+\begin{equation}
+    \delta_X(\vec x, \chi) =  b_X g(\chi) a(\chi) \int\frac{\ud^3\vec k}{(2 \pi)^3}
+        e^{i\vec k \cdot \vec x} \delta(\vec k, 0)
+\end{equation}
+
+\begin{equation}
+    w^{XX}(\hat n \cdot \hat n', \chi, \chi')
+    \equiv \langle \delta_X(\vec x) \delta_X(\vec x') \rangle
+\end{equation}
+
+For dark matter:
+\begin{align}
+w(\hat n \cdot \hat n', \chi, \chi') 
+    &= gg'aa'
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} \frac{\ud^3\vec k'}{(2 \pi)^3}
+        e^{i\vec k \cdot \vec x} e^{i\vec k' \cdot \vec x'}
+        \langle \delta(\vec k, 0) \delta(\vec k', 0) \rangle\\
+    &= gg'aa'
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i\vec k \cdot (\vec x - \vec x')} P(k, 0)\\
+    &= gg'aa'
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i\vec k \cdot (\vec x - \vec x')} P(k)\\
+    &= gg'aa'
+        \int\frac{k^2 \sin(\theta_k) \ud k \ud \theta_k \ud \phi_k}{(2 \pi)^3} 
+        e^{i k |\vec x - \vec x'| \cos\theta_k} P(k, 0)\\
+    &= gg'aa'
+        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
+        \frac{\sin(k |\vec x - \vec x'|)}{k |\vec x - \vec x'|} P(k, 0)\\
+    &= gg'aa'
+        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
+        j_0 (k \sqrt{\chi^2 + \chi'^{^2} - \chi \chi' \hat n \cdot \hat n'})
+        P(k, 0)
+\end{align}
+Somehow when I integrate this against a lengendre polynomial, $P_\ell(\mu)$,
+to get $C_\ell$
+I'm going to get Bessel functions. Lets assume that works (Kris, how does this
+work?) to get:
+\begin{equation}
+    C_{\ell\chi\chi'} = \frac{2 gg'aa'}{\pi}
+    \int_0^\infty\ud k k^2 j_\ell(k \chi) j_\ell(k \chi')
+        P(k, 0)
+\end{equation}
+
+Define $\delta_d$ as:
+\begin{equation}
+    \delta_d(\hat n \chi) = \int_0^\chi \ud \chi' \delta_e(\hat n \chi')
+\end{equation}
+which doesn't have the same units as overdensity, but that is okay.
+\begin{align}
+    w^{dd}(\hat n \cdot \hat n', \chi, \chi')
+    &= \int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
+         \langle \delta_e(\hat n \chi'') \delta_e(\hat n' \chi''') \rangle\\
+    &= b_e^2\int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
+        g''g'''a''a'''
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} \frac{\ud^3\vec k'}{(2 \pi)^3}
+        e^{i\vec k \cdot \vec x''} e^{i\vec k' \cdot \vec x'''}
+        \langle \delta(\vec k, 0) \delta(\vec k', 0) \rangle\\
+    &= b_e^2\int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
+        g''g'''a''a'''
+        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
+        j_0 (k \sqrt{\chi''^2 + \chi'''^{^2} - \chi'' \chi''' \hat n \cdot \hat n'})
+        P(k, 0)
+\end{align}
+
+
+
+
+\end{document}
