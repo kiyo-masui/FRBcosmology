@@ -49,16 +49,16 @@ Columbia, Vancouver, BC, Canada, V6T 1Z1}
 
 \maketitle
 
-\section{FRB density perturnbations in DM space}
+\section{FRB density perturbations in DM space}
 
 \begin{equation}
-D(\hat n, \chi) = \int_0^\chi \ud \chi' a(\chi')^2
+D(\hat n, \chi) = \int_0^\chi \frac{\ud\chi'}{a(\chi')}
    \left[1 + \delta_e(\hat{n}\chi')\right]
 \end{equation}
 
 This defines DM space:
 \begin{equation}
-D(\chi_s) =  \int_0^{\chi_s} \ud \chi' a(\chi')^2
+D(\chi_s) = \int_0^{\chi_s}\frac{\ud\chi'}{a(\chi')}
 \end{equation}
 
 Combining the above, we find that:
@@ -106,9 +106,9 @@ The jacobian in spherical coordinates is:
         \label{e:jac}
 \end{align}
 Following Kaiser, the third line follows since the
-second factor in parenthases on the second line, which is the
+second factor in parentheses on the second line, which is the
 average overdensity along the line of sight, is much
-closer to unity than the first due to cancelations.
+closer to unity than the first due to cancellations.
 
 Substituting Equations~\ref{e:nfs}~and~\ref{e:jac} into Equation~\ref{e:density},
 we obtain:
@@ -124,7 +124,7 @@ we obtain:
 
 In this section all quantities are already first order in the perturbations so
 there is no need to distinguish between the DM space coordinates and the real
-space coordintes. The correction is higher order. Still need to distinguish
+space coordinates. The correction is higher order. Still need to distinguish
 between DM space and real space fields ($\delta_{fs} \neq \delta_f$, but
 $\delta_f(\vec x_s) \approx \delta_f(\vec x)$).
 
@@ -137,29 +137,224 @@ on DM shells at $D$ and $D'$.
 
 Because the expression for the density perturbations in DM space involves an
 integral over the line of sight, which for far off sources may cover a
-significant amount of the Universe's expansion, it is nessisary to explicitly
+significant amount of the Universe's expansion, it is necessary to explicitly
 account for light cone effects. This is most easily done in linear theory,
-where these effects are scale independant, a factorization that allows certian
+where these effects are scale independent, a factorization that allows certain
 integral to be performed. In reality, non-linear growth causes both the bias
 and the growth factor to be scale and time dependant. As in weak lensing, this
 would need to be simulated.
 
-We use the following convensions:
+We use the following conventions:
 \begin{equation}
-    P_X(k, \chi) = b_X^2 g(\chi)^2 a(\chi)^2 P(k, 0)
+    P_{xy}(k, \chi) = b_x b_y g(\chi)^2 a(\chi)^2 P(k, 0)
 \end{equation}
 
 \begin{equation}
-    \delta_X(\vec x, \chi) =  b_X g(\chi) a(\chi) \int\frac{\ud^3\vec k}{(2 \pi)^3}
+    \delta_x(\vec x, \chi) =  b_x g(\chi) a(\chi) \int\frac{\ud^3\vec k}{(2 \pi)^3}
         e^{i\vec k \cdot \vec x} \delta(\vec k, 0)
 \end{equation}
 
 \begin{equation}
-    w^{XX}(\hat n \cdot \hat n', \chi, \chi')
-    \equiv \langle \delta_X(\vec x) \delta_X(\vec x') \rangle
+    w^{xy}(\hat n \cdot \hat n', \chi, \chi')
+    \equiv \langle \delta_x(\vec x) \delta_y(\vec x') \rangle
 \end{equation}
 
-For dark matter:
+For dark matter, ignoring time dependance (redshift evolution)
+of the power spectrum:
+\begin{align}
+\delta_{\ell\ell'}\delta_{mm'}C_\ell(\chi, \chi')
+    &= \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
+        \langle \delta(\hat n \chi) \delta(\hat n' \chi') \rangle
+        \\
+    &= gg'aa'
+        \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} \frac{\ud^3\vec k'}{(2 \pi)^3}
+        e^{i\vec k \cdot \vec x} e^{i\vec k' \cdot \vec x'}
+        \langle \delta(\vec k, 0) \delta(\vec k', 0) \rangle
+        \\
+    &= gg'aa'
+        \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i\vec k \cdot (\vec x - \vec x')} P(k, 0)
+        \\
+    &= gg'aa'
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} P(k, 0)
+        \int\ud\Omega Y_{\ell m}(\hat n)
+        e^{i\vec k \cdot \vec x}
+        \int\ud\Omega' Y_{\ell' m'}(\hat n')
+        e^{-i\vec k \cdot \vec x'}
+        \\
+    &= gg'aa'
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} P(k, 0)
+        \left[(4 \pi) i^\ell j_\ell(k\chi) Y_{\ell m}^*(\hat k)\right]
+        \left[(4 \pi) i^{-\ell'} j_{\ell'}(k\chi') Y_{\ell' m'}(\hat
+        k)\right]
+        \\
+    &= gg'aa'\frac{2}{\pi}
+        \int\ud k k^2 j_\ell(k\chi) j_{\ell'}(k\chi')P(k, 0)
+        \int\ud \Omega_k i^{(\ell - \ell')}
+        Y_{\ell' m'}^*(\hat k) Y_{\ell m}(\hat k)
+        \\
+    &= \delta_{\ell\ell'}\delta_{mm'}gg'aa'\frac{2}{\pi}
+        \int\ud k k^2  j_\ell(k\chi) j_{\ell}(k\chi')P(k, 0)
+        \\
+C_\ell(\chi,\chi') 
+    &= gg'aa'\frac{2}{\pi}
+        \int\ud k k^2 j_\ell(k\chi) j_{\ell}(k\chi')P(k, 0)
+\end{align}
+
+\section{Small angles and Limber}
+
+Alternately, on the flat sky and for small angles:
+\begin{align}
+(2\pi)^2\delta^2(\vec \ell - \vec \ell')C_\ell(\chi, \chi')
+    &=
+        \int\ud^2\vec\theta\ud^2\vec\theta'
+        e^{-i\vec\ell\cdot\vec\theta} e^{-i\vec\ell'\cdot\vec\theta'}
+        \langle \delta(\hat n \chi) \delta(\hat n' \chi') \rangle
+        \\
+    &= gg'aa'
+        \int\ud^2\vec\theta\ud^2\vec\theta'
+        e^{-i\vec\ell\cdot\vec\theta} e^{-i\vec\ell'\cdot\vec\theta'}
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i\vec k \cdot (\vec x - \vec x')} P(k, 0)
+        \\
+    &= gg'aa'
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i k_\parallel (\chi - \chi')} P(k, 0)
+        \int\ud^2\vec\theta e^{-i(\vec\ell-\bar\chi\vec k_\bot)\cdot\vec\theta}
+        \int\ud^2\vec\theta' e^{-i(\vec\ell'-\bar\chi\vec k_\bot)\cdot\vec\theta'}
+        \\
+    &= gg'aa'
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i k_\parallel (\chi - \chi')} P(\sqrt{k_\parallel^2 + k_\bot^2}, 0)
+        (2\pi)^4 \delta^2(\vec\ell - \bar\chi \vec k_\bot)
+        \delta^2(\vec\ell' - \bar\chi\vec k_\bot)
+        \\
+    &= gg'aa'
+        \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+        e^{i k_\parallel (\chi - \chi')}
+        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, 0)
+        \frac{(2\pi)^2\delta^2(\vec\ell' - \vec \ell)}{\bar\chi^2}
+        \\
+C_\ell(\chi, \chi')
+    &= \frac{gg'aa'}{\bar\chi^2}
+        \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+        e^{i k_\parallel (\chi - \chi')}
+        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, 0)
+\end{align}
+Which is valid for $\ell \gg 1$ and $\chi - \chi' \ll \bar\chi$.
+$\bar \chi \equiv (\chi + \chi') /2$
+
+Define $\delta_d$ as:
+\begin{equation}
+    \delta_d(\hat n \chi) = \int_0^\chi \ud \chi' \delta_e(\hat n \chi')
+\end{equation}
+which doesn't have the same units as over-density, but that is okay.
+\begin{equation}
+C^{dd}_\ell(\chi,\chi') 
+    =
+    \frac{2}{\pi}
+    \int_0^\chi\ud\chi''g''a''
+    \int_0^{\chi'}\ud\chi'''
+    g'''a'''
+    \int\ud k k^2 j_\ell(k\chi'') j_{\ell}(k\chi''')P_{ee}(k, 0)
+\end{equation}
+At this point we could again to the transformation to $C_{\ell\chi\chi'}$
+leaving the expression as a triple integral. This is not as computationally
+costly as might be expected at first glance, since the $\chi''$ and $\chi'''$
+integrals are almost the same for all $\chi$, $\chi'$ pairs with only the
+limits of integration changing. Thus the full set of $C_{\ell\chi\chi'}$'s can
+be computed with a cumulative sum, only performing one new integral (over $k$)
+for each element.
+
+Or for flat sky and small angles:
+\begin{align}
+C^{dd}_\ell(\chi,\chi') 
+    &=
+    \int_0^\chi\ud\chi''g''a''
+    \int_0^{\chi'}\ud\chi'''g'''a'''
+    \frac{1}{\bar\chi^2}
+    \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+    e^{i k_\parallel (\chi'' - \chi''')}
+    P_{ee}(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, 0)
+    \\
+    &\approx
+    \int_0^\chi\ud\chi''g''a''
+    \int_0^{\chi'}\ud\chi'''g'''a'''
+    \frac{1}{\bar\chi^2}
+    \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+    e^{i k_\parallel (\chi'' - \chi''')}
+    P_{ee}(\ell/\bar\chi, 0)
+    \\
+    &=
+    \int_0^\chi\ud\chi''g''a''
+    \int_0^{\chi'}\ud\chi'''g'''a'''
+    \frac{1}{\bar\chi^2}
+    \delta(\chi'' - \chi''')
+    P_{ee}(\ell/\bar\chi, 0)
+    \\
+    &=
+    \int_0^{\min(\chi,\chi')}\ud\chi''
+    \left(\frac{g''a''}{\chi''}\right)^2
+    P_{ee}(\ell/\chi'', 0)
+\end{align}
+\red{Double check the $\min$.}
+where the second line applies Limber's approximation.
+
+Finally, the cross terms:
+\begin{equation}
+C^{dx}_\ell(\chi,\chi')
+    =
+    g'a'
+    \frac{2}{\pi}
+    \int_0^\chi\ud\chi''g''a''
+    \int\ud k k^2 j_\ell(k\chi'') j_{\ell}(k\chi')P_{ex}(k, 0)
+\end{equation}
+Or under Limber:
+\begin{align}
+C^{dx}_\ell(\chi,\chi')
+    &=
+    g'a'
+    \int_0^\chi\ud\chi''g''a''
+    \frac{1}{\bar\chi^2}
+    \delta(\chi'' - \chi')
+    P_{ex}(\ell/\bar\chi, 0)
+    \\
+    &=
+    \left(\frac{g'a'}{\chi'}\right)^2
+    P_{ex}(\ell/\chi', 0)
+    \qquad \textrm{if $\chi' < \chi$ and 0 otherwise.}
+    \\
+C^{dx}_\ell(\chi,\chi') + C^{xd}_\ell(\chi,\chi')
+    &=
+    \left(\frac{g^ma^m}{\chi^m}\right)^2
+    P_{ex}(\ell/\chi^m, 0)
+\end{align}
+
+Accumulating all terms for Limber and assuming a linear bias model:
+\begin{align}
+C^{ss}_\ell(\chi_m,\Delta\chi) =&~
+    (b_f - b_e)^2 \left(\frac{g_m a_m}{\chi_m}\right)^2
+        \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+        e^{i k_\parallel \Delta\chi}
+        P(\sqrt{k_\parallel^2 + \ell^2/\chi_m^2}, 0)
+    \\ &+
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)_{\chi_m}^2
+    b_e^2 \int_0^{\chi_m}\ud\chi''
+        \left(\frac{g''a''}{\chi''}\right)^2
+        P(\ell/\chi'', 0)
+    \\ &+
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)_{\chi_m}
+    b_e(b_f - b_e)\left(\frac{g_m a_m}{\chi_m}\right)^2
+        P(\ell/\chi_m, 0)
+\end{align}
+
+%%%% SCRAP
+
+\begin{comment}
 \begin{align}
 w(\hat n \cdot \hat n', \chi, \chi') 
     &= gg'aa'
@@ -183,7 +378,7 @@ w(\hat n \cdot \hat n', \chi, \chi')
         j_0 (k \sqrt{\chi^2 + \chi'^{^2} - \chi \chi' \hat n \cdot \hat n'})
         P(k, 0)
 \end{align}
-Somehow when I integrate this against a lengendre polynomial, $P_\ell(\mu)$,
+Somehow when I integrate this against a Legendre polynomial, $P_\ell(\mu)$,
 to get $C_\ell$
 I'm going to get Bessel functions. Lets assume that works (Kris, how does this
 work?) to get:
@@ -192,12 +387,10 @@ work?) to get:
     \int_0^\infty\ud k k^2 j_\ell(k \chi) j_\ell(k \chi')
         P(k, 0)
 \end{equation}
+\end{comment}
 
-Define $\delta_d$ as:
-\begin{equation}
-    \delta_d(\hat n \chi) = \int_0^\chi \ud \chi' \delta_e(\hat n \chi')
-\end{equation}
-which doesn't have the same units as overdensity, but that is okay.
+
+\begin{comment}
 \begin{align}
     w^{dd}(\hat n \cdot \hat n', \chi, \chi')
     &= \int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
@@ -214,6 +407,28 @@ which doesn't have the same units as overdensity, but that is okay.
         P(k, 0)
 \end{align}
 
+
+Alternately, we can make the limber approximation (replacing
+$a(\chi'')g(\chi'')$ and $a(\chi''')g(\chi''')$ with 
+$a(\bar \chi)g(\bar \chi)$) and small angle approximations
+(replacing the argument of the spherical Bessel with
+$k\sqrt{\Delta \chi^2 + (\bar \chi (\hat n - \hat n'))^2}$).
+\begin{align}
+    w^{dd}(\hat n \cdot \hat n', \chi, \chi')
+    &= b_e^2\int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
+        (g(\bar \chi) a(\bar \chi))^2
+        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
+        j_0 (k \sqrt{\Delta \chi^2 + (\bar \chi (\hat n - \hat n'))^2})
+        P(k, 0)\\
+    &= b_e^2\int_0^{(\chi + \chi')/2} \ud \bar\chi 
+        (g(\bar \chi) a(\bar \chi))^2
+        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
+        P(k, 0)
+        \int_{-\infty}^{\infty} \ud \Delta\chi
+        j_0 (k \sqrt{\Delta \chi^2 + (\bar \chi (\hat n - \hat n'))^2})\\
+\end{align}
+
+\end{comment}
 
 
 
