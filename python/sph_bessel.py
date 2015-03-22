@@ -4,6 +4,7 @@ import numpy as np
 import math
 
 from scipy import special, integrate
+import matplotlib.pyplot as plt
 
 
 def jn(n, x):
@@ -44,7 +45,7 @@ def approx_jnjn(n, mean, delta, x):
 
 
 def sample_jnjn(n, mean, delta, x_max):
-    """Doesn't work for n=0.
+    """
 
     Notes
     -----
@@ -57,31 +58,93 @@ def sample_jnjn(n, mean, delta, x_max):
 
     """
 
+    adelta = abs(delta)
+    if adelta <= mean * 1e-6:
+        adelta = mean * 1e-6
+    umean = mean + delta / 2
+    lmean = mean - delta / 2
     # Figure out total number of samples:
-    bound_lower = max((n - 1 * math.sqrt(n)) / mean, 0)
-    bound_middle = n / mean
-    bound_upper = (n + 5 * math.sqrt(n)) / mean
-    if bound_upper > x_max:
+    bound_lower = max((n - 1.5 * math.sqrt(n)) / umean, 0)
+    #bound_middle = n / mean
+    bound_upper = max(n + 3 * math.sqrt(n), n + 30) / lmean
+    if bound_upper >= x_max:
         bound_upper = x_max
         nparts_upper = 0
         delta_upper = 0
     else:
-        nparts_upper = max(pow_2_gt((x_max - bound_upper) * delta), 8)
+        nparts_upper = max(pow_2_gt(1 * (x_max - bound_upper) * adelta), 128)
         delta_upper = (x_max - bound_upper) / nparts_upper
     
-    nparts_middle = pow_2_gt((bound_upper - bound_middle) * mean)
-    nparts_lower = 8
-    delta_lower = (bound_middle - bound_lower) / nparts_lower
-    delta_middle = (bound_upper - bound_middle) / nparts_middle
+    nparts_lower = pow_2_gt(2. * (bound_upper - bound_lower) * mean)
+    #nparts_lower = 8
+    #delta_lower = (bound_middle - bound_lower) / nparts_lower
+    delta_lower = (bound_upper - bound_lower) / nparts_lower
     
     points_lower = bound_lower + np.arange(nparts_lower) * delta_lower
-    points_middle = bound_middle + np.arange(nparts_middle) * delta_middle
+    #points_middle = bound_middle + np.arange(nparts_middle) * delta_middle
     points_upper = bound_upper + np.arange(nparts_upper + 1) * delta_upper
 
-    all_points = np.concatenate((points_lower, points_middle, points_upper))
+    all_points = np.concatenate((points_lower,  points_upper))
 
-    return (all_points, (nparts_lower, nparts_middle, nparts_upper), 
-            (delta_lower, delta_middle, delta_upper))
+    return (all_points, (nparts_lower,  nparts_upper), 
+            (delta_lower, delta_upper))
+
+def integrate_f_jnjn(f, n, mean, delta, x_max):
+    """Doesn't work for n=0, because we set f=0 for the first point.
+    """
+
+    if n == 0:
+        raise NotImplementedError()
+
+    x_max = float(x_max)
+    mean = float(mean)
+    delta = float(delta)
+
+    x, ntuple, delta_tuple = sample_jnjn(n, mean, delta, x_max)
+    f_eval = np.empty_like(x)
+    f_eval[0] = 0
+    f_eval[1:] = f(x[1:])
+
+    lower = np.s_[:ntuple[0] + 1]
+    jnjn_lower = np.empty_like(x[lower])
+    jnjn_lower[0] = 0
+    jnjn_lower[1:] =  jnjn(n, mean, delta, x[lower][1:])
+    integral = integrate.romb(f_eval[lower] * jnjn_lower, dx=delta_tuple[0])
+    
+    if ntuple[1]:
+        upper = np.s_[ntuple[0]:]
+        jnjn_upper = approx_jnjn(n, mean, delta, x[upper])
+        integral += integrate.romb(f_eval[upper] * jnjn_upper, dx=delta_tuple[1])
+
+    # XXX
+    #print "n points:", ntuple
+    #plt.plot(x[lower], jnjn_lower * f_eval[lower])
+    #plt.plot(x[upper], jnjn_upper * f_eval[upper])
+
+    return integral
+
+def integrate_f_jnjn_brute(f, n, mean, delta, x_max):
+
+    x_max = float(x_max)
+    mean = float(mean)
+    delta = float(delta)
+
+    x_min = n / mean / 2
+    npoints = 4 * mean * (x_max - x_min)
+    npoints = pow_2_gt(npoints)
+
+    delta_x = (x_max - x_min) / npoints
+    x = np.arange(npoints + 1, dtype=float) * delta_x + x_min
+    integrand = np.empty_like(x)
+    integrand[0] = 0
+    integrand[0:] = f(x[0:])
+    integrand *= jnjn(n, mean, delta, x)
+
+    # XXX
+    #print "brute n points:", npoints
+    #plt.plot(x, integrand)
+
+    return integrate.romb(integrand, dx=delta_x)
 
 
 def pow_2_gt(n):

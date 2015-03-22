@@ -7,7 +7,7 @@ from scipy import interpolate, special
 import sph_bessel
 
 
-camb_dat = np.loadtxt("matter_power_z1.dat")
+camb_dat = np.loadtxt("data/Pk_z0.0.dat")
 matter_power = interpolate.interp1d(camb_dat[:,0], camb_dat[:,1])
 k_camb = camb_dat[1:-1,0].copy()
 
@@ -55,28 +55,48 @@ class TestSph_jn(unittest.TestCase):
 class TestIntegration(unittest.TestCase):
 
     def test_sample(self):
-        n = 10
+        n = 4
         mean = 1000.
-        delta = 1.
+        delta = 100.
         k_max = 2
         x_dense = np.arange(0.001, 2, 0.0001)
         x, n_tuple, delta_tuple = sph_bessel.sample_jnjn(n, mean, delta, k_max)
-        print np.diff(x)
-        print n_tuple, delta_tuple
-        approx = sph_bessel.approx_jnjn(n, mean, delta, x)
-        right_ans = sph_bessel.jnjn(n, mean, delta, x)
-        right_ans_d = sph_bessel.jnjn(n, mean, delta, x_dense)
-        approx_d = sph_bessel.approx_jnjn(n, mean, delta, x_dense)
+        #print np.diff(x)
+        #print n_tuple, delta_tuple
+        #approx = sph_bessel.approx_jnjn(n, mean, delta, x)
+        #right_ans = sph_bessel.jnjn(n, mean, delta, x)
+        #right_ans_d = sph_bessel.jnjn(n, mean, delta, x_dense)
+        #approx_d = sph_bessel.approx_jnjn(n, mean, delta, x_dense)
         #ra_s = np.cumsum(right_ans[::-1])
         #a_s = np.cumsum(approx[::-1])
-        plt.figure()
-        plt.plot(mean * x_dense, right_ans_d)
-        plt.plot(mean * x_dense, approx_d)
-        plt.plot(mean * x, right_ans, '.')
+        #plt.figure()
+        #plt.plot(mean * x_dense, right_ans_d)
+        #plt.plot(mean * x_dense, approx_d)
+        #plt.plot(mean * x, right_ans, '.')
         #plt.figure()
         #plt.plot(mean * x[::-1], ra_s)
         #plt.plot(mean * x[::-1], a_s)
-        plt.show()
+        #plt.show()
+
+    def test_integrate(self):
+        n_l = [2**i for i in range(12)]
+        mean = 1000.
+        delta_l = [0., 1., 10., 100., 300.]
+        k_max = 2
+        for n in n_l:
+            first = True
+            for delta in delta_l:
+                I = sph_bessel.integrate_f_jnjn(matter_power, n, mean, delta,
+                        k_max)
+                I2 = sph_bessel.integrate_f_jnjn_brute(matter_power, n, mean,
+                        delta, k_max)
+                if first:
+                    atol = I2 * 0.05
+                    first = False
+                #print n, delta, I, I2
+                self.assertTrue(np.allclose(I, I2, atol=atol))
+
+
 
 
 
