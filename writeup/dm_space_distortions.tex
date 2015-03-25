@@ -240,9 +240,9 @@ C^{dd}_\ell(\chi,\chi')
 
 For numerical integration, perform the following change of variables to make
 things much easier.
-\begin{equation}
+\begin{align}
 C^{dd}_\ell(\chi,\chi')
-    =
+&=
     \frac{2}{\pi}
     \int_0^{(\chi' + \chi)/2}\ud\bar\chi'
     \int_{\max(-2\bar\chi', -2(\chi -\bar\chi'))}^{\min(2\bar\chi', 2(\chi' -
@@ -250,7 +250,15 @@ C^{dd}_\ell(\chi,\chi')
     \int_0^\infty\ud k k^2 j_\ell(k(\bar\chi' - \Delta'/2))
     j_{\ell}(k(\bar\chi' + \Delta'/2))
     P_{ee}(k, \bar\chi')
-\end{equation}
+    \\
+    &\approx
+    \frac{4}{\pi}
+    \int_0^{\chi_m}\ud\bar\chi'
+    \int_{0}^{\infty}\ud\Delta'
+    \int_0^\infty\ud k k^2 j_\ell(k(\bar\chi' - \Delta'/2))
+    j_{\ell}(k(\bar\chi' + \Delta'/2))
+    P_{ee}(k, \bar\chi')
+\end{align}
 At this point we could again to the transformation to $C_{\ell\chi\chi'}$
 leaving the expression as a triple integral. This is not as computationally
 costly as might be expected at first glance, since the $\chi''$ and $\chi'''$
@@ -262,14 +270,6 @@ for each element.
 Finally, the cross terms:
 \begin{equation}
 C^{dx}_\ell(\chi,\chi')
-    =
-    \frac{2}{\pi}
-    \int_0^\chi\ud\chi''
-    \int_0^\infty\ud k k^2 
-    j_\ell(k\chi') j_{\ell}(k\chi'')P_{ex}(k, (\chi' + \chi'')/2)
-\end{equation}
-\begin{equation}
-    C^{dx}_\ell(\chi,\chi') + C^{xd}_\ell(\chi,\chi')
     =
     \frac{2}{\pi}
     \int_0^\chi\ud\chi''
@@ -291,21 +291,36 @@ C^{dx}_\ell(\chi,\chi') + C^{xd}_\ell(\chi,\chi')
     \approx&
     \frac{2}{\pi}
     \int_{-\chi'}^{\chi - \chi'}\ud\Delta'
-    \int_0^\infty\ud k k^2 j_\ell(k(\chi'-\Delta/2))
+    \int_0^\infty\ud k k^2 j_\ell(k(\chi'-\Delta'/2))
     j_{\ell}(k(\chi'+\Delta'/2))
     P_{ex}(k, \chi')
     \nonumber\\
     &+
     \frac{2}{\pi}
     \int_{-\chi}^{\chi' - \chi}\ud\Delta'
-    \int_0^\infty\ud k k^2 j_\ell(k(\chi-\Delta/2))
+    \int_0^\infty\ud k k^2 j_\ell(k(\chi-\Delta'/2))
     j_{\ell}(k(\chi+\Delta'/2))
-    P_{ex}(k, \chi)
+    P_{ex}(k, \chi)\\
+    \approx&
+    \frac{4}{\pi}
+    \int_{0}^{\infty}\ud\Delta'
+    \int_0^\infty\ud k k^2 j_\ell(k(\chi_m-\Delta'/2))
+    j_{\ell}(k(\chi_m+\Delta'/2))
+    P_{ex}(k, \chi_m)
 \end{align}
 The second line exploits the fact that for $\ell \gg 1$, $\chi \gg \chi'/\ell$ and
 $\chi' \gg \chi/\ell$, only $\Delta'\ll\chi$ contributes significantly to the
 integral. Also the expressions are very weak functions of $\chi$ and thus
-may be shifted by $\Delta/2$ without incurring much error.
+may be shifted by $\Delta/2$ without incurring much error. The third line
+exploits the fact that only one term contributes if $\chi$ and $\chi'$ are
+widely separated, and if they are close then the two terms combine to the given
+expression.
+
+\red{Actually, with the approximations we've made, we can actually do the
+$\Delta$ integrals analytically by transferring all the $\Delta$ to a single
+Bessel and shifting the power spectrum to be independent of $\Delta$.  Should
+be pretty good for $\ell > 10$.  That is nice because it will control all our
+numerical issues with oscillating Bessel functions.}
 
 
 \section{Small angles and Limber}

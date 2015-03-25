@@ -32,10 +32,14 @@ def approx_jnjn(n, mean, delta, x):
     a = mean - delta/2
     b = mean + delta/2
     nu = n + 1./2
-    t = np.sqrt(mean**2 * x**2 - nu**2)
-    arg = (mean * delta) * (x**2 / t)
-    arg += (delta**2 / 2) * (x**2 / t)
-    arg -= (mean**2 * delta**2 / 2) * (x**4 / t**3)
+    # The following is the tailor expantion of around delta. Not accurate
+    # enough.
+    #t = np.sqrt(mean**2 * x**2 - nu**2)
+    #arg = (mean * delta) * (x**2 / t)
+    #arg += (delta**2 / 2) * (x**2 / t)
+    #arg -= (mean**2 * delta**2 / 2) * (x**4 / t**3)
+    arg = np.sqrt((b*x)**2 - nu**2)
+    arg -= np.sqrt((a*x)**2 - nu**2)
     arg -= np.arccos(nu / b / x) * nu
     arg += np.arccos(nu / a / x) * nu
     out = (1./2) * np.cos(arg)
@@ -61,21 +65,25 @@ def sample_jnjn(n, mean, delta, x_max):
     adelta = abs(delta)
     if adelta <= mean * 1e-6:
         adelta = mean * 1e-6
-    umean = mean + delta / 2
-    lmean = mean - delta / 2
+    umean = mean + adelta / 2
+    lmean = mean - adelta / 2
     # Figure out total number of samples:
-    bound_lower = max((n - 1.5 * math.sqrt(n)) / umean, 0)
+    bound_lower = max((n - 2 * math.sqrt(n)) / umean, 0)
     #bound_middle = n / mean
-    bound_upper = max(n + 3 * math.sqrt(n), n + 30) / lmean
+    bound_upper = max(n + 15 * math.sqrt(n), n + 40) / lmean
     if bound_upper >= x_max:
         bound_upper = x_max
         nparts_upper = 0
         delta_upper = 0
+        if bound_lower > x_max:
+            bound_lower = x_max - 1. / umean
     else:
-        nparts_upper = max(pow_2_gt(1 * (x_max - bound_upper) * adelta), 128)
+        nparts_upper = max(pow_2_gt(4. * (x_max - bound_upper) * adelta), 128)
         delta_upper = (x_max - bound_upper) / nparts_upper
     
-    nparts_lower = pow_2_gt(2. * (bound_upper - bound_lower) * mean)
+    #print bound_upper, bound_lower, x_max
+    #print 5. * (bound_upper - bound_lower) * mean
+    nparts_lower = max(pow_2_gt(5. * (bound_upper - bound_lower) * mean), 16)
     #nparts_lower = 8
     #delta_lower = (bound_middle - bound_lower) / nparts_lower
     delta_lower = (bound_upper - bound_lower) / nparts_lower
@@ -100,7 +108,19 @@ def integrate_f_jnjn(f, n, mean, delta, x_max):
     mean = float(mean)
     delta = float(delta)
 
+    # Reduce x_max if envelope is significant.
+    if delta == 0:
+        envelop_width = 1000 * x_max
+    else:
+        envelop_width = 5 * (2 * np.pi / delta)
+    x_max = min(x_max, 4 * envelop_width)
+
     x, ntuple, delta_tuple = sample_jnjn(n, mean, delta, x_max)
+
+    # Envelope of a Gaussian with width of several oscillations. This
+    # controls the oscillations out to high k.
+    envelope = np.exp(-0.5*(x - n / mean)**2 / envelop_width**2)
+
     f_eval = np.empty_like(x)
     f_eval[0] = 0
     f_eval[1:] = f(x[1:])
@@ -114,12 +134,16 @@ def integrate_f_jnjn(f, n, mean, delta, x_max):
     if ntuple[1]:
         upper = np.s_[ntuple[0]:]
         jnjn_upper = approx_jnjn(n, mean, delta, x[upper])
-        integral += integrate.romb(f_eval[upper] * jnjn_upper, dx=delta_tuple[1])
+        integral += integrate.romb(f_eval[upper] * jnjn_upper * envelope[upper],
+                                   dx=delta_tuple[1])
 
     # XXX
     #print "n points:", ntuple
     #plt.plot(x[lower], jnjn_lower * f_eval[lower])
     #plt.plot(x[upper], jnjn_upper * f_eval[upper])
+    #plt.plot(x[lower], jnjn_lower * f_eval[lower] * envelope[lower])
+    #plt.plot(x[upper], jnjn_upper * f_eval[upper] * envelope[upper])
+    #plt.show()
 
     return integral
 

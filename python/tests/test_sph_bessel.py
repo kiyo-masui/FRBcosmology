@@ -9,6 +9,7 @@ import sph_bessel
 
 camb_dat = np.loadtxt("data/Pk_z0.0.dat")
 matter_power = interpolate.interp1d(camb_dat[:,0], camb_dat[:,1])
+matter_power_k2 = lambda k: matter_power(k) * k**2
 k_camb = camb_dat[1:-1,0].copy()
 
 
@@ -81,14 +82,14 @@ class TestIntegration(unittest.TestCase):
     def test_integrate(self):
         n_l = [2**i for i in range(12)]
         mean = 1000.
-        delta_l = [0., 1., 10., 100., 300.]
+        delta_l = [0., 1., 10., 20, 50, 100., 300., 600, 1200, 1980]
         k_max = 2
         for n in n_l:
             first = True
             for delta in delta_l:
-                I = sph_bessel.integrate_f_jnjn(matter_power, n, mean, delta,
+                I = sph_bessel.integrate_f_jnjn(matter_power_k2, n, mean, delta,
                         k_max)
-                I2 = sph_bessel.integrate_f_jnjn_brute(matter_power, n, mean,
+                I2 = sph_bessel.integrate_f_jnjn_brute(matter_power_k2, n, mean,
                         delta, k_max)
                 if first:
                     atol = I2 * 0.05
