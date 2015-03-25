@@ -95,17 +95,18 @@ def get_mult_ell(ells=None):
 
 
 def my_plots(mult_ell):
-    matplotlib.rcParams.update({'font.size': 14})
+    matplotlib.rcParams.update({'font.size': 14,
+                                'text.usetex' : False,
+                                'figure.autolayout': True})
     CHI = 2000.
     DELTAS = [5., 20., 50.]
     Y_MIN = 1e-7
-    Y_MAX = 2e-5
+    Y_MAX = 4e-5
     X_MIN = 9
     X_MAX = 1001
     
     kwargs = {
             "linewidth" : 2.,
-
              }
 
     title = "$\\bar\\chi=%d\\,\\rm{MPc}/h$, $\\Delta\\chi=%d\\,\\rm{MPc}/h$"
@@ -116,15 +117,26 @@ def my_plots(mult_ell):
         plt.ylim([Y_MIN, Y_MAX])
         plt.xlim([X_MIN, X_MAX])
         plt.title(title % (CHI, delta))
-        plt.xlabel(r"$\ell$")
-        plt.ylabel(r"$C^{ss}_\ell(\chi,\chi')$")
+        plt.xlabel(r"$\ell$",
+                   fontsize=18,
+                   )
+        plt.ylabel(r"$C^{ss}_\ell(\chi,\chi')$",
+                   fontsize=18,
+                   )
         plt.legend(loc="lower left", labelspacing=.1, frameon=False)
 
-    chi_s = np.linspace(100, 3600, 50)
+    chi_s = np.linspace(500, 3500, 50)
     coef_s = np.array([  d_ln_n(chi) + 2./chi for chi in chi_s ])
 
     plt.figure()
-    plt.plot(chi_s, coef_s)
+    plt.plot(chi_s, coef_s, **kwargs)
+    plt.xlabel(r"$\chi$ ($\rm{MPc}/h$)",
+               fontsize=18,
+               )
+    plt.ylabel(r"$(\frac{1}{\bar{n}_f}\frac{d \bar{n}_f}{d \chi}"
+               r"+ \frac{2}{\chi})$  ($h/\rm{MPc})$",
+               fontsize=18,
+               )
     
 
 
