@@ -9,9 +9,13 @@ class TestSingleEll(unittest.TestCase):
 
     def test_init(self):
         pass
-        s = angular_terms.SingleEll(80, 3000)
-        delta = np.arange(0.1, 1800, 5)
-        plt.loglog(delta, abs(s.i1(2000, delta)))
+        #s = angular_terms.SingleEll(80, 3000)
+        #delta = np.arange(0.1, 1800, 5)
+        #plt.loglog(delta, abs(s.i1(2000, delta)))
+        #plt.show()
+
+    def test_limber(self):
+        s = angular_terms.SingleEllLimber(80, 3000)
         plt.show()
 
 

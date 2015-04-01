@@ -3,7 +3,7 @@ PS."""
 
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy import integrate, interpolate
+from scipy import integrate, interpolate, fftpack, signal
 
 import sph_bessel
 import matter_power
@@ -83,6 +83,60 @@ class SingleEll(object):
         self.i2 = interpolate.interp1d(chi_list, I2[1:], kind="cubic")
         self.i3 = interpolate.interp1d(chi_list, I3, kind="cubic")
         self.data = data
+
+
+
+class SingleEllLimber(object):
+
+    def __init__(self, ell, chi_max):
+        
+        ell = int(ell)
+        chi_max = float(chi_max)
+        self._ell = ell
+        self._chi_max = chi_max
+        
+        # XXX
+        nchi = 1
+        #chi_list = np.linspace(0, chi_max, nchi, endpoint=True)
+        delta_chi = chi_max / nchi
+        chi_list = np.arange(1, nchi + 1, dtype=float) / nchi * chi_max
+
+        data = []
+
+        n_total = 0
+        for chi in chi_list:
+            # Matter power at this redshift.
+            p_k_interp = matter_power.p_k_interp(chi)
+
+            # Local term.
+            delta_k = 2 * np.pi / (2 * chi)
+            k_max = 2.
+            k = np.arange(0, k_max, delta_k)
+            k = np.concatenate((k, -k[:0:-1]))
+            nk = len(k)   # Guaranteed to be odd.
+            #print k
+            p_k_local = p_k_interp(np.sqrt((ell/chi)**2 + k**2))
+            #plt.semilogy(k, p_k_local, '.')
+            window = fftpack.ifftshift(signal.kaiser(nk, beta=14, sym=True))
+            #window = fftpack.ifftshift(signal.gaussian(nk, std=0.5/delta_k, sym=True))
+            #plt.figure(1)
+            #plt.loglog(k, p_k_local)
+            #plt.loglog(k, p_k_local * window)
+            p_k_local *= window
+            #nk1 = nk//2
+            #zeros = np.zeros(nk1)
+            #plt.figure(4)
+            #plt.plot(p_k_local)
+            #p_k_local = np.concatenate((p_k_local[:nk1 + 1], zeros, zeros,
+            #    p_k_local[nk1 + 1:]))
+            #plt.figure(3)
+            #plt.plot(p_k_local)
+            fft_norm = len(k) * delta_k / 2 / np.pi / chi**2
+            i1_data = fftpack.ifft(p_k_local).real
+            i1_data = fftpack.fftshift(i1_data) * fft_norm
+            deltas = np.linspace(-chi, chi, len(i1_data), endpoint=True)
+            #plt.figure(2)
+            #plt.plot(deltas, i1_data)
 
 
 
