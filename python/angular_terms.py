@@ -12,7 +12,7 @@ import matter_power
 
 class SingleEll(object):
 
-    def __init__(self, ell, chi_max):
+    def __init__(self, ell, chi_max, limber=False):
         ell = int(ell)
         chi_max = float(chi_max)
         self._ell = ell
@@ -30,32 +30,33 @@ class SingleEll(object):
             this_chi_data = {}
             p_k_interp = matter_power.p_k_interp(chi)
             # Put in Gaussian cut-off to control oscillations.
-            # XXX Move this to sph_bessel... obviously.
-            #p_k = lambda k: (np.exp(-k**2 / (2 * (matter_power.K_MAX / 4)**2)) * k**2
-            #                 * p_k_interp(k))
-            p_k = lambda k: k**2 * p_k_interp(k)
 
-            scale = ell / chi
-            nscales = min(5, 2 * ell - 1)
-            # These deltas for the integral.
-            deltas, delta_u = exp_sample(scale, nscales)
-            ndelta_int = len(deltas)
-            # Extra deltas for interpolation.
-            delta_max = min(1.99 * chi, 1.99 * (chi_max - chi))
-            factor = 1.5
-            deltas = list(deltas)
-            while factor * deltas[-1] < delta_max:
-                deltas.append(factor * deltas[-1])
-            deltas.append(delta_max)
-            deltas = np.array(deltas)
+            if limber:
+                pass
+            else:
+                p_k = lambda k: k**2 * p_k_interp(k)
 
-            n_total += len(deltas)
-            I1 = np.empty_like(deltas)
-            for ii in range(len(deltas)):
-                I1[ii] = sph_bessel.integrate_f_jnjn(p_k, ell, chi_max, deltas[ii],
-                        matter_power.K_MAX) * (2 / np.pi)
-            I2 = integrate.romb(I1[:ndelta_int] * np.exp(scale * deltas[:ndelta_int]),
-                                dx=delta_u) * 2
+                scale = ell / chi
+                nscales = min(5, 2 * ell - 1)
+                # These deltas for the integral.
+                deltas, delta_u = exp_sample(scale, nscales)
+                ndelta_int = len(deltas)
+                # Extra deltas for interpolation.
+                delta_max = min(1.99 * chi, 1.99 * (chi_max - chi))
+                factor = 1.5
+                deltas = list(deltas)
+                while factor * deltas[-1] < delta_max:
+                    deltas.append(factor * deltas[-1])
+                deltas.append(delta_max)
+                deltas = np.array(deltas)
+
+                n_total += len(deltas)
+                I1 = np.empty_like(deltas)
+                for ii in range(len(deltas)):
+                    I1[ii] = sph_bessel.integrate_f_jnjn(p_k, ell, chi_max, deltas[ii],
+                            matter_power.K_MAX) * (2 / np.pi)
+                I2 = integrate.romb(I1[:ndelta_int] * np.exp(scale * deltas[:ndelta_int]),
+                                    dx=delta_u) * 2
 
             this_chi_data['chi'] = chi
             this_chi_data['deltas'] = deltas
@@ -105,6 +106,7 @@ class SingleEllLimber(object):
 
         n_total = 0
         for chi in chi_list:
+            this_chi_data = {}
             # Matter power at this redshift.
             p_k_interp = matter_power.p_k_interp(chi)
 
@@ -114,29 +116,18 @@ class SingleEllLimber(object):
             k = np.arange(0, k_max, delta_k)
             k = np.concatenate((k, -k[:0:-1]))
             nk = len(k)   # Guaranteed to be odd.
-            #print k
             p_k_local = p_k_interp(np.sqrt((ell/chi)**2 + k**2))
-            #plt.semilogy(k, p_k_local, '.')
             window = fftpack.ifftshift(signal.kaiser(nk, beta=14, sym=True))
-            #window = fftpack.ifftshift(signal.gaussian(nk, std=0.5/delta_k, sym=True))
-            #plt.figure(1)
-            #plt.loglog(k, p_k_local)
-            #plt.loglog(k, p_k_local * window)
             p_k_local *= window
-            #nk1 = nk//2
-            #zeros = np.zeros(nk1)
-            #plt.figure(4)
-            #plt.plot(p_k_local)
-            #p_k_local = np.concatenate((p_k_local[:nk1 + 1], zeros, zeros,
-            #    p_k_local[nk1 + 1:]))
-            #plt.figure(3)
-            #plt.plot(p_k_local)
             fft_norm = len(k) * delta_k / 2 / np.pi / chi**2
-            i1_data = fftpack.ifft(p_k_local).real
-            i1_data = fftpack.fftshift(i1_data) * fft_norm
+            I1 = fftpack.ifft(p_k_local).real
+            I1 = fftpack.fftshift(I1) * fft_norm
             deltas = np.linspace(-chi, chi, len(i1_data), endpoint=True)
-            #plt.figure(2)
-            #plt.plot(deltas, i1_data)
+
+            # Limber term.
+            I2 = p_k_interp(ell/chi) / chi**2
+
+
 
 
 
