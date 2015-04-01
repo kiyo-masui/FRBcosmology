@@ -322,6 +322,47 @@ Bessel and shifting the power spectrum to be independent of $\Delta$.  Should
 be pretty good for $\ell > 10$.  That is nice because it will control all our
 numerical issues with oscillating Bessel functions.}
 
+Assembling terms:
+\begin{align}
+C^{ss}_\ell(\chi,\chi') = &
+    \frac{2}{\pi}
+    \int_0^\infty\ud k k^2
+    j_\ell(k\chi) j_{\ell}(k\chi')
+    \left[ P_{ff}(k, \bar\chi)
+    + P_{ee}(k, \bar\chi)
+    - 2P_{fe}(k, \bar\chi) \right]
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi'}
+    + \frac{2}{\chi'} \right)
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \int_0^\infty\ud k k^2 j_\ell(k\chi'') j_{\ell}(k\chi''')
+    P_{ee}(k, (\chi''+\chi''')/2)
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+    \int_0^\chi\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi') j_{\ell}(k\chi'')
+    \left[ P_{ee}(k, (\chi' + \chi'')/2)
+    - P_{fe}(k, (\chi' + \chi'')/2) \right]
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi'}
+    + \frac{2}{\chi'} \right)
+    \int_0^{\chi'}\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi) j_{\ell}(k\chi'')
+    \left[ P_{ee}(k, (\chi + \chi'')/2)
+    - P_{fe}(k, (\chi + \chi'')/2) \right]
+\end{align}
 
 \section{Small angles and Limber}
 
@@ -333,35 +374,35 @@ Alternately, on the flat sky and for small angles:
         e^{-i\vec\ell\cdot\vec\theta} e^{-i\vec\ell'\cdot\vec\theta'}
         \langle \delta(\hat n \chi) \delta(\hat n' \chi') \rangle
         \\
-    &= gg'aa'
+    &\approx
         \int\ud^2\vec\theta\ud^2\vec\theta'
         e^{-i\vec\ell\cdot\vec\theta} e^{-i\vec\ell'\cdot\vec\theta'}
         \int\frac{\ud^3\vec k}{(2 \pi)^3} 
-        e^{i\vec k \cdot (\vec x - \vec x')} P(k, 0)
+        e^{i\vec k \cdot (\vec x - \vec x')} P(k, \bar\chi)
         \\
-    &= gg'aa'
+    &=
         \int\frac{\ud^3\vec k}{(2 \pi)^3} 
-        e^{i k_\parallel (\chi - \chi')} P(k, 0)
+        e^{i k_\parallel (\chi - \chi')} P(k, \bar\chi)
         \int\ud^2\vec\theta e^{-i(\vec\ell-\bar\chi\vec k_\bot)\cdot\vec\theta}
         \int\ud^2\vec\theta' e^{-i(\vec\ell'-\bar\chi\vec k_\bot)\cdot\vec\theta'}
         \\
-    &= gg'aa'
+    &=
         \int\frac{\ud^3\vec k}{(2 \pi)^3} 
-        e^{i k_\parallel (\chi - \chi')} P(\sqrt{k_\parallel^2 + k_\bot^2}, 0)
+        e^{i k_\parallel (\chi - \chi')} P(\sqrt{k_\parallel^2 + k_\bot^2}, \bar\chi)
         (2\pi)^4 \delta^2(\vec\ell - \bar\chi \vec k_\bot)
         \delta^2(\vec\ell' - \bar\chi\vec k_\bot)
         \\
-    &= gg'aa'
+    &=
         \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
         e^{i k_\parallel (\chi - \chi')}
-        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, 0)
+        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
         \frac{(2\pi)^2\delta^2(\vec\ell' - \vec \ell)}{\bar\chi^2}
         \\
 C_\ell(\chi, \chi')
-    &= \frac{gg'aa'}{\bar\chi^2}
+    &= \frac{1}{\bar\chi^2}
         \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
         e^{i k_\parallel (\chi - \chi')}
-        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, 0)
+        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
 \end{align}
 Which is valid for $\ell \gg 1$ and $\chi - \chi' \ll \bar\chi$.
 $\bar \chi \equiv (\chi + \chi') /2$
@@ -371,155 +412,76 @@ Or for flat sky and small angles:
 \begin{align}
 C^{dd}_\ell(\chi,\chi') 
     &=
-    \int_0^\chi\ud\chi''g''a''
-    \int_0^{\chi'}\ud\chi'''g'''a'''
-    \frac{1}{\bar\chi^2}
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \frac{1}{\bar\chi^{\prime 2}}
     \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
     e^{i k_\parallel (\chi'' - \chi''')}
-    P_{ee}(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, 0)
+    P_{ee}(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, (\chi'' + \chi''')/2)
     \\
     &\approx
-    \int_0^\chi\ud\chi''g''a''
-    \int_0^{\chi'}\ud\chi'''g'''a'''
-    \frac{1}{\bar\chi^2}
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \frac{1}{\bar\chi^{\prime 2}}
     \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
     e^{i k_\parallel (\chi'' - \chi''')}
-    P_{ee}(\ell/\bar\chi, 0)
+    P_{ee}(\ell/\bar\chi', (\chi'' + \chi''')/2)
     \\
     &=
-    \int_0^\chi\ud\chi''g''a''
-    \int_0^{\chi'}\ud\chi'''g'''a'''
-    \frac{1}{\bar\chi^2}
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \frac{1}{\bar\chi^{\prime 2}}
     \delta(\chi'' - \chi''')
-    P_{ee}(\ell/\bar\chi, 0)
+    P_{ee}(\ell/\bar\chi', (\chi'' + \chi''')/2)
     \\
     &=
     \int_0^{\min(\chi,\chi')}\ud\chi''
-    \left(\frac{g''a''}{\chi''}\right)^2
-    P_{ee}(\ell/\chi'', 0)
+    \left(\frac{1}{\chi''}\right)^2
+    P_{ee}(\ell/\chi'', \chi'')
 \end{align}
-\red{Double check the $\min$.}
-where the second line applies Limber's approximation.
+where the second line applies Limber's approximation. 
+$\bar\chi' \equiv (\chi'' + \chi''')/2$.
 
 Or under Limber:
 \begin{align}
 C^{dx}_\ell(\chi,\chi')
     &=
-    g'a'
-    \int_0^\chi\ud\chi''g''a''
-    \frac{1}{\bar\chi^2}
+    \int_0^\chi\ud\chi''
+    \frac{1}{\bar\chi^{\prime 2}}
     \delta(\chi'' - \chi')
-    P_{ex}(\ell/\bar\chi, 0)
+    P_{ex}(\ell/{\bar\chi'}, (\chi'' + \chi')/2)
     \\
     &=
-    \left(\frac{g'a'}{\chi'}\right)^2
-    P_{ex}(\ell/\chi', 0)
+    \left(\frac{1}{\chi'}\right)^2
+    P_{ex}(\ell/\chi', \chi')
     \qquad \textrm{if $\chi' < \chi$ and 0 otherwise.}
-    \\
-C^{dx}_\ell(\chi,\chi') + C^{xd}_\ell(\chi,\chi')
-    &=
-    \left(\frac{g^ma^m}{\chi^m}\right)^2
-    P_{ex}(\ell/\chi^m, 0)
+%    \\
+%C^{dx}_\ell(\chi,\chi') + C^{xd}_\ell(\chi,\chi')
+%    &=
+%    \left(\frac{1}{\chi^m}\right)^2
+%    P_{ex}(\ell/\chi^m, \chi_m)
 \end{align}
 
 Accumulating all terms for Limber and assuming a linear bias model:
 \begin{align}
-C^{ss}_\ell(\chi_m,\Delta\chi) =&~
-    (b_f - b_e)^2 \left(\frac{g_m a_m}{\chi_m}\right)^2
+C^{ss}_\ell(\chi, \chi') =&~
+    \left(\frac{b_f - b_e }{\bar\chi}\right)^2
         \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
         e^{i k_\parallel \Delta\chi}
-        P(\sqrt{k_\parallel^2 + \ell^2/\chi_m^2}, 0)
+        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
     \\ &+
-    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
-    + \frac{2}{\chi} \right)_{\chi_m}^2
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi_m}
+    + \frac{2}{\chi_m} \right)^2
     b_e^2 \int_0^{\chi_m}\ud\chi''
-        \left(\frac{g''a''}{\chi''}\right)^2
-        P(\ell/\chi'', 0)
+    \frac{1}{\chi^{\prime\prime 2}}
+        P(\ell/\chi'',\chi'')
     \\ &+
-    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
-    + \frac{2}{\chi} \right)_{\chi_m}
-    b_e(b_f - b_e)\left(\frac{g_m a_m}{\chi_m}\right)^2
-        P(\ell/\chi_m, 0)
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi_m}
+    + \frac{2}{\chi_m} \right)
+    \frac{b_e(b_f - b_e)}{\chi_m^2}
+        P(\ell/\chi_m, \chi_m)
 \end{align}
-
-%%%% SCRAP
-
-\begin{comment}
-\begin{align}
-w(\hat n \cdot \hat n', \chi, \chi') 
-    &= gg'aa'
-        \int\frac{\ud^3\vec k}{(2 \pi)^3} \frac{\ud^3\vec k'}{(2 \pi)^3}
-        e^{i\vec k \cdot \vec x} e^{i\vec k' \cdot \vec x'}
-        \langle \delta(\vec k, 0) \delta(\vec k', 0) \rangle\\
-    &= gg'aa'
-        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
-        e^{i\vec k \cdot (\vec x - \vec x')} P(k, 0)\\
-    &= gg'aa'
-        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
-        e^{i\vec k \cdot (\vec x - \vec x')} P(k)\\
-    &= gg'aa'
-        \int\frac{k^2 \sin(\theta_k) \ud k \ud \theta_k \ud \phi_k}{(2 \pi)^3} 
-        e^{i k |\vec x - \vec x'| \cos\theta_k} P(k, 0)\\
-    &= gg'aa'
-        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
-        \frac{\sin(k |\vec x - \vec x'|)}{k |\vec x - \vec x'|} P(k, 0)\\
-    &= gg'aa'
-        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
-        j_0 (k \sqrt{\chi^2 + \chi'^{^2} - \chi \chi' \hat n \cdot \hat n'})
-        P(k, 0)
-\end{align}
-Somehow when I integrate this against a Legendre polynomial, $P_\ell(\mu)$,
-to get $C_\ell$
-I'm going to get Bessel functions. Lets assume that works (Kris, how does this
-work?) to get:
-\begin{equation}
-    C_{\ell\chi\chi'} = \frac{2 gg'aa'}{\pi}
-    \int_0^\infty\ud k k^2 j_\ell(k \chi) j_\ell(k \chi')
-        P(k, 0)
-\end{equation}
-\end{comment}
-
-
-\begin{comment}
-\begin{align}
-    w^{dd}(\hat n \cdot \hat n', \chi, \chi')
-    &= \int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
-         \langle \delta_e(\hat n \chi'') \delta_e(\hat n' \chi''') \rangle\\
-    &= b_e^2\int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
-        g''g'''a''a'''
-        \int\frac{\ud^3\vec k}{(2 \pi)^3} \frac{\ud^3\vec k'}{(2 \pi)^3}
-        e^{i\vec k \cdot \vec x''} e^{i\vec k' \cdot \vec x'''}
-        \langle \delta(\vec k, 0) \delta(\vec k', 0) \rangle\\
-    &= b_e^2\int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
-        g''g'''a''a'''
-        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
-        j_0 (k \sqrt{\chi''^2 + \chi'''^{^2} - \chi'' \chi''' \hat n \cdot \hat n'})
-        P(k, 0)
-\end{align}
-
-
-Alternately, we can make the limber approximation (replacing
-$a(\chi'')g(\chi'')$ and $a(\chi''')g(\chi''')$ with 
-$a(\bar \chi)g(\bar \chi)$) and small angle approximations
-(replacing the argument of the spherical Bessel with
-$k\sqrt{\Delta \chi^2 + (\bar \chi (\hat n - \hat n'))^2}$).
-\begin{align}
-    w^{dd}(\hat n \cdot \hat n', \chi, \chi')
-    &= b_e^2\int_0^\chi \ud \chi'' \int_0^{\chi'} \ud \chi'''
-        (g(\bar \chi) a(\bar \chi))^2
-        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
-        j_0 (k \sqrt{\Delta \chi^2 + (\bar \chi (\hat n - \hat n'))^2})
-        P(k, 0)\\
-    &= b_e^2\int_0^{(\chi + \chi')/2} \ud \bar\chi 
-        (g(\bar \chi) a(\bar \chi))^2
-        \int_0^\infty\frac{\ud k}{2 \pi^2} k^2
-        P(k, 0)
-        \int_{-\infty}^{\infty} \ud \Delta\chi
-        j_0 (k \sqrt{\Delta \chi^2 + (\bar \chi (\hat n - \hat n'))^2})\\
-\end{align}
-
-\end{comment}
-
+where $\chi_m \equiv \min(\chi, \chi')$.
 
 
 \end{document}
