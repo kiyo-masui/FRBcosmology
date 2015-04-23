@@ -86,22 +86,25 @@ def get_ells():
     return np.array(ells)
 
 
-def get_mult_ell(ells=None):
+def get_mult_ell(ells=None, limber=False):
     if ells is None:
         ells = get_ells()
     CHI_MAX = 3600.
-    mell = angular_terms.MultiEll(ells, CHI_MAX)
+    mell = angular_terms.MultiEll(ells, CHI_MAX, limber)
     return mell
 
 
-def my_plots(mult_ell):
+def my_plots(mult_ell=None, chi=1800):
     matplotlib.rcParams.update({'font.size': 14,
                                 'text.usetex' : False,
                                 'figure.autolayout': True})
-    CHI = 1000.
+
+    if mult_ell is None:
+        mult_ell = get_mult_ell()
+    CHI = float(chi)
     DELTAS = [5., 20., 50., 100.]
-    Y_MIN = 4e-8
-    Y_MAX = 1e-5
+    Y_MIN = 4e-7
+    Y_MAX = 1e-4
     X_MIN = 9
     X_MAX = 1001
     
@@ -123,7 +126,7 @@ def my_plots(mult_ell):
         plt.ylabel(r"$C^{ss}_\ell(\chi,\chi')$",
                    fontsize=18,
                    )
-        plt.legend(loc="lower left", labelspacing=.1, frameon=False)
+        plt.legend(loc="upper right", labelspacing=.1, frameon=False)
 
     chi_s = np.linspace(100, 3500, 50)
     coef_s = np.array([  d_ln_n(chi) + 2./chi for chi in chi_s ])

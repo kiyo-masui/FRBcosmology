@@ -15,7 +15,7 @@ class TestSingleEll(unittest.TestCase):
         #plt.show()
 
     def test_limber(self):
-        s = angular_terms.SingleEllLimber(80, 3000)
+        s = angular_terms.SingleEll(80, 3000, limber=True)
         plt.show()
 
 

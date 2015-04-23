@@ -1,10 +1,11 @@
-\documentclass[onecolumn,prd,nofootinbib]{revtex4-1}
+\documentclass[twocolumn,prl,nofootinbib]{revtex4-1}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{bm}
 \usepackage{color}
 \usepackage{verbatim}
+\usepackage{times}
 
 
 % shortcuts
@@ -30,7 +31,7 @@
 
 \begin{document}
 
-\title{The large scale clustering of fast radio bursts in dispersion measure space}
+\title{The large scale clustering in dispersion measure space}
 
 \author{Kiyoshi Wesley Masui}
  \affiliation{Department of Physics and Astronomy, University of British 
@@ -45,45 +46,89 @@ Columbia, Vancouver, BC, Canada, V6T 1Z1}
 
 \begin{abstract}
 
+    The recently discovered fast radio bursts are a new class of radio
+    transient that, due to thier high dispersion from interviening plasma,
+    have been interpreted as
+    origionating from cosmological distances.  The rate of fast radio bursts
+    has been estimated to be as high as 10\,000 per sky per day.  If
+    cosmological, these events should trace the large-scale structure of the
+    Universe in some way. Furthermore, because the disperion measure (DM) can be
+    used as a proxy for radial distance (like redshift),
+    clustering can be studied in three dimensions. Due to inhomogenaities in
+    the plasma's density dispersion measure is an imperfect proxy or radial
+    distance and we show that this leads to additional clustering terms---the
+    dispersion measure space distortions. We calculate the DM space
+    powerspectra for a toy model of electron and FRB clustering and show that
+    the clustering signal could be detected in a survey of \red{10000} FRB
+    events, as is expected to be produced by the Canadian Hydrogen Intensity
+    Mapping Experiment.
+
 \end{abstract}
 
 \maketitle
 
-\section{FRB density perturbations in DM space}
+\section{Introduction}
 
+
+\section{Density perturbations in dispersion measure space}
+
+The dispersion measure of a signal observed in some angular direction $\hat{n}$ and
+originating from comoving radial distance $\chi$ is
 \begin{equation}
-D(\hat n, \chi) = \int_0^\chi \frac{\ud\chi'}{a(\chi')}
-   \left[1 + \delta_e(\hat{n}\chi')\right]
+    {\rm DM}(\hat{n}, \chi) = \int_0^{\chi} \ud\chi' a(\chi)^2
+        n_e(\hat{n}\chi', \chi').
+\end{equation}
+Here
+$n_e(\vec{x}, \chi)$ is the free electron density as a function of location and
+conformal time. Note that we use $\chi$ as our radial distance and time
+coordinate, as opposed to redshift which is more approprite for spectroscopic
+applications. We model the cosmological 
+electron density as containing a homogenious part
+and perturbations
+$n_e(\vec x, \chi) = \bar{n}_e(\chi) \left[1 + \delta_e(\vec x, \chi)\right]$.  \red{We take
+all of the electrons to be in a diffuse ionized state such that
+$\bar{n}_e(\chi) = \bar{n}_{e0} / a(\chi)^3$ (not nessisary).} The dispersion
+measure is thus
+\begin{equation}
+    {\rm DM}(\hat n, \chi) = \int_0^\chi \ud\chi' a(\chi')^2 \bar{n}_e(\chi')
+       \left[1 + \delta_e(\hat{n}\chi',\chi')\right].
 \end{equation}
 
-This defines DM space:
+\emph{Dispersion measure space} is the three dimensional coordinates,
+$\vec x_s$ inferred from the dispersion measure assuming that the electrons are
+homogenious. This only affect the radial coordinate such that $\vec x_s = \hat
+n \chi_s$ with $\chi_s$ defined by the equation
 \begin{equation}
-D(\chi_s) = \int_0^{\chi_s}\frac{\ud\chi'}{a(\chi')}
+    {\rm DM}(\chi_s) = \int_0^\chi \ud\chi' a(\chi')^2 \bar{n}_e(\chi').
 \end{equation}
 
-Combining the above, we find that:
+Combining the above equations (keeping only terms first order in the density
+perturbations), we find that
 \begin{equation}
-\frac{\ud \chi_s}{\ud \chi} = (1 + \delta_e),
+\frac{\ud \chi_s}{\ud \chi} = (1 + \delta_e(\hat n \chi, \chi),
 \end{equation}
-and
+and thus
 \begin{equation}
 \chi_s - \chi = \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
 \end{equation}
 
+We wish to relate the density of a tracer $f$ measured in DM space to its
+density in real space. We follow the derivation in \citet{Kaiser} of the
+redshift space distortions. Start by noting that the total number of tracers
+in a volume element is the same in both spaces:
 \begin{equation}
 \label{e:density}
-n_{fs}(\vec x_s) \ud^3\vec x_s = n_{f}(\vec x) \ud^3\vec x
+n_{fs}(\vec x_s) \ud^3\vec x_s = n_{f}(\vec x) \ud^3\vec x.
 \end{equation}
-
-Averaged over the sky, the galaxy density should be the same in DM 
-space as in real space.
+We split the density into a homogenious part plus perturbations,
 \begin{equation}
-\bar{n}_{fs}(\chi_s)\left[ 1 + \delta_f(\vec x_s)\right] \ud^3\vec x_s
-    = \bar{n}_{f}(\chi)\left[ 1 + \delta_f(\vec x)\right] \ud^3\vec x
+    \bar{n}_{fs}(\chi_s)\left[ 1 + \delta_{fs}(\vec x_s)\right] \ud^3\vec x_s
+    = \bar{n}_{f}(\chi)\left[ 1 + \delta_f(\vec x)\right] \ud^3\vec x.
 \end{equation}
-
+Averaged over the sky, the density should be the same in DM 
+space as in real space,
 \begin{equation}
-\bar{n}_{fs}(\chi) = \bar{n}_f(\chi)
+\bar{n}_{fs}(\chi) = \bar{n}_f(\chi).
 \end{equation}
 Therefore,
 \begin{align}
@@ -94,7 +139,7 @@ Therefore,
        \label{e:nfs}
 \end{align}
 
-The jacobian in spherical coordinates is:
+The jacobian in spherical coordinates is
 \begin{align}
 \left| \frac{\ud^3\vec x}{\ud^3\vec x_s} \right|
     &= \frac{\ud \chi}{\ud \chi_s}\frac{\chi^2}{\chi_s^2}\\
@@ -105,44 +150,241 @@ The jacobian in spherical coordinates is:
         - \frac{2}{\chi}\int_0^\chi \ud \chi' \delta_e(\hat n \chi')
         \label{e:jac}
 \end{align}
-Following Kaiser, the third line follows since the
-second factor in parentheses on the second line, which is the
-average overdensity along the line of sight, is much
-closer to unity than the first due to cancellations.
 
 Substituting Equations~\ref{e:nfs}~and~\ref{e:jac} into Equation~\ref{e:density},
-we obtain:
+we obtain
 \begin{equation}
 \label{e:delta_s}
     \delta_{fs} = \delta_f - \delta_e
     - \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
     + \frac{2}{\chi} \right)
-        \int_0^\chi \ud \chi' \delta_e(\hat n \chi')
+        \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
 \end{equation}
+In the equation above, the $-\delta_e$ term is most analogous to the Kaiser
+redshift space distortions.  It is a dillution of tracers in DM space due to an
+excess of electrons in between the tracers. However we note that this term is isotropic
+in cotrast to Kaiser.  This is because any wave vector electron perturbation
+causes DM space distortions, whereas the radial velocities that cause
+redshift space distortions are only sourced by perterbations with radial wave
+vectors.
+
+The $\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}$ arise since the
+misinterpretation of the radial distance causes the observed tracer density to
+be compared to the wrong background density. The $\frac{2}{\chi}$ term is
+caused by a misinterpretation of angular distances when the radial distance is
+mismeasured.  Both term are in-prociple present in redshift space but are
+negligable. Because radial veolocities are only sourced by modes with large
+radial wave vector, there is near perfect cancelation along the line of sight
+and thus is very little net error in radial distance.
 
 \section{Two-point statistics in DM space}
 
-In this section all quantities are already first order in the perturbations so
-there is no need to distinguish between the DM space coordinates and the real
-space coordinates. The correction is higher order. Still need to distinguish
-between DM space and real space fields ($\delta_{fs} \neq \delta_f$, but
-$\delta_f(\vec x_s) \approx \delta_f(\vec x)$).
-
 Unlike in redshift-space distortions, Equation~\ref{e:delta_s} does not have a
-simple form in harmonic space. The equations third term couples harmonic modes
-and thus the two-point statistic cannot be phrased as a simple power spectrum.
-We will phrase the two point statistic in terms of $C^{ss}_{\ell D D'}$, which is
-the cross-correlation angular power-spectrum of the DM space source overdensity
-on DM shells at $D$ and $D'$.
+simple form in harmonic space. The equation's third term couples harmonic modes
+and thus the two-point statistics cannot be phrased as a simple power spectrum.
+We will phrase the two point statistic in terms of $C^{ss}_\ell(\chi,\chi')$, which is
+the cross-correlation angular power-spectrum of the DM space overdensity
+on shells at $\chi$ and $\chi'$.
+\begin{align}
+    &\delta_{\ell\ell'}\delta_{mm'}C^{ss}_\ell(\chi, \chi') = \nonumber \\
+    & \quad
+        \left\langle
+        \int\ud\Omega Y_{\ell m}(\hat n)
+       \delta_{fs}(\hat n \chi, \chi)
+        \int\ud\Omega' Y_{\ell' m'}(\hat n')
+        \delta_{fs}(\hat n' \chi', \chi')
+        \right\rangle
+\end{align}
+The first two term in Equation~\ref{e:delta_s} are stationary. For stationary,
+isotropic, tracers $x$ and $y$ we have 
+$\langle \delta_x(\vec k, \chi) \delta_y(\vec k', \chi) \rangle = (2\pi)^3
+\delta^3(\vec k - \vec k') P_{xy}(k, \chi)$.  If for a moment we ignore time
+dependance, the angular cross power spectrum of such tracers is
+\begin{align}
+    %\delta_{\ell\ell'}\delta_{mm'}C^{xy}_\ell(\chi, \chi')
+    %&= \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
+    %    \langle \delta_x(\hat n \chi) \delta_y(\hat n' \chi') \rangle,
+    %    \\
+    C^{xy}_\ell(\chi,\chi')
+    &= \frac{2}{\pi}
+\int_0^\infty\ud k k^2 j_\ell(k\chi) j_{\ell}(k\chi')P_{xy}(k).
+\end{align}
+In reality the powerspectrum evolves on the order of a (conformal) Hubble time.
+The angular cross-correlations will be very small unless $\chi$ and $\chi'$ are
+within a few correlation lengths of one another, roughly a few hundred
+megaparsecs.  The evolution of the power-spectrum is negligable over these time
+differences which leads to a straight forward way to include the evolution of
+the perturbations:
+\begin{align}
+C^{xy}_\ell(\chi,\chi') 
+    \approx \frac{2}{\pi}
+    \int_0^\infty\ud k k^2
+    j_\ell(k\chi) j_{\ell}(k\chi')
+    P_{xy}(k,(\chi + \chi')/2),\nonumber &\\
+    |\chi - \chi'| \ll 1/aH.&
+\end{align}
 
-Because the expression for the density perturbations in DM space involves an
-integral over the line of sight, which for far off sources may cover a
-significant amount of the Universe's expansion, it is necessary to explicitly
-account for light cone effects. This is most easily done in linear theory,
-where these effects are scale independent, a factorization that allows certain
-integral to be performed. In reality, non-linear growth causes both the bias
-and the growth factor to be scale and time dependant. As in weak lensing, this
-would need to be simulated.
+The thrid term in Equation~\ref{e:delta_s} is not stationary but is an integral
+over the stationary field $\delta_e$.
+Define $\delta_d$ as
+\begin{equation}
+    \delta_d(\hat n \chi) \equiv \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
+\end{equation}
+It is straight-forward to show that
+\begin{widetext}
+\begin{equation}
+C^{dd}_\ell(\chi,\chi')
+    =
+    \frac{2}{\pi}
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \int_0^\infty\ud k k^2 j_\ell(k\chi'') j_{\ell}(k\chi''')
+    P_{ee}(k, (\chi''+\chi''')/2).
+\end{equation}
+
+Finally, $C^{ss}_\ell$ will contain cross terms between the stationary terms
+and the integral terms.  These will have the form
+\begin{equation}
+C^{dx}_\ell(\chi,\chi')
+    =
+    \frac{2}{\pi}
+    \int_0^\chi\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi') j_{\ell}(k\chi'')P_{ex}(k, (\chi' + \chi'')/2).
+\end{equation}
+
+Assembling all these expressions with the proper coefficients we have
+\begin{align}
+    \label{e:Clss}
+C^{ss}_\ell(\chi,\chi') = &~
+    \frac{2}{\pi}
+    \int_0^\infty\ud k k^2
+    j_\ell(k\chi) j_{\ell}(k\chi')
+    P_{[ff + ee - 2ef]}(k, (\chi + \chi')/2)
+    %\left[
+    %P_{ff}(k, \bar\chi)
+    %+ P_{ee}(k, \bar\chi)
+    %- 2P_{fe}(k, \bar\chi)
+    %\right]
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi'}
+    + \frac{2}{\chi'} \right)
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \int_0^\infty\ud k k^2 j_\ell(k\chi'') j_{\ell}(k\chi''')
+    P_{ee}(k, (\chi''+\chi''')/2)
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+    \int_0^\chi\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi') j_{\ell}(k\chi'')
+    P_{[ee - fe]}(k, (\chi' + \chi'')/2)
+    %\left[
+    %P_{ee}(k, (\chi' + \chi'')/2)
+    %- P_{fe}(k, (\chi' + \chi'')/2) 
+    %\right]
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi'}
+    + \frac{2}{\chi'} \right)
+    \int_0^{\chi'}\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi) j_{\ell}(k\chi'')
+    P_{[ee - fe]}(k, (\chi + \chi'')/2).
+    %\left[ 
+    %P_{ee}(k, (\chi + \chi'')/2)
+    %- P_{fe}(k, (\chi + \chi'')/2) 
+    %\right].
+\end{align}
+Here, espressions like $P_{[ff + ee - 2ef]}$ are short hand for $P_{ff} +
+P_{ee} - 2P_{ef}$.
+
+Equation~\ref{e:Clss} can be simplifed substantially by adopting the small
+angle and Limber approximations \citep{extened_limber}.  The small angle
+approximation eliminates the $k$ integral over sperical Bessel functions, replacing it
+with a Forrier transform, and is valid for $\ell \gg 1$. The Limber
+approximation assumes that only modes with small radial component of thier wave
+vector contribute to the radial integrals and is valid if the power spectra
+evolve slowly compared to the correlation length (which has already been
+assumed). With these approximations we have
+\begin{align}
+C^{ss}_\ell(\chi, \chi') \approx&~
+    \frac{1}{\bar\chi^2}
+        \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+        e^{i k_\parallel (\chi - \chi')}
+        P_{[ee + ff - 2ef]}
+        (\sqrt{k_\parallel^2 + \ell(\ell + 1)/\bar\chi^2}, \bar\chi)
+        %\left[
+        %P_{ee}(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
+        %+ P_{ff}(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
+        %- 2 P_{ef}(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
+        %\right]
+    \nonumber \\ &+
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi'}
+    + \frac{2}{\chi'} \right)
+    \int_0^{\chi_{\rm min}}\ud\chi''
+    \frac{1}{\chi^{\prime\prime 2}}
+    P_{ee}((\ell + 1/2)/\chi'',\chi'')
+    \nonumber \\ &+
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi_{\max}}
+    + \frac{2}{\chi_{\max}} \right)
+    \frac{1}{\chi_{\min}^2}
+    P_{[ee - ef]}((\ell + 1/2)/\chi_{\min}, \chi_{\min}),
+        %\left[
+        %    P_{ee}(\ell/\chi_{\min}, \chi_{\min})
+        %    - P_{fe}(\ell/\chi_{\min}, \chi_{\min})
+        %\right],
+\end{align}
+where $\chi_{\min} \equiv \min(\chi, \chi')$ and $\chi_{\max} \equiv \max(\chi,
+\chi')$ .  We've found that these approximations are excelent for $\ell > 10$
+and use this form for the remainder of the paper.
+\end{widetext}
+
+\section{Observational considerations}
+
+DM contribution intrinsic to the source will have a few effects: There will be
+an offset which will change the DM-distance relation in some way that can
+hopefully be characterized. Also there will be a stocastic piece which will
+smear out DM-distance relations and limit the effective width of the radial
+shells. Detailed considereation of these effects is beyond the scope of this
+work but to crudely deal with this, we don't consider any $\chi - \chi'$
+smaller than \red{$10\,{\rm MPc}/h$}.
+
+Contributions from local Universe probably not an issue. Can be measure by
+other means and subtracted off.
+
+Tomography is exact.  Get excellent separation of scales, unlike lensing.
+
+\section{Detectability}
+
+\section{Conclustions}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%            Scrap           %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{widetext}
+
+\newpage
+
+\section{Details not to be included}
 
 We use the following conventions:
 \begin{equation}
@@ -302,7 +544,7 @@ C^{dx}_\ell(\chi,\chi') + C^{xd}_\ell(\chi,\chi')
     j_{\ell}(k(\chi+\Delta'/2))
     P_{ex}(k, \chi)\\
     \approx&
-    \frac{4}{\pi}
+    \frac{\red{4}}{\pi}
     \int_{0}^{\infty}\ud\Delta'
     \int_0^\infty\ud k k^2 j_\ell(k(\chi_m-\Delta'/2))
     j_{\ell}(k(\chi_m+\Delta'/2))
@@ -469,19 +711,20 @@ C^{ss}_\ell(\chi, \chi') =&~
         \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
         e^{i k_\parallel \Delta\chi}
         P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
-    \\ &+
+    \nonumber \\ &+
     \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi_m}
     + \frac{2}{\chi_m} \right)^2
     b_e^2 \int_0^{\chi_m}\ud\chi''
     \frac{1}{\chi^{\prime\prime 2}}
         P(\ell/\chi'',\chi'')
-    \\ &+
+    \nonumber \\ &+
     \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi_m}
     + \frac{2}{\chi_m} \right)
-    \frac{b_e(b_f - b_e)}{\chi_m^2}
+    \frac{b_e(-b_f + b_e)}{\chi_m^2}
         P(\ell/\chi_m, \chi_m)
 \end{align}
 where $\chi_m \equiv \min(\chi, \chi')$.
 
+\end{widetext}
 
 \end{document}

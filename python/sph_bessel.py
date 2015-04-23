@@ -113,7 +113,7 @@ def integrate_f_jnjn(f, n, mean, delta, x_max):
         envelop_width = 1000 * x_max
     else:
         envelop_width = 5 * (2 * np.pi / delta)
-    x_max = min(x_max, 4 * envelop_width)
+    x_max = min(x_max, 5 * envelop_width)
 
     x, ntuple, delta_tuple = sample_jnjn(n, mean, delta, x_max)
 
