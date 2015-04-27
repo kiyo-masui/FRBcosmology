@@ -12,8 +12,8 @@ import angular_terms
 Z_STAR = 0.8
 ALPHA = -0.7
 
-B_E = 0.9
-B_F = 1.3
+B_E = 1.0
+B_F = 0.7
 
 
 def d_ln_n(chi):
@@ -59,22 +59,28 @@ def n_chi(chi):
 
 
 def apply_coeffs(mult_ell, chi, delta):
+    
+    chi1 = chi - abs(delta) / 2
+    chi2 = chi + abs(delta) / 2
 
-    coeff = d_ln_n(chi) + 2./chi
+    coeff1 = d_ln_n(chi1) + 2./chi1
+    coeff2 = d_ln_n(chi2) + 2./chi2
     i1, i2, i3 = mult_ell.get_integrals(chi, delta)
     t1 = (B_F - B_E)**2 * i1
-    t2 = (B_F - B_E) * B_E * coeff * i2
-    t3 = B_E**2 * coeff**2 * i3
+    t2 = (B_E - B_F) * B_E * coeff2 * i2
+    t3 = B_E**2 * coeff1 * coeff2 * i3
 
     return t1, t2, t3
 
 def plot_spectra(mult_ell, chi, delta, **kwargs):
     ells = mult_ell.ells
     t1, t2, t3 = apply_coeffs(mult_ell, chi, delta)
-    plt.loglog(ells, t1 + t2 + t3, '-k', label='total', **kwargs)
-    plt.loglog(ells, t1, '--b', label='local term', **kwargs)
-    plt.loglog(ells, t2, '-.g', label='cross term', **kwargs)
-    plt.loglog(ells, t3, ':r', label='integral term', **kwargs)
+    #trans = lambda t: ells**2 * abs(t)
+    trans = lambda t: abs(t)
+    plt.loglog(ells, trans(t1 + t2 + t3), '-k', label='total', **kwargs)
+    plt.loglog(ells, trans(t1), '--b', label='local term', **kwargs)
+    plt.loglog(ells, trans(t2), '-.g', label='cross term', **kwargs)
+    plt.loglog(ells, trans(t3), ':r', label='integral term', **kwargs)
 
 
 def get_ells():
@@ -132,23 +138,33 @@ def my_plots(mult_ell=None, chi=1800):
     coef_s = np.array([  d_ln_n(chi) + 2./chi for chi in chi_s ])
 
     plt.figure()
-    plt.plot(chi_s, coef_s, **kwargs)
-    plt.xlabel(r"$\chi$ ($\rm{MPc}/h$)",
-               fontsize=18,
-               )
-    plt.ylabel(r"$(\frac{1}{\bar{n}_f}\frac{d \bar{n}_f}{d \chi}"
-               r"+ \frac{2}{\chi})$  ($h/\rm{MPc})$",
-               fontsize=18,
-               )
-
-    plt.figure()
-    plt.plot(chi_s, chi_s**2 * n_chi(chi_s), **kwargs)
-    plt.xlabel(r"$\chi$ ($\rm{MPc}/h$)",
-               fontsize=18,
-               )
+    ax1 = plt.subplot(211)
+    d = chi_s**2 * n_chi(chi_s)
+    d /= np.amax(d)
+    ax1.plot(chi_s, d, **kwargs)
+    plt.ylim(0., 1.1)
+    plt.yticks(np.arange(0.1, 1.0,  0.2))
     plt.ylabel(r"$\chi^2\bar{n}_f$  ($h/\rm{MPc})$",
                fontsize=18,
                )
+    
+    ax2 = plt.subplot(212, sharex=ax1)
+    ax2.plot(chi_s, coef_s, **kwargs)
+    plt.ylim(-0.01, 0.02)
+    plt.yticks(np.arange(-0.005, 0.02,  0.005))
+    #plt.ylabel(r"$(\frac{1}{\bar{n}_f}\frac{d \bar{n}_f}{d \chi}"
+    #           r"+ \frac{2}{\chi})$  ($h/\rm{MPc})$",
+    #           fontsize=18,
+    #           )
+    plt.ylabel(r"$A(\chi)$  ($h/\rm{MPc})$",
+               fontsize=18,
+               )
+    plt.xlabel(r"$\chi$ ($\rm{MPc}/h$)",
+               fontsize=18,
+               )
+    xticklabels = ax1.get_xticklabels()
+    plt.setp(xticklabels, visible=False)
+    plt.subplots_adjust(hspace=0.0001)
     
 
 

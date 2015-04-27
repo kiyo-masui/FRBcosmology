@@ -22,8 +22,8 @@ class SingleEll(object):
         #delta_chi = chi_max / nchi
         #chi_list = np.arange(1, nchi + 1, dtype=float) / nchi * chi_max
         
-        chi_min = 500.
-        chi_list = np.linspace(chi_min, chi_max, nchi, endpoint=True)
+        CHI_MIN = 500.
+        chi_list = np.linspace(CHI_MIN, chi_max, nchi, endpoint=True)
         delta_chi = chi_list[1] - chi_list[0]
 
         data = []
@@ -80,7 +80,8 @@ class SingleEll(object):
                 for ii in range(len(deltas)):
                     I1[ii] = sph_bessel.integrate_f_jnjn(p_k, ell, chi, deltas[ii],
                             matter_power.K_MAX) * (2 / np.pi)
-                I2 = integrate.romb(I1[:ndelta_int] * np.exp(scale * deltas[:ndelta_int]),
+                I2 = integrate.romb(I1[:ndelta_int]
+                                    * np.exp(scale * deltas[:ndelta_int]),
                                     dx=delta_u) * 2
 
             this_chi_data['chi'] = chi
@@ -91,8 +92,8 @@ class SingleEll(object):
             n_total += len(deltas)
 
         I2 = [td["I2"] for td in data]
-        I2 = np.array([0] + I2)
-        I3 = integrate.cumtrapz(I2, dx=delta_chi)
+        I2 = np.array(I2)
+        I3 = integrate.cumtrapz(I2, dx=delta_chi, initial=0.)
         for ii in range(nchi):
             data[ii]["I3"] = I3[ii]
 
@@ -107,7 +108,7 @@ class SingleEll(object):
             ii += ndelta
 
         self.i1 = interpolate.LinearNDInterpolator(chi_delta, I1, fill_value=0.)
-        self.i2 = interpolate.interp1d(chi_list, I2[1:], kind="cubic")
+        self.i2 = interpolate.interp1d(chi_list, I2, kind="cubic")
         self.i3 = interpolate.interp1d(chi_list, I3, kind="cubic")
         self.data = data
 
