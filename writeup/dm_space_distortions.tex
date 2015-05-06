@@ -387,7 +387,7 @@ and use this form for the remainder of the paper.
 \subsection{Modelling the angular power-spectrum}
 
 Description of the input power-spectra, $\bar n_f$ and figures.
-Figure~\ref{f:n_f}
+Figure~\ref{f:n_f}, Figure~\ref{f:terms}.
 
 \begin{figure}
     \includegraphics[scale=0.42]{"figures/n_f"}
@@ -396,6 +396,21 @@ Figure~\ref{f:n_f}
         \red{Need to fix normalization of top panel.}
     }
 \end{figure}
+
+\begin{figure}
+    \includegraphics[scale=0.42]{"figures/terms"}
+    \caption{
+        \label{f:terms}
+        Terms in the DM-space cross-correlation angular power spectrum.
+        All terms are evaluated at $\bar\chi=1000\,{\rm MPc}/h$ and 
+        $\chi - \chi' = 10\,{\rm MPc}/h$, except the lowest most 
+        ``local term'' curve which is for $\chi - \chi'=50\,{\rm MPc}/h$. 
+        While
+        the other two terms are highly insensitive to the separation of
+        the radial slices, the local term drops rapidly at high separations.
+    }
+\end{figure}
+
 
 
 \section{Measurement}
@@ -436,11 +451,11 @@ $\Delta \chi$ is
 Here, to indicate that we are now working with quantities binned in the radial
 direction instead of
 continuous functions, we've switched to $C_{\ell,ij}$ over 
-$C_\ell(\chi, \chi')$. The error bar on the angular
+$C_\ell(\chi, \chi')$. The uncertainty on the angular
 cross-power spectrum is then
 \begin{align}
     (\Delta{C^{ss}_{\ell,ij}})^2 = 
-    \sqrt{\frac{1}{\ell(\ell + 1)\Delta \ell f_{\rm sky}}}
+    {\frac{1}{\ell(\ell + 1)\Delta \ell f_{\rm sky}}}
         \left[C^N_{\ell,ii} C^N_{\ell,jj} +  (C^N_{\ell,ij})^2\right],
 \end{align}
 where the second term in brackets only contributes for $i = j$.
@@ -448,12 +463,27 @@ where the second term in brackets only contributes for $i = j$.
 To give an idea of the sensitivity of the survey, we collapse
 $C^{ss}_{\ell,ij}$ to a single function of $\ell$ by taking a weighted average
 of all pairs of radial bins. We use bin widths of $100\,{\rm MPc}/h$ over the
-range $500\,{\rm MPc}/h$ to $3600\,{\rm MPc}/h$.
-For weights in the radial bin average, we use the signal to noise-squared
-at $\ell=100$, which extracts all the signal to noise at that $\ell$.
+range $500\,{\rm MPc}/h$ to $3500\,{\rm MPc}/h$.
+For weights in the radial bin average, we use the signal to uncertainty-squared
+at $\ell=100$, which extracts all the signal to noise at that $\ell$ and much
+of it at other multipoles.
 We exclude the $i = j$ bin pairs due to
 the presumed observational complications discussed in the previous section.
-This effectively discards the contribution from the local term.
+This effectively discards the contribution from the local term. This is shown
+in Figure~\ref{f:sensitivity}.
+
+\begin{figure}
+    \includegraphics[scale=0.42]{"figures/sensitivity"}
+    \caption{
+        \label{f:sensitivity}
+        Sensitivity of a survey with $10^4$ dispersion measures distributed
+        uniformly over half the sky.  Plotted is the cross-correlation
+        power spectrum weighted averaged over all pairs of radial bins. Weights
+        are chosen to maximize signal to noise at $\ell=100$.
+    }
+\end{figure}
+
+
 
 \section{Discussion and conclusions}
 
