@@ -1,0 +1,349 @@
+
+
+\begin{widetext}
+
+\newpage
+
+\section{Details not to be included}
+
+We use the following conventions:
+\begin{equation}
+    P_{xy}(k, \chi) = b_x b_y g(\chi)^2 a(\chi)^2 P(k, 0)
+\end{equation}
+
+\begin{equation}
+    \delta_x(\vec x, \chi) =  b_x g(\chi) a(\chi) \int\frac{\ud^3\vec k}{(2 \pi)^3}
+        e^{i\vec k \cdot \vec x} \delta(\vec k, 0)
+\end{equation}
+
+\begin{equation}
+    w^{xy}(\hat n \cdot \hat n', \chi, \chi')
+    \equiv \langle \delta_x(\vec x) \delta_y(\vec x') \rangle
+\end{equation}
+
+For any statistically stationary tracers $x$ and $y$,
+ignoring time dependance (redshift evolution)
+of the power spectrum:
+\begin{align}
+    \delta_{\ell\ell'}\delta_{mm'}C^{xy}_\ell(\chi, \chi')
+    &= \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
+        \langle \delta^x(\hat n \chi) \delta^y(\hat n' \chi') \rangle
+        \\
+    &=
+        \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} \frac{\ud^3\vec k'}{(2 \pi)^3}
+        e^{i\vec k \cdot \vec x} e^{i\vec k' \cdot \vec x'}
+        \langle \delta(\vec k) \delta(\vec k') \rangle
+        \\
+    &=
+        \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i\vec k \cdot (\vec x - \vec x')} P_{xy}(k)
+        \\
+    &=
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} P_{xy}(k)
+        \int\ud\Omega Y_{\ell m}(\hat n)
+        e^{i\vec k \cdot \vec x}
+        \int\ud\Omega' Y_{\ell' m'}(\hat n')
+        e^{-i\vec k \cdot \vec x'}
+        \\
+    &=
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} P_{xy}(k)
+        \left[(4 \pi) i^\ell j_\ell(k\chi) Y_{\ell m}^*(\hat k)\right]
+        \left[(4 \pi) i^{-\ell'} j_{\ell'}(k\chi') Y_{\ell' m'}(\hat
+        k)\right]
+        \\
+    &=
+        \frac{2}{\pi}
+        \int_0^\infty\ud k k^2 j_\ell(k\chi) j_{\ell'}(k\chi')P_{xy}(k)
+        \int\ud \Omega_k i^{(\ell - \ell')}
+        Y_{\ell' m'}^*(\hat k) Y_{\ell m}(\hat k)
+        \\
+    &= \delta_{\ell\ell'}\delta_{mm'}\frac{2}{\pi}
+        \int_0^\infty\ud k k^2  j_\ell(k\chi) j_{\ell}(k\chi')P_{xy}(k)
+        \\
+    C^{xy}_\ell(\chi,\chi') 
+    &= \frac{2}{\pi}
+\int_0^\infty\ud k k^2 j_\ell(k\chi) j_{\ell}(k\chi')P_{xy}(k)
+\end{align}
+
+It is convienient to reparameterize this in terms of
+$\bar\chi \equiv (\chi + \chi') /2$ and $\Delta \chi \equiv \chi' - \chi$.
+We expect the power spectrum to vary slowly as a function of $\bar\chi$ and
+very quickly as a function of $\Delta\chi$. However it will be highly
+suppressed for $\ell \gg \bar\chi/\Delta\chi$. These facts will be very
+helpfull in subsequent numerical integrals.
+
+Also since smallish value of $\Delta\chi$ are of interest, this leads us to
+an obviouse way to include redshift dependance of the
+power spectrum:
+\begin{equation}
+C^{xy}_\ell(\bar\chi,\Delta\chi) 
+    = \frac{2}{\pi}
+    \int_0^\infty\ud k k^2
+    j_\ell(k\chi) j_{\ell}(k\chi')
+    P_{xy}(k,\bar\chi) \qquad \Delta\chi \ll 1/aH
+\end{equation}
+
+Define $\delta_d$ as:
+\begin{equation}
+    \delta_d(\hat n \chi) = \int_0^\chi \ud \chi' \delta_e(\hat n \chi')
+\end{equation}
+which doesn't have the same units as over-density, but that is okay.
+\begin{equation}
+C^{dd}_\ell(\chi,\chi')
+    =
+    \frac{2}{\pi}
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \int_0^\infty\ud k k^2 j_\ell(k\chi'') j_{\ell}(k\chi'''
+    )P_{ee}(k, (\chi''+\chi''')/2)
+\end{equation}
+
+For numerical integration, perform the following change of variables to make
+things much easier.
+\begin{align}
+C^{dd}_\ell(\chi,\chi')
+&=
+    \frac{2}{\pi}
+    \int_0^{(\chi' + \chi)/2}\ud\bar\chi'
+    \int_{\max(-2\bar\chi', -2(\chi -\bar\chi'))}^{\min(2\bar\chi', 2(\chi' -
+    \bar\chi'))}\ud\Delta'
+    \int_0^\infty\ud k k^2 j_\ell(k(\bar\chi' - \Delta'/2))
+    j_{\ell}(k(\bar\chi' + \Delta'/2))
+    P_{ee}(k, \bar\chi')
+    \\
+    &\approx
+    \frac{4}{\pi}
+    \int_0^{\chi_m}\ud\bar\chi'
+    \int_{0}^{\infty}\ud\Delta'
+    \int_0^\infty\ud k k^2 j_\ell(k(\bar\chi' - \Delta'/2))
+    j_{\ell}(k(\bar\chi' + \Delta'/2))
+    P_{ee}(k, \bar\chi')
+\end{align}
+At this point we could again to the transformation to $C_{\ell\chi\chi'}$
+leaving the expression as a triple integral. This is not as computationally
+costly as might be expected at first glance, since the $\chi''$ and $\chi'''$
+integrals are almost the same for all $\chi$, $\chi'$ pairs with only the
+limits of integration changing. Thus the full set of $C_{\ell\chi\chi'}$'s can
+be computed with a cumulative sum, only performing one new integral (over $k$)
+for each element.
+
+Finally, the cross terms:
+\begin{equation}
+C^{dx}_\ell(\chi,\chi')
+    =
+    \frac{2}{\pi}
+    \int_0^\chi\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi') j_{\ell}(k\chi'')P_{ex}(k, (\chi' + \chi'')/2)
+\end{equation}
+
+with the following change of variables for numerical integration:
+\begin{align}
+C^{dx}_\ell(\chi,\chi')
+    =&
+    \frac{2}{\pi}
+    \int_{-\chi'}^{\chi - \chi'}\ud\Delta'
+    \int_0^\infty\ud k k^2 j_\ell(k\chi')
+    j_{\ell}(k(\chi'+\Delta'))
+    P_{ex}(k, \chi' + \Delta'/2)
+    \\
+C^{dx}_\ell(\chi,\chi') + C^{xd}_\ell(\chi,\chi')
+    \approx&
+    \frac{2}{\pi}
+    \int_{-\chi'}^{\chi - \chi'}\ud\Delta'
+    \int_0^\infty\ud k k^2 j_\ell(k(\chi'-\Delta'/2))
+    j_{\ell}(k(\chi'+\Delta'/2))
+    P_{ex}(k, \chi')
+    \nonumber\\
+    &+
+    \frac{2}{\pi}
+    \int_{-\chi}^{\chi' - \chi}\ud\Delta'
+    \int_0^\infty\ud k k^2 j_\ell(k(\chi-\Delta'/2))
+    j_{\ell}(k(\chi+\Delta'/2))
+    P_{ex}(k, \chi)\\
+    \approx&
+    \frac{\red{4}}{\pi}
+    \int_{0}^{\infty}\ud\Delta'
+    \int_0^\infty\ud k k^2 j_\ell(k(\chi_m-\Delta'/2))
+    j_{\ell}(k(\chi_m+\Delta'/2))
+    P_{ex}(k, \chi_m)
+\end{align}
+The second line exploits the fact that for $\ell \gg 1$, $\chi \gg \chi'/\ell$ and
+$\chi' \gg \chi/\ell$, only $\Delta'\ll\chi$ contributes significantly to the
+integral. Also the expressions are very weak functions of $\chi$ and thus
+may be shifted by $\Delta/2$ without incurring much error. The third line
+exploits the fact that only one term contributes if $\chi$ and $\chi'$ are
+widely separated, and if they are close then the two terms combine to the given
+expression.
+
+\red{Actually, with the approximations we've made, we can actually do the
+$\Delta$ integrals analytically by transferring all the $\Delta$ to a single
+Bessel and shifting the power spectrum to be independent of $\Delta$.  Should
+be pretty good for $\ell > 10$.  That is nice because it will control all our
+numerical issues with oscillating Bessel functions.}
+
+Assembling terms:
+\begin{align}
+C^{ss}_\ell(\chi,\chi') = &
+    \frac{2}{\pi}
+    \int_0^\infty\ud k k^2
+    j_\ell(k\chi) j_{\ell}(k\chi')
+    \left[ P_{ff}(k, \bar\chi)
+    + P_{ee}(k, \bar\chi)
+    - 2P_{fe}(k, \bar\chi) \right]
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi'}
+    + \frac{2}{\chi'} \right)
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \int_0^\infty\ud k k^2 j_\ell(k\chi'') j_{\ell}(k\chi''')
+    P_{ee}(k, (\chi''+\chi''')/2)
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+    \int_0^\chi\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi') j_{\ell}(k\chi'')
+    \left[ P_{ee}(k, (\chi' + \chi'')/2)
+    - P_{fe}(k, (\chi' + \chi'')/2) \right]
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi'}
+    + \frac{2}{\chi'} \right)
+    \int_0^{\chi'}\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi) j_{\ell}(k\chi'')
+    \left[ P_{ee}(k, (\chi + \chi'')/2)
+    - P_{fe}(k, (\chi + \chi'')/2) \right]
+\end{align}
+
+\section{Small angles and Limber}
+
+Alternately, on the flat sky and for small angles:
+\begin{align}
+(2\pi)^2\delta^2(\vec \ell - \vec \ell')C_\ell(\chi, \chi')
+    &=
+        \int\ud^2\vec\theta\ud^2\vec\theta'
+        e^{-i\vec\ell\cdot\vec\theta} e^{-i\vec\ell'\cdot\vec\theta'}
+        \langle \delta(\hat n \chi) \delta(\hat n' \chi') \rangle
+        \\
+    &\approx
+        \int\ud^2\vec\theta\ud^2\vec\theta'
+        e^{-i\vec\ell\cdot\vec\theta} e^{-i\vec\ell'\cdot\vec\theta'}
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i\vec k \cdot (\vec x - \vec x')} P(k, \bar\chi)
+        \\
+    &=
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i k_\parallel (\chi - \chi')} P(k, \bar\chi)
+        \int\ud^2\vec\theta e^{-i(\vec\ell-\bar\chi\vec k_\bot)\cdot\vec\theta}
+        \int\ud^2\vec\theta' e^{-i(\vec\ell'-\bar\chi\vec k_\bot)\cdot\vec\theta'}
+        \\
+    &=
+        \int\frac{\ud^3\vec k}{(2 \pi)^3} 
+        e^{i k_\parallel (\chi - \chi')} P(\sqrt{k_\parallel^2 + k_\bot^2}, \bar\chi)
+        (2\pi)^4 \delta^2(\vec\ell - \bar\chi \vec k_\bot)
+        \delta^2(\vec\ell' - \bar\chi\vec k_\bot)
+        \\
+    &=
+        \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+        e^{i k_\parallel (\chi - \chi')}
+        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
+        \frac{(2\pi)^2\delta^2(\vec\ell' - \vec \ell)}{\bar\chi^2}
+        \\
+C_\ell(\chi, \chi')
+    &= \frac{1}{\bar\chi^2}
+        \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+        e^{i k_\parallel (\chi - \chi')}
+        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
+\end{align}
+Which is valid for $\ell \gg 1$ and $\chi - \chi' \ll \bar\chi$.
+$\bar \chi \equiv (\chi + \chi') /2$
+
+
+Or for flat sky and small angles:
+\begin{align}
+C^{dd}_\ell(\chi,\chi') 
+    &=
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \frac{1}{\bar\chi^{\prime 2}}
+    \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+    e^{i k_\parallel (\chi'' - \chi''')}
+    P_{ee}(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, (\chi'' + \chi''')/2)
+    \\
+    &\approx
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \frac{1}{\bar\chi^{\prime 2}}
+    \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+    e^{i k_\parallel (\chi'' - \chi''')}
+    P_{ee}(\ell/\bar\chi', (\chi'' + \chi''')/2)
+    \\
+    &=
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \frac{1}{\bar\chi^{\prime 2}}
+    \delta(\chi'' - \chi''')
+    P_{ee}(\ell/\bar\chi', (\chi'' + \chi''')/2)
+    \\
+    &=
+    \int_0^{\min(\chi,\chi')}\ud\chi''
+    \left(\frac{1}{\chi''}\right)^2
+    P_{ee}(\ell/\chi'', \chi'')
+\end{align}
+where the second line applies Limber's approximation. 
+$\bar\chi' \equiv (\chi'' + \chi''')/2$.
+
+Or under Limber:
+\begin{align}
+C^{dx}_\ell(\chi,\chi')
+    &=
+    \int_0^\chi\ud\chi''
+    \frac{1}{\bar\chi^{\prime 2}}
+    \delta(\chi'' - \chi')
+    P_{ex}(\ell/{\bar\chi'}, (\chi'' + \chi')/2)
+    \\
+    &=
+    \left(\frac{1}{\chi'}\right)^2
+    P_{ex}(\ell/\chi', \chi')
+    \qquad \textrm{if $\chi' < \chi$ and 0 otherwise.}
+%    \\
+%C^{dx}_\ell(\chi,\chi') + C^{xd}_\ell(\chi,\chi')
+%    &=
+%    \left(\frac{1}{\chi^m}\right)^2
+%    P_{ex}(\ell/\chi^m, \chi_m)
+\end{align}
+
+Accumulating all terms for Limber and assuming a linear bias model:
+\begin{align}
+C^{ss}_\ell(\chi, \chi') =&~
+    \left(\frac{b_f - b_e }{\bar\chi}\right)^2
+        \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+        e^{i k_\parallel \Delta\chi}
+        P(\sqrt{k_\parallel^2 + \ell^2/\bar\chi^2}, \bar\chi)
+    \nonumber \\ &+
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi_m}
+    + \frac{2}{\chi_m} \right)^2
+    b_e^2 \int_0^{\chi_m}\ud\chi''
+    \frac{1}{\chi^{\prime\prime 2}}
+        P(\ell/\chi'',\chi'')
+    \nonumber \\ &+
+    \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi_m}
+    + \frac{2}{\chi_m} \right)
+    \frac{b_e(-b_f + b_e)}{\chi_m^2}
+        P(\ell/\chi_m, \chi_m)
+\end{align}
+where $\chi_m \equiv \min(\chi, \chi')$.
+
+\end{widetext}
+
