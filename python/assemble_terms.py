@@ -3,6 +3,7 @@ import numpy as np
 from scipy import special, integrate, interpolate
 from cora.util.cosmology import Cosmology
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 import matplotlib
 
 import matter_power
@@ -104,7 +105,7 @@ def get_mult_ell(ells=None, limber=True):
 
 
 def my_plots(mult_ell=None, chi=1000):
-    matplotlib.rcParams.update({'font.size': 14,
+    matplotlib.rcParams.update({'font.size': 16,
                                 'text.usetex' : False,
                                 'figure.autolayout': True})
 
@@ -125,7 +126,7 @@ def my_plots(mult_ell=None, chi=1000):
     title = "$\\bar\\chi=%d\\,\\rm{MPc}/h$, $\\Delta\\chi=%d\\,\\rm{MPc}/h$"
     
     for delta in DELTAS:
-        plt.figure()
+        plt.figure(tight_layout=True)
         plot_spectra(mult_ell, CHI, delta, **kwargs)
         plt.ylim([Y_MIN, Y_MAX])
         plt.xlim([X_MIN, X_MAX])
@@ -146,7 +147,7 @@ def my_plots(mult_ell=None, chi=1000):
     D1 = 10.
     D2 = 50.
 
-    plt.figure()
+    plt.figure(tight_layout=True)
     plot_spectra(mult_ell, chi, D1, **kwargs)
     plt.ylim([Y_MIN, Y_MAX])
     plt.xlim([X_MIN, X_MAX])
@@ -158,6 +159,7 @@ def my_plots(mult_ell=None, chi=1000):
                )
     plt.legend(loc="upper right", labelspacing=.1, frameon=False)
     plot_spectra(mult_ell, chi, D2, local_only=True, **kwargs)
+    plt.savefig('terms.eps', tightlayout=True, bbox_inches='tight')
 
     # Mean source density plot
     N_TOTAL = 10000
@@ -171,20 +173,22 @@ def my_plots(mult_ell=None, chi=1000):
     norm /= N_TOTAL
     n_bar /= norm
 
-    plt.figure()
-    ax1 = plt.subplot(211)
+    f = plt.figure()
+    grid = gridspec.GridSpec(2, 1, wspace=0.0, hspace=0.0)
+    ax1 = plt.subplot(grid[0])
     d = chi_s**2 * n_bar * 4 * np.pi * F_SKY
     #d /= np.amax(d)
-    ax1.plot(chi_s, d, **kwargs)
+    ax1.plot(chi_s, d, 'k', **kwargs)
     #plt.ylim(0., 1.1)
     #plt.yticks(np.arange(0.1, 1.0,  0.2))
     plt.ylabel(r"$4\pi f_{\rm sky} \chi^2\bar{n}_f$ ($h/\rm{MPc})$",
                fontsize=18,
                )
     
-    ax2 = plt.subplot(212, sharex=ax1)
-    ax2.axhline(y=0.0, color='k')
-    ax2.plot(chi_s, coef_s, **kwargs)
+    ax2 = plt.subplot(grid[1], sharex=ax1)
+    #f.subplots_adjust(hspace=0.001)
+    ax2.axhline(y=0.0, color='k', linestyle='--')
+    ax2.plot(chi_s, coef_s, 'k', **kwargs)
     plt.ylim(-0.01, 0.02)
     plt.yticks(np.arange(-0.005, 0.02,  0.005))
     #plt.ylabel(r"$(\frac{1}{\bar{n}_f}\frac{d \bar{n}_f}{d \chi}"
@@ -199,7 +203,8 @@ def my_plots(mult_ell=None, chi=1000):
                )
     xticklabels = ax1.get_xticklabels()
     plt.setp(xticklabels, visible=False)
-    plt.subplots_adjust(hspace=0.0001)
+    #plt.ticklabel_format(axis='y',style='sci',scilimits=(1,1))
+    plt.savefig('n_f.eps', tightlayout=True, bbox_inches='tight')
 
 
     # Sensitivity plot.
@@ -208,13 +213,8 @@ def my_plots(mult_ell=None, chi=1000):
 
     delta_chi_bins = 100.
     chi_bins = np.arange(550, 3500, delta_chi_bins)
-    # XXX
-    #delta_chi_bins = 200.
-    #chi_bins = np.arange(600, 3500, delta_chi_bins)
     n_bar_bins = interpolate.interp1d(chi_s, n_bar)(chi_bins)
 
-    #delta_l = np.diff(ells)
-    #ell_bins = (ells[:-1] + ells[1:]) / 2.
     delta_l = np.diff(ells[0::2])
     ell_bins = ells[1:-1:2]
 
@@ -231,31 +231,30 @@ def my_plots(mult_ell=None, chi=1000):
             var = noise[ii]*noise[jj] / (ell_bins*(ell_bins + 1)*delta_l*F_SKY)
             t1, t2, t3 = apply_coeffs(mult_ell, (chi1 + chi2)/2, chi1 - chi2)
             spectrum = t1 + t2 + t3
-            # XXX
             weight = spectrum[ind_100] / (noise[ii]*noise[jj])
-            #weight = np.sign(spectrum[ind_100])
             cum_spectrum += weight * spectrum
             cum_var += weight**2 * var
-            #cum_noise += noise[ii]*noise[jj] * abs(weight)
             normalization += abs(weight)
-    #print cum_var.shape, cum_spectrum.shape, weight.shape, noise.shape,
-    #print normalization.shape, var.shape
     errors = np.sqrt(cum_var) / normalization
     spectrum = cum_spectrum / normalization
     # Effective noise power spectrum.
     noise_spec = errors * np.sqrt(ell_bins*(ell_bins + 1)*delta_l*F_SKY)
     
-    plt.figure()
-    plt.loglog(ells, spectrum, 'k')
+    plt.figure(tight_layout=True)
+    plt.loglog(ells, spectrum, 'k', **kwargs)
     #plt.loglog(ell_bins, noise_spec, 'k--')
     spectrum_bins = interpolate.interp1d(ells, spectrum)(ell_bins)
-    plt.errorbar(ell_bins, spectrum_bins, errors, color='k', marker='', ls='')
-    plt.ylabel(r"$\bar{C}^{ss}_\ell$")
-    plt.xlabel(r"$\ell$")
+    ax = plt.subplot(111)
+    plt.errorbar(ell_bins, spectrum_bins, errors, color='k', marker='', ls='',
+            **kwargs)
+    ax.set_aspect(0.4)
+    plt.ylabel(r"$\langle {C}^{ss}_\ell \rangle$", fontsize=18)
+    plt.xlabel(r"$\ell$", fontsize=18)
     Y_MIN = 5e-7
     Y_MAX = 2e-4
     plt.ylim([Y_MIN, Y_MAX])
     plt.xlim([X_MIN, X_MAX])
+    plt.savefig('sensitivity.eps', tightlayout=True, bbox_inches='tight')
 
     
     

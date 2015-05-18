@@ -7,6 +7,7 @@
 \usepackage{verbatim}
 \usepackage{times}
 \usepackage{afterpage}
+\usepackage{epstopdf}
 
 
 
@@ -46,6 +47,7 @@
 \renewcommand{\section}[1]{\emph{#1}---\ignorespacesandimplicitepars}
 \renewcommand{\subsection}[1]{}
 
+\input{AAS_macros.tex}
 
 \begin{document}
 
@@ -101,22 +103,28 @@ walls and voids.
 However, redshift is not the only measure of radial distance. In particular,
 dispersion of electromagnetic signals due to intervening plasma
 is readily measured from fast radio bursts (FRB) which are a class
-of radio transient first reported in \citet{lorimer}. There have since been 
-\ldots such bursts detected \citep{all_bursts} and total rate of bursts
-been estimated to be \ldots. The dispersion measure
+of radio transient first reported in \citet{2007Sci...318..777L}.
+There have since been 
+10 such bursts detected \citep{2012MNRAS.425L..71K,2013Sci...341...53T, 2014ApJ...790..101S, 2014ApJ...792...19B, 2015MNRAS.447..246P,2015ApJ...799L...5R} and total rate of bursts
+been estimated to be $3.3^{+5}_{-2.5} \times 10^3$
+per sky per day \cite{2015arXiv150500834R}. 
+The dispersion measure
 (DM) is a line-of-site integral of the free electron density and can thus be
 used as a distance estimate.
 If the progenitors of these bursts are at cosmological distances, with the
 majority of the dispersion caused by electrons in the inter-galactic medium,
-then the average DM-distance relation can be modelled \citep{someone}.
+then the average DM-distance relation can be modelled
+\citep{2004MNRAS.348..999I, 2003ApJ...598L..79I}.
 
 Neither redshift nor dispersion measure are perfect proxies for radial distance.
 Redshifts are systematically biased by the peculiar velocities of the object
 relative to the Hubble flow. This leads to additional apparent clustering 
 in redshift
-space which was first calculated by \citet{kaiser} using linear theory.
+space which was first calculated by \citet{1987MNRAS.227....1K}
+using linear theory.
 Similarly, distance estimates from dispersion measure will be biased by
-inhomogeneities in the electron density, again leading to additional apparent
+inhomogeneities in the electron density \citep{2014ApJ...780L..33M},
+again leading to additional apparent
 clustering of sources in dispersion measure space.  In this letter we calculate
 these DM space distortions and consider the detectability of the signal by
 upcoming surveys.
@@ -166,7 +174,8 @@ and thus
 \end{equation}
 
 We wish to relate the density of a tracer $f$ measured in DM space to its
-density in real space. We follow the derivation in \citet{Kaiser} of the
+density in real space. We follow the derivation in \citet{1987MNRAS.227....1K}
+of the
 redshift space distortions. Start by noting that the total number of tracers
 in a volume element is the same in both spaces:
 \begin{equation}
@@ -233,6 +242,7 @@ and thus is very little net error in radial distance.
 For brevity in the following sections we define the coefficient of the integral
 term as
 \begin{equation}
+    \label{e:A}
     A(\chi) \equiv \frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
     + \frac{2}{\chi}.
 \end{equation}
@@ -375,12 +385,14 @@ Here, expressions such as $P_{[ff + ee - 2ef]}$ are short hand for $P_{ff} +
 P_{ee} - 2P_{ef}$.
 
 Equation~\ref{e:Clss} can be simplified substantially by adopting the small
-angle and Limber approximations \citep{extened_limber}.  The small angle
+angle and Limber approximations \citep{1953ApJ...117..134L,
+1992ApJ...388..272K, 1998ApJ...498...26K}.  The small angle
 approximation eliminates the $k$ integral over spherical Bessel functions, replacing it
 with a Fourier transform, and is valid for $\ell \gg 1$. The Limber
 approximation assumes that only modes with small radial component of their wave
 vector contribute to the radial integrals and is valid if the power spectra
-evolve slowly compared to the correlation length (which has already been
+evolve slowly compared to the correlation length \citep{2008PhRvD..78l3506L}
+(which has already been
 assumed). With these approximations we have
 \begin{align}
     &C^{ss}_\ell(\chi, \chi') \approx
@@ -418,12 +430,14 @@ must pass through the Milky Way's galactic disk, halo and local environment
 which will contribute to the dispersion measure. However, this is only a 
 single function of $\hat n$  which can presumably be well
 measured. In addition, this function could in principal be well characterized
-by independent data such as observations of pulsars.  As such, the local
-contribution is unlikely to be a limiting obstacle. \red{cite geansler paper?}
+by independent data such as observations of pulsars.  As such, it should be
+possible to subtract the local
+contribution, as was done in
+\citet{2014arXiv1412.4829D}, and this is unlikely to be a limiting obstacle.
 
 More concerning is the dispersion from the burst progenitor's environment
 as well as the halo in which it resides. These electrons will presumably be
-clustered around the burst progenitor on scales far smaller than DM space
+clustered around the burst progenitor on scales far smaller than DM-space
 structure maps and thus are not accounted for in the $\delta_e$--$\delta_f$
 correlations included in the above formalism.  This will have a mean
 contribution, common to all bursts and which may be epoch dependant, which will
@@ -448,7 +462,7 @@ angular power spectrum has a similar form.  However in lensing a kernel in
 the line-of-sight integral, arising from geometric effects, suppresses the
 contribution from small distances, partially alleviating the issue.
 
-There is an advantage to the lack of kernel in the DM space integral term.
+There is an advantage to the lack of kernel in the DM-space integral term.
 Lensing tomography---the use of sources at multiple redshifts to unmix
 spatial scales---is complicated by the kernel. The kernel's shape depends on
 the source redshift, reweighting the line of sight and
@@ -469,15 +483,19 @@ Description of the input power-spectra, $\bar n_f$ and figures.
 Figure~\ref{f:n_f}, Figure~\ref{f:terms}.
 
 \begin{figure}
-    \includegraphics[scale=0.42]{"figures/n_f"}
+    \includegraphics[scale=0.42]{figures/n_f}
     \caption{
         \label{f:n_f}
-        \red{Need to fix normalization of top panel.}
+        \emph{Top:} Comoving density of sources for toy model, as given in
+        Equation~\ref{e:n_f}. Normalization is
+        such that the survey has a total of $10^4$ FRBs.
+        \emph{Bottom:} Coefficient $A(\chi)$ (defined in Equation~\ref{e:A})
+        in toy model.
     }
 \end{figure}
 
 \begin{figure}
-    \includegraphics[scale=0.42]{"figures/terms"}
+    \includegraphics[scale=0.42]{figures/terms}
     \caption{
         \label{f:terms}
         Terms in the DM-space cross-correlation angular power spectrum.
@@ -512,13 +530,12 @@ where the second term in brackets only contributes for $i = j$.
 Here we consider the sensitivity of a survey with a total of $10^4$ dispersion
 measures from FRBs distributed uniformly over half the sky. This is in rough
 approximation to what could be achieved by the Canadian Hydrogen Intensity
-Mapping Experiment's now funded FRB instrument over a three year survey
-\citep{who}.
+Mapping Experiment's now funded FRB instrument over a three year survey.
 To give an idea of the overall sensitivity of the survey, we collapse
 $C^{ss}_{\ell,ij}$ to a single function of $\ell$ by taking a weighted average
 of all pairs of radial bins. We use bin widths of $100\,{\rm MPc}/h$ over the
 range $500\,{\rm MPc}/h$ to $3500\,{\rm MPc}/h$.
-For weights in the radial bin average, we use the signal to noise-squared
+For weights in the radial bin average, we use the signal over noise-squared
 at $\ell=100$, which maximizes the signal to noise at that $\ell$ and
 is near optimal at other multipoles.
 We exclude the $i = j$ bin pairs
@@ -527,7 +544,7 @@ This effectively discards the contribution from the local term. The result is sh
 in Figure~\ref{f:sensitivity}.
 
 \begin{figure}
-    \includegraphics[scale=0.42]{"figures/sensitivity"}
+    \includegraphics[scale=0.42]{figures/sensitivity}
     \caption{
         \label{f:sensitivity}
         Sensitivity of a survey with $10^4$ dispersion measures distributed
@@ -552,7 +569,7 @@ Program.
 
 
 
-\bibliography{dm_space}
+\bibliography{refs}
 
 \end{document}
 
