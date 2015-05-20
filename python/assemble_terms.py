@@ -10,11 +10,11 @@ import matter_power
 import angular_terms
 
 # Redshift at which we can detect event of luminocity L*.
-Z_STAR = 0.8
-ALPHA = -0.7
+Z_STAR = 1.
+ALPHA = -1.
 
 B_E = 1.0
-B_F = 0.7
+B_F = 1.3
 
 
 def d_ln_n(chi):
@@ -83,8 +83,8 @@ def plot_spectra(mult_ell, chi, delta, local_only=False, **kwargs):
     else:
         plt.loglog(ells, trans(t1 + t2 + t3), '-k', label='total', **kwargs)
         plt.loglog(ells, trans(t1), '--b', label='local term', **kwargs)
-        plt.loglog(ells, trans(t2), '-.g', label='cross term', **kwargs)
         plt.loglog(ells, trans(t3), ':r', label='integral term', **kwargs)
+        plt.loglog(ells, trans(t2), '-.g', label='cross term', **kwargs)
 
 
 def get_ells():
@@ -114,8 +114,8 @@ def my_plots(mult_ell=None, chi=1000):
     CHI = float(chi)
     #DELTAS = [5., 10., 20., 50., 100.]
     DELTAS = []
-    Y_MIN = 1e-7
-    Y_MAX = 1e-4
+    Y_MIN = 5e-8
+    Y_MAX = 5e-5
     X_MIN = 9
     X_MAX = 1001
     

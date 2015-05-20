@@ -105,16 +105,24 @@ dispersion of electromagnetic signals due to intervening plasma
 is readily measured from fast radio bursts (FRB) which are a class
 of radio transient first reported in \citet{2007Sci...318..777L}.
 There have since been 
-10 such bursts detected \citep{2012MNRAS.425L..71K,2013Sci...341...53T, 2014ApJ...790..101S, 2014ApJ...792...19B, 2015MNRAS.447..246P,2015ApJ...799L...5R} and total rate of bursts
+10 such bursts reported \citep{2012MNRAS.425L..71K,2013Sci...341...53T, 2014ApJ...790..101S, 2014ApJ...792...19B, 2015MNRAS.447..246P,2015ApJ...799L...5R} and total rate of bursts
 been estimated to be $3.3^{+5}_{-2.5} \times 10^3$
 per sky per day \cite{2015arXiv150500834R}. 
 The dispersion measure
 (DM) is a line-of-site integral of the free electron density and can thus be
-used as a distance estimate.
-If the progenitors of these bursts are at cosmological distances, with the
-majority of the dispersion caused by electrons in the inter-galactic medium,
-then the average DM-distance relation can be modelled
-\citep{2004MNRAS.348..999I, 2003ApJ...598L..79I}.
+used as a distance estimate, as is routinely done for galactic pulsars.
+Because FRBs are observed to have dispersion measures greatly in excess of
+the galactic expectation they must be of extra-galactic origin, with their
+dispersion produced either by
+inter-galactic medium (IGM) \citep{2013Sci...341...53T} or the
+environment of the source
+\citep{2014ApJ...785L..26L,2015arXiv150101341P}.
+If the dispersion is dominated by the inter-galactic medium, then 
+ then the average DM-distance relation can be modelled
+\citep{2004MNRAS.348..999I, 2003ApJ...598L..79I} and the sources are at
+cosmological distances of a few gigaparsecs. This would permit
+the study of the clustering of FRBs in three dimensions which should trace the
+large-scale structure of the Universe on linear scales.
 
 Neither redshift nor dispersion measure are perfect proxies for radial distance.
 Redshifts are systematically biased by the peculiar velocities of the object
@@ -132,7 +140,6 @@ upcoming surveys.
 
 %\section{Density perturbations in dispersion measure space}
 \section{Clustering in dispersion measure space}
-
 
 The dispersion measure of a signal observed in some angular direction $\hat{n}$ and
 originating from comoving radial distance $\chi$ is
@@ -250,13 +257,13 @@ term as
 
 %\section{Two-point statistics}
 
-Large-scale structure is usually studied through it two-point statistics, most
+Large-scale structure is usually studied through its two-point statistics, most
 commonly the power-spectrum, $P(k)$.
 Unlike in redshift-space distortions, Equation~\ref{e:delta_s} does not have a
 simple form in harmonic space. The equation's third term couples harmonic modes
 and thus the two-point statistics cannot be phrased as a simple power spectrum.
 We will instead use $C^{ss}_\ell(\chi,\chi')$, which is
-the cross-correlation angular power-spectrum of the DM space over-density
+the cross-correlation angular power-spectrum of the DM space over-density,
 on shells at $\chi$ and $\chi'$.
 \begin{align}
     &\delta_{\ell\ell'}\delta_{mm'}C^{ss}_\ell(\chi, \chi') = \nonumber \\
@@ -416,7 +423,9 @@ where $\nu\equiv\ell + 1/2$, $\chi_{\min} \equiv \min(\chi, \chi')$,
 and $\chi_{\max} \equiv \max(\chi,
 \chi')$ .  We've found that these approximations are excellent for $\ell
 \gtrsim 10$
-and use this form for the remainder of the paper.
+and use this form for the remainder of the paper. In the above equation we dub
+the three terms the `local', `integral' and `cross' terms respectively and will
+refer to them as such for the remainder of this work.
 
 
 \section{Modeling and measurement}
@@ -479,18 +488,32 @@ contributions to the integral term from below this distance. The smallest
 spatial scale that contributes the our plotted angular power spectra out to
 $\ell=1000$ is thus $k=2\,h/{\rm MPc}$.
 
-Description of the input power-spectra, $\bar n_f$ and figures.
-Figure~\ref{f:n_f}, Figure~\ref{f:terms}.
+For plotting the DM space power-spectra we use a toy model for the electron and
+FRB clustering that assumes both are biased tracers of the dark matter,
+\emph{i.e.}~$P_{xy}(k)=b_x b_y P(k)$.  We
+calculate the time dependant dark matter power-spectrum using {\tt CAMB} using
+the integrated {\tt HALOFIT} to approximate the non-linear evolution. We assume
+that the electron bias $b_e=1$, which should be true on large scales due to
+approximate conservation of free electrons. The bias of FRB sources is
+unconstrained by data and we choose it to be $b_f=1.3$. The coefficient
+$A(\chi)$ depends on the density of detected FRB sources, $\bar n_f(\chi)$.
+We use a simple model where all events above a fixed flux are detected,
+the intrinsic luminosity function has the
+\citet{1976ApJ...203..297S} form with index $-1$, and events at the cut off of the
+luminosity function and at
+a radial distance of $\chi=2350\,{\rm MPc}/h$ are at the detection threshold.
+This source density is shown in Figure~\ref{f:n_f} with the resulting DM-space
+power-spectrum in Figure~\ref{f:terms}.
 
 \begin{figure}
     \includegraphics[scale=0.42]{figures/n_f}
     \caption{
         \label{f:n_f}
-        \emph{Top:} Comoving density of sources for toy model, as given in
-        Equation~\ref{e:n_f}. Normalization is
+        \emph{Top:} Comoving density of sources in toy model, as described in
+        text. Normalization is
         such that the survey has a total of $10^4$ FRBs.
-        \emph{Bottom:} Coefficient $A(\chi)$ (defined in Equation~\ref{e:A})
-        in toy model.
+        \emph{Bottom:} Resulting coefficient $A(\chi)$ as given in
+        Equation~\ref{e:A}.
     }
 \end{figure}
 
@@ -499,12 +522,12 @@ Figure~\ref{f:n_f}, Figure~\ref{f:terms}.
     \caption{
         \label{f:terms}
         Terms in the DM-space cross-correlation angular power spectrum.
-        All terms are evaluated at $\bar\chi=1000\,{\rm MPc}/h$ and 
+        All terms are evaluated at $\bar\chi=2000\,{\rm MPc}/h$ and 
         $\chi - \chi' = 10\,{\rm MPc}/h$, except the lowest most 
         ``local term'' curve which is for $\chi - \chi'=50\,{\rm MPc}/h$. 
         While
         the other two terms are highly insensitive to the separation of
-        the radial slices, the local term drops rapidly at high separations.
+        the radial slices, the local term drops rapidly with separation.
     }
 \end{figure}
 
@@ -556,6 +579,29 @@ in Figure~\ref{f:sensitivity}.
 
 \section{Discussion and conclusions}
 
+I can be seen in Figure~\ref{f:terms} that the integral term dominates the
+cross term and the local term except at small radial separations.  We've found
+that this is generically true for most $(\chi, \chi')$ pairs and that the
+sensitivity shown in Figure~\ref{f:sensitivity} is dominated by the integral
+term. Since the integral term only depends on the clustering of electrons, not
+sources, an FRB survey could be used to study the distribution of electrons and
+potentially solve the `missing baryon problem' as pointed out in
+\citet{2014ApJ...780L..33M}.
+
+We have calculated the clustering of sources in dispersion measure space and
+shown that a survey detecting a modest $10^4$ fast radio bursts of cosmological
+origin could detect the clustering signal.
+
+Looking forward, DM-space
+clustering could become a powerful probe of large-scale structure should
+observational factors turn out to be favourable compared to spectroscopic
+surveys. The baryon acoustic oscillation feature can be clearly seen in
+Figure~\ref{f:terms} in the cross term and both
+local-term curves. It might even be possible to extract it from the integral
+term using tomography.
+This however depends on the contribution to dispersion measure from
+the source's environment and host halo to be modest compared to the
+contribution from the IGM.
 
 
 \begin{acknowledgments}
