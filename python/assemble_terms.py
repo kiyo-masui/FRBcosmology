@@ -123,7 +123,7 @@ def my_plots(mult_ell=None, chi=1000):
             "linewidth" : 2.,
              }
 
-    title = "$\\bar\\chi=%d\\,\\rm{MPc}/h$, $\\Delta\\chi=%d\\,\\rm{MPc}/h$"
+    title = "$\\bar\\chi=%d\\,\\rm{Mpc}/h$, $\\Delta\\chi=%d\\,\\rm{Mpc}/h$"
     
     for delta in DELTAS:
         plt.figure(tight_layout=True)
@@ -181,7 +181,7 @@ def my_plots(mult_ell=None, chi=1000):
     ax1.plot(chi_s, d, 'k', **kwargs)
     #plt.ylim(0., 1.1)
     #plt.yticks(np.arange(0.1, 1.0,  0.2))
-    plt.ylabel(r"$4\pi f_{\rm sky} \chi^2\bar{n}_f$ ($h/\rm{MPc})$",
+    plt.ylabel(r"$4\pi f_{\rm sky} \chi^2\bar{n}_f$ ($h/\rm{Mpc})$",
                fontsize=18,
                )
     
@@ -192,13 +192,13 @@ def my_plots(mult_ell=None, chi=1000):
     plt.ylim(-0.01, 0.02)
     plt.yticks(np.arange(-0.005, 0.02,  0.005))
     #plt.ylabel(r"$(\frac{1}{\bar{n}_f}\frac{d \bar{n}_f}{d \chi}"
-    #           r"+ \frac{2}{\chi})$  ($h/\rm{MPc})$",
+    #           r"+ \frac{2}{\chi})$  ($h/\rm{Mpc})$",
     #           fontsize=18,
     #           )
-    plt.ylabel(r"$A(\chi)$  ($h/\rm{MPc})$",
+    plt.ylabel(r"$A(\chi)$  ($h/\rm{Mpc})$",
                fontsize=18,
                )
-    plt.xlabel(r"$\chi$ ($\rm{MPc}/h$)",
+    plt.xlabel(r"$\chi$ ($\rm{Mpc}/h$)",
                fontsize=18,
                )
     xticklabels = ax1.get_xticklabels()
