@@ -67,20 +67,25 @@ Columbia, Vancouver, BC, Canada, V6T 1Z1}
 
 \begin{abstract}
 
-    We propose that `standard pings', brief broadband radio impulses, can be used to
-    study the three-dimensional clustering of matter in the Universe even in the absence of redshift information.
-    The dispersion of radio waves as they travel through the
-    Universe, like redshift, can be used as a cosmological distance measure.
-    Due to inhomogeneities in the electron density along the line-of-siight dispersion is an imperfect proxy for radial
-    distance and we show that this leads to calculable dispersion-space
-    distortions in the apparent clustering of sources. Fast radio bursts (FRBs) are a new class of radio
-    transients that are the prototypical standard ping, and due to their high observed dispersion from intervening plasma,
-    have been interpreted as originating at cosmological distances.  The rate of fast radio bursts
-    has been estimated to be several thousand over the whole sky per day, and if cosmological, the sources of these events should trace the large-scale
-    structure of the Universe.  We calculate the dispersion-space
-    power spectra for a simple model where electrons and FRBs are biased tracers of the large-scale-structure of the Universe and show that
-    the clustering signal may be detectable in a survey with as few as $10000$ 
-    events.  Upcoming wide-field radio telescopes, like the Canadian Hydrogen Intensity Mapping Experiment (CHIME), are expected to detect...
+    We propose that `standard pings', brief broadband radio impulses, can be
+    used to study the three-dimensional clustering of matter in the Universe
+    even in the absence of redshift information.  The dispersion of radio waves
+    as they travel through the Universe, like redshift, can be used as a
+    cosmological distance measure.  Due to inhomogeneities in the electron
+    density along the line-of-siight dispersion is an imperfect proxy for
+    radial distance and we show that this leads to calculable dispersion-space
+    distortions in the apparent clustering of sources. Fast radio bursts (FRBs)
+    are a new class of radio transients that are the prototypical standard
+    ping, and due to their high observed dispersion from intervening plasma,
+    have been interpreted as originating at cosmological distances.  The rate
+    of fast radio bursts has been estimated to be several thousand over the
+    whole sky per day, and if cosmological, the sources of these events should
+    trace the large-scale structure of the Universe.  We calculate the
+    dispersion-space power spectra for a simple model where electrons and FRBs
+    are biased tracers of the large-scale structure of the Universe and show
+    that the clustering signal may be detectable in a survey with as few as
+    $10000$ events.  Upcoming wide-field radio telescopes, like the Canadian
+    Hydrogen Intensity Mapping Experiment (CHIME), are expected to detect...
 \end{abstract}
 
 \maketitle
@@ -98,13 +103,14 @@ surveys have now aggregated the positions of millions of galaxies into three
 dimensional density maps, exposing a rich structure of clusters, filaments,
 walls and voids.
 
-However, redshift is not the only measure of radial distance.   
-Standard candles and standard rulers can be used to estimate distance using brightness and angular size respectively.
-In the same way a \emph{standard ping}, a brief broadband radio impulse, can be used to estimate radial distance because of
-the characteristic $\lambda^2$ dispersion of electromagnetic signals along the line-of-sight as a function of wavelength.
-This technique, widely used as an approximate distance indicator to pulsars in the Galaxy, can be used to define the
-\emph{dispersion distance} to cosmological sources.
-
+However, redshift is not the only measure of radial distance.   Standard
+candles and standard rulers can be used to estimate distance using brightness
+and angular size respectively.  In the same way a \emph{standard ping}, a brief
+broadband radio impulse, can be used to estimate radial distance because of the
+characteristic $\lambda^2$ dispersion of electromagnetic signals along the
+line-of-sight as a function of wavelength.  This technique, widely used as an
+approximate distance indicator to pulsars in the Galaxy, can be used to define
+the \emph{dispersion distance} to cosmological sources.
 
 due to intervening plasma
 is readily measured from fast radio bursts (FRB) which are a class
@@ -284,14 +290,10 @@ We will instead use $C^{ss}_\ell(\chi,\chi')$, which is
 the cross-correlation angular power spectrum of the DM-space over density,
 on shells at $\chi$ and $\chi'$:
 \begin{align}
-    &\delta_{\ell\ell'}\delta_{mm'}C^{ss}_\ell(\chi, \chi') = \nonumber \\
-    & \quad
-        \left\langle
-        \int\ud\Omega Y_{\ell m}(\hat n)
-       \delta_{fs}(\hat n \chi, \chi)
-        \int\ud\Omega' Y_{\ell' m'}(\hat n')
-        \delta_{fs}(\hat n' \chi', \chi')
-        \right\rangle.
+    &C^{ss}_\ell(\chi, \chi') =
+    \int\ud\Omega\ud\Omega' Y_{\ell m}(\hat n) Y^*_{\ell m}(\hat n')
+    \langle \delta_{fs}(\hat n \chi) \delta_{fs}(\hat n' \chi')
+        \rangle.
 \end{align}
 The first two terms in Equation~\ref{e:delta_s} are stationary. For stationary,
 isotropic, tracers $x$ and $y$ we have 
