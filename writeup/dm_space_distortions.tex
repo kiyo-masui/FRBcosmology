@@ -117,7 +117,7 @@ line-of-sight and can thus be used to estimate radial distance.
 This technique, routinely used for
 pulsars in the Galaxy, can be used to define a \emph{dispersion distance} to
 cosmological sources.
-%
+
 Dispersion is readily measured from fast radio bursts (FRB),
 a new class of millisecond duration radio transients first reported by
 \citet{2007Sci...318..777L}, which are the archetype of a standard ping.
@@ -127,7 +127,7 @@ Ten such bursts have been reported to date
 event rate has been estimated to be $3.3^{+5}_{-2.5} \times 10^3$ per sky per
 day \cite{2015arXiv150500834R}.
 Dispersion is characterized by a line-of-site
-integral of the free electron density known the dispersion measure (DM).  FRB
+integral of the free electron density known the dispersion measure (DM). FRB
 events are observed to have dispersion measures of order $\sim\!\!1000\,{\rm pc}
 / {\rm cm}^3$, greatly in excess of the galactic expectation of order
 $\sim\!\!100\,{\rm pc} / {\rm cm}^3$ (depending on galactic latitude)
@@ -139,8 +139,8 @@ source \citep{2014ApJ...785L..26L,2015arXiv150101341P,2015arXiv150505535C}.  If
 the dispersion is dominated by electrons along the line-of-sight, then the
 average dispersion--distance relation can be modelled
 \citep{2014ApJ...797...71Z,2004MNRAS.348..999I, 2003ApJ...598L..79I} and the
-sources appear to be at cosmological distances of of order $\sim\!\!{\rm Gpc}$.
-Such cosmological distances permit the study of clustering of FRB sources in
+sources appear to be at cosmological distances of order gigaparsecs.
+Such cosmological distances permit the study of the clustering of FRB sources in
 three dimensions with an expectation that these events trace the large-scale
 structure of the Universe on linear scales. We note that while our discussion
 here is framed in terms of FRBs, other bright radio transients that fluctuate
@@ -156,7 +156,7 @@ using linear theory.
 Similarly, as we show here, distance estimates from dispersion will be biased by
 inhomogeneities in the electron density \citep{2014ApJ...780L..33M},
 again leading to additional apparent
-clustering of sources in dispersion measure space.  In this letter we calculate
+clustering of sources in dispersion space.  In this letter we calculate
 these dispersion-space distortions and consider the detectability of the signal by
 upcoming surveys.
 
@@ -288,7 +288,7 @@ Unlike the redshift-space distortions, Equation~\ref{e:delta_s} does not have a
 simple form in harmonic space. The equation's third term couples harmonic modes
 and thus the two-point statistics cannot be phrased as a simple power spectrum.
 We will instead use $C^{ss}_\ell(\chi,\chi')$, which is
-the cross-correlation angular power spectrum of the dispersion-space over density,
+the cross-correlation angular power spectrum of the dispersion-space over-density,
 on shells at $\chi$ and $\chi'$:
 \begin{align}
     &C^{ss}_\ell(\chi, \chi') =
@@ -299,8 +299,8 @@ on shells at $\chi$ and $\chi'$:
 The first two terms in Equation~\ref{e:delta_s} are stationary. For stationary,
 isotropic, tracers $x$ and $y$ we have 
 $\langle \delta_x(\vec k, \chi) \delta_y(\vec k', \chi) \rangle = (2\pi)^3
-\delta^3(\vec k - \vec k') P_{xy}(k, \chi)$.  If for a moment we ignore time
-dependence, the angular cross-power spectrum of such tracers is
+\delta^3(\vec k - \vec k') P_{xy}(k, \chi)$.  If for a moment we ignore
+structure evolution, the angular cross-power spectrum of such tracers is
 \begin{align}
     %\delta_{\ell\ell'}\delta_{mm'}C^{xy}_\ell(\chi, \chi')
     %&= \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
@@ -314,8 +314,7 @@ In reality the power spectrum evolves on the order of a Hubble time.
 The angular cross correlations will be very small unless $\chi$ and $\chi'$ are
 within a few correlation lengths of one another, roughly a hundred
 megaparsecs.  The evolution of the power spectrum is negligible over these time
-differences which leads to a straight-forward way to include the evolution of
-the perturbations:
+differences which leads to a straight-forward way to include the evolution:
 \begin{align}
     % I've tuned the alignment of the domain (using &)
     % here to get the equation number and
@@ -484,7 +483,7 @@ $\ell=1000$ is thus $k=2\,h/{\rm Mpc}$.
 For plotting the dispersion-space power spectra we use a toy model for the electron and
 FRB clustering that assumes both are biased tracers of the dark matter:
 \emph{i.e.}~$P_{xy}(k)=b_x b_y P(k)$.  We
-calculate the time dependant dark-matter power spectrum using {\tt CAMB} using
+calculate the time dependant dark-matter power spectrum using {\tt CAMB}, using
 the integrated {\tt HALOFIT} to approximate the non-linear evolution. We assume
 that the electron bias is $b_e=1$, which should be true on large scales due to
 the approximate conservation of free electrons. The bias of FRB sources is
