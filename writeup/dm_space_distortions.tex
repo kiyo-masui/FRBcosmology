@@ -441,45 +441,14 @@ assumed). With these approximations we have
 \end{align}
 where $\nu\equiv\ell + 1/2$, $\chi_{\min} \equiv \min(\chi, \chi')$,
 and $\chi_{\max} \equiv \max(\chi,
-\chi')$ .  We've found that these approximations are excellent for $\ell
-\gtrsim 10$
+\chi')$ .  We've found that these approximations are accurate to within $3\%$ at
+$\ell \gtrsim 10$
 and use this form for the remainder of the paper. In the above equation we dub
 the three terms the `local', `integral' and `cross' terms respectively and will
 refer to them as such henceforth.
 
 
 \section{Modelling and measurement}
-
-There are a number of effects that will complicate the measurement of the
-above calculated angular power spectrum by a real survey of dispersion 
-measures.  The first effect is
-that the model that the free electron density decomposes into a homogeneous
-part plus a random field of perturbations is not complete. Firstly, all signals
-must pass through the Milky Way's galactic disk, halo, and local environment,
-which will contribute to the dispersion measure. However, this is only a
-single function of $\hat n$ which can presumably be well
-measured. In addition, this function could in principle be well characterized
-by independent data such as observations of pulsars.  As such, it should be
-possible to subtract the local
-contribution, as was done in
-\citet{2014arXiv1412.4829D}, and this is unlikely to be a limiting obstacle.
-
-More concerning is the dispersion from the source's environment
-as well as the halo in which it resides. These electrons will presumably be
-clustered around the source on scales far smaller than DM-space
-structure map pixels and thus are not accounted for in the $\delta_e$--$\delta_f$
-correlations included in the above formalism.  This will have a mean
-contribution, common to all sources and which may be epoch dependant, that will
-modify the mean DM--distance relation. This will need to be calibrated in some
-why or else fit with nuisance parameters during parameter estimation.  There
-will also be a stochastic piece which varies from source to source.  This will
-limit the precision at which $\chi_s$ can be measured, thus limiting the
-resolution of DM space density maps in the radial direction.
-
-Detailed treatment of the above complications is beyond the scope of this
-work. The magnitude of the contribution from the progenitor is at present
-unknown. To crudely deal with it here we use relatively large
-$\chi$ bins of $100\,{\rm Mpc}/h$ in sensitivity estimates.
 
 The second term in Equation~\ref{e:Clss_limber} is an integral that mixes
 many spatial scales: small scales from smaller radial distance and larger
@@ -498,7 +467,7 @@ the source redshift, re-weighting the line-of-sight integral and
 making tomography inexact.  In contrast the integrand in the DM-space integral
 term is completely independent of the limit of integration, meaning
 contributions from different parts of the line of sight (and thus different
-spatial scales) can be separated exactly. Again, a detailed study of DM space
+spatial scales) can be separated exactly. A detailed study of dispersion space
 tomography is beyond the scope of this work.  To avoid our results being
 sensitive to the hard-to-model small scales, we assume that the contribution to the
 integral term from radial distances $\chi'' < 500\,{\rm Mpc}/h$ are well
@@ -570,20 +539,53 @@ cross-power spectrum is then
 \end{align}
 where the second term in brackets only contributes for $i = j$.
 
+There are a number of effects that will complicate the measurement of the
+above calculated angular power spectrum by a real survey of dispersion 
+measures.  The first effect is
+that the model that the free electron density decomposes into a homogeneous
+part plus a random field of perturbations is not complete. Firstly, all signals
+must pass through the Milky Way's galactic disk, halo, and local environment,
+which will contribute to the dispersion measure. However, this is only a
+single function of $\hat n$ which can presumably be well
+measured. In addition, this function could in principle be well characterized
+by independent data such as observations of pulsars.  As such, it should be
+possible to subtract the local
+contribution, as was done in
+\citet{2014arXiv1412.4829D}, and this is unlikely to be a limiting obstacle.
+
+Perhapse, more concerning is the dispersion from the source's environment
+as well as the halo in which it resides. These electrons will presumably be
+clustered around the source on scales far smaller than DM-space
+structure map pixels and thus are not accounted for in the $\delta_e$--$\delta_f$
+correlations included in the above formalism.  This will have a mean
+contribution, common to all sources and which may be epoch dependant, that will
+modify the mean DM--distance relation. This will need to be calibrated in some
+why or else fit with nuisance parameters during parameter estimation.  There
+will also be a stochastic piece which varies from source to source.  This will
+limit the precision at which $\chi_s$ can be measured, thus limiting the
+resolution of DM space density maps in the radial direction.
+
+Detailed treatment of the above complications is beyond the scope of this
+work. The magnitude of the contribution from the progenitor is at present
+unknown. To crudely deal with it here we use relatively large
+bins widths of $\Delta\chi = 100\,{\rm Mpc}/h$ 
+and exclude the $\chi_i = \chi_j$ bin pairs.
+Because the local term drops rapidly with radial separations, this effectively 
+discards the contribution from the local term which is most sensitive to having
+precise radial distances.
+
 We consider the sensitivity of a survey with a total of $10^4$ dispersion
 measures from FRB events distributed uniformly over half the sky. This is in rough
 approximation to what could be achieved by the Canadian Hydrogen Intensity
 Mapping Experiment's now funded FRB instrument over a three year survey.
 To give an idea of the overall sensitivity of the survey, we collapse
 $C^{ss}_{\ell,ij}$ to a single function of $\ell$ by taking a weighted average
-of all pairs of radial bins. We use bin widths of $100\,{\rm Mpc}/h$ over the
+of all pairs of radial bins over the
 range $500\,{\rm Mpc}/h$ to $3500\,{\rm Mpc}/h$.
 For weights in the radial bin average, we use the signal over noise-squared
 at $\ell=100$, which maximizes the signal to noise at that $\ell$ and
 is near optimal at other multipoles.
-We exclude the $i = j$ bin pairs
-as they would be contaminated by noise bias in a real survey.
-This effectively discards the contribution from the local term. The result is shown
+The result is shown
 in Figure~\ref{f:sensitivity}.
 
 \begin{figure}
