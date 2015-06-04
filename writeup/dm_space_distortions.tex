@@ -131,7 +131,7 @@ inter-galactic medium (IGM) \citep{2013Sci...341...53T} surrounding galaxies or 
 environment of the source
 \citep{2014ApJ...785L..26L,2015arXiv150101341P,2015arXiv150505535C}.
 If the dispersion is dominated by electrons along the line-of-sight,
-then the average DM--distance relation can be modelled
+then the average dispersion--distance relation can be modelled
 \citep{2014ApJ...797...71Z,2004MNRAS.348..999I, 2003ApJ...598L..79I}
 and the sources appear to be at
 cosmological distances of of order $\sim\!\!{\rm Gpc}$. Such cosmological distances permit
@@ -140,22 +140,22 @@ large-scale structure of the Universe on linear scales. Note that although we
 frame our discussion in terms of FRBs, other bright radio transients that fluctuate on timescales less than the typical lag time of might also be used as standard pings.
 
 
-Neither redshift nor dispersion measure are perfect proxies for radial distance.
+Neither redshift nor dispersion are perfect proxies for radial distance.
 Redshifts are systematically biased by the peculiar velocities of the object
 relative to the Hubble flow. This leads to additional apparent clustering
 in redshift
 space which was first calculated by \citet{1987MNRAS.227....1K}
 using linear theory.
-Similarly, distance estimates from dispersion measure will be biased by
+Similarly, distance estimates from dispersion will be biased by
 inhomogeneities in the electron density \citep{2014ApJ...780L..33M},
 again leading to additional apparent
 clustering of sources in dispersion measure space.  In this letter we calculate
-these DM-space distortions and consider the detectability of the signal by
+these dispersion-space distortions and consider the detectability of the signal by
 upcoming surveys.
 
 
 %\section{Density perturbations in dispersion measure space}
-\section{Clustering in dispersion measure space}
+\section{Clustering in dispersion space}
 
 The dispersion measure of a signal observed in some angular direction $\hat{n}$ and
 originating from comoving radial distance $\chi$ is
@@ -178,7 +178,7 @@ measure is thus
        \left[1 + \delta_e(\hat{n}\chi',\chi')\right].
 \end{equation}
 
-\emph{Dispersion measure space} is the three dimensional coordinates,
+\emph{Dispersion space} is the three dimensional coordinates,
 $\vec x_s$ inferred from the dispersion measure assuming that the electrons are
 homogeneous. This only affects the radial coordinate such that $\vec x_s = \hat
 n \chi_s$ with $\chi_s$ defined by the equation
@@ -196,7 +196,7 @@ and thus
 \chi_s - \chi = \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
 \end{equation}
 
-We wish to relate the density of a tracer, $f$, measured in DM space to its
+We wish to relate the density of a tracer, $f$, measured in dispersion space to its
 density in real space. We follow the derivation in \citet{1987MNRAS.227....1K}
 of the
 redshift-space distortions. Start by noting that the total number of tracers
@@ -212,7 +212,7 @@ We split the density into a homogeneous part plus perturbations,
 \end{equation}
 Averaged over the sky, $\langle \chi_s \rangle = \chi$ and thus the background
 density should
-be the same in DM space as in real space,
+be the same in dispersion space as in real space,
 \begin{equation}
 \bar{n}_{fs}(\chi) = \bar{n}_f(\chi).
 \end{equation}
@@ -248,10 +248,10 @@ we obtain
         \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
 \end{equation}
 In the equation above, the $-\delta_e$ term is most analogous to the Kaiser
-redshift-space distortions.  It is a dilution of tracers in DM space due to an
+redshift-space distortions.  It is a dilution of tracers in dispersion space due to an
 excess of electrons between the tracers. However we note that this term is isotropic
 in contrast to Kaiser.  This is because any wave vector electron perturbation
-causes DM space distortions, whereas the radial velocities that cause
+causes dispertion space distortions, whereas the radial velocities that cause
 redshift-space distortions are only sourced by perturbations with radial wave
 vectors.
 
@@ -282,7 +282,7 @@ Unlike in redshift-space distortions, Equation~\ref{e:delta_s} does not have a
 simple form in harmonic space. The equation's third term couples harmonic modes
 and thus the two-point statistics cannot be phrased as a simple power spectrum.
 We will instead use $C^{ss}_\ell(\chi,\chi')$, which is
-the cross-correlation angular power spectrum of the DM-space over density,
+the cross-correlation angular power spectrum of the dispersion-space over density,
 on shells at $\chi$ and $\chi'$:
 \begin{align}
     &C^{ss}_\ell(\chi, \chi') =
@@ -455,11 +455,11 @@ angular power spectrum has a similar form.  In lensing, a kernel in
 the line-of-sight integral arising from geometric effects suppresses the
 contribution from small distances, partially alleviating the issue.
 
-There is an advantage to the lack of kernel in the DM-space integral term.
+There is an advantage to the lack of kernel in the dispersion-space integral term.
 Lensing tomography---the use of sources at multiple redshifts to un-mix
 spatial scales---is complicated by the kernel. The kernel's shape depends on
 the source redshift, re-weighting the line-of-sight integral and
-making tomography inexact.  In contrast the integrand in the DM-space integral
+making tomography inexact.  In contrast the integrand in the dispersion-space integral
 term is completely independent of the limit of integration, meaning
 contributions from different parts of the line of sight (and thus different
 spatial scales) can be separated exactly. A detailed study of dispersion space
@@ -472,7 +472,7 @@ contributions to the integral term from below this distance. The smallest
 spatial scale that contributes the our plotted angular power spectra out to
 $\ell=1000$ is thus $k=2\,h/{\rm Mpc}$.
 
-For plotting the DM-space power spectra we use a toy model for the electron and
+For plotting the dispersion-space power spectra we use a toy model for the electron and
 FRB clustering that assumes both are biased tracers of the dark matter:
 \emph{i.e.}~$P_{xy}(k)=b_x b_y P(k)$.  We
 calculate the time dependant dark-matter power spectrum using {\tt CAMB} using
@@ -482,11 +482,11 @@ the approximate conservation of free electrons. The bias of FRB sources is
 unconstrained by data and we choose it to be $b_f=1.3$. The coefficient
 $A(\chi)$ depends on the density of detected FRB sources, $\bar n_f(\chi)$.
 We use a simple model where all events above a fixed flux are detected,
-the intrinsic luminosity function has the
-\citet{1976ApJ...203..297S} form with index $-1$, and events at the cut off of the
+the intrinsic luminosity function has the form from
+\citet{1976ApJ...203..297S} with index $-1$, and events at the cut off of the
 luminosity function and at
 a radial distance of $\chi=2350\,{\rm Mpc}/h$ are at the flux detection threshold.
-This source density is shown in Figure~\ref{f:n_f} with the resulting DM-space
+This source density is shown in Figure~\ref{f:n_f} with the resulting dispersion-space
 power-spectrum in Figure~\ref{f:terms}.
 
 \begin{figure}
@@ -505,7 +505,7 @@ power-spectrum in Figure~\ref{f:terms}.
     \includegraphics[scale=0.42]{figures/terms}
     \caption{
         \label{f:terms}
-        Terms in the DM-space cross-correlation angular power spectrum.
+        Terms in the dispersion-space cross-correlation angular power spectrum.
         All terms are evaluated at $\bar\chi=2000\,{\rm Mpc}/h$ and 
         $\chi - \chi' = 10\,{\rm Mpc}/h$, except the lowest most 
         ``local term'' curve which is for $\chi - \chi'=50\,{\rm Mpc}/h$. 
@@ -516,7 +516,7 @@ power-spectrum in Figure~\ref{f:terms}.
 \end{figure}
 
 In first measurements of the angular power spectra, uncertainty will be
-dominated by the finite number of observed dispersion measures, or shot noise.
+dominated by the finite number of observed events, or shot noise.
 The noise power spectrum on shells with of width
 $\Delta \chi$ is
 \begin{equation}
@@ -524,7 +524,7 @@ $\Delta \chi$ is
 \end{equation}
 Here, to indicate that we are now working with quantities binned in the radial
 direction instead of
-continuous functions, we've switched to $C_{\ell,ij}$ over 
+continuous functions, we've switched to $C_{\ell,ij}$ instead of
 $C_\ell(\chi, \chi')$. The uncertainty on the angular
 cross-power spectrum is then
 \begin{align}
@@ -540,7 +540,7 @@ measures.  The first effect is
 that the model that the free electron density decomposes into a homogeneous
 part plus a random field of perturbations is not complete. Firstly, all signals
 must pass through the Milky Way's galactic disk, halo, and local environment,
-which will contribute to the dispersion measure. However, this is only a
+which will contribute to the dispersion. However, this is only a
 single function of $\hat n$ which can presumably be well
 measured. In addition, this function could in principle be well characterized
 by independent data such as observations of pulsars.  As such, it should be
@@ -550,15 +550,15 @@ contribution, as was done in
 
 Perhapse, more concerning is the dispersion from the source's environment
 as well as the halo in which it resides. These electrons will presumably be
-clustered around the source on scales far smaller than DM-space
+clustered around the source on scales far smaller than dispersion-space
 structure map pixels and thus are not accounted for in the $\delta_e$--$\delta_f$
 correlations included in the above formalism.  This will have a mean
 contribution, common to all sources and which may be epoch dependant, that will
-modify the mean DM--distance relation. This will need to be calibrated in some
+modify the mean dispersion--distance relation. This will need to be calibrated in some
 why or else fit with nuisance parameters during parameter estimation.  There
 will also be a stochastic piece which varies from source to source.  This will
 limit the precision at which $\chi_s$ can be measured, thus limiting the
-resolution of DM space density maps in the radial direction.
+resolution of dispersion space density maps in the radial direction.
 
 Detailed treatment of the above complications is beyond the scope of this
 work. The magnitude of the contribution from the progenitor is at present
@@ -597,15 +597,15 @@ in Figure~\ref{f:sensitivity}.
 \section{Discussion and conclusions}
 
 We have proposed using FRB sources as 3D tracers of the large-scale structure,
-using dispersion measure to estimate radial distance. It can be seen in
+using dispersion to estimate radial distance. It can be seen in
 Figure~\ref{f:terms} that the signal is dominated by inhomogeneities in the
 electron density along the line of sight inducing mis-estimates of radial
-distance and thus apparent clustering. These DM-space distortions could be used
+distance and thus apparent clustering. These dispersion-space distortions could be used
 to study the distribution of free electrons in the Universe on large-scales.
 There have been other proposals to use FRB events to study large-scale
 structure \citep{2014ApJ...780L..33M,2014MNRAS.443L..11D}, however these
 schemes have either been two dimensional or required externally measured redshifts
-for the sources. Additionally, there have been proposals to use the DM-redshift
+for the sources. Additionally, there have been proposals to use the dispersion-redshift
 relation to probe the background density of electrons and thus the expansion
 history of the Universe
 \citep{2014ApJ...783L..35D,2014PhRvD..89j7303Z,2014ApJ...788..189G}.
@@ -614,7 +614,7 @@ We have
 shown that a survey detecting $10^4$ fast radio bursts of cosmological
 origin (as might be achieved by the CHIME FRB instrument) could detect the
 clustering signal.
-Looking forward, DM-space
+Looking forward, dispersion-space
 clustering could become a powerful probe of large-scale structure should
 observational factors turn out to be favourable compared to spectroscopic
 surveys. The baryon acoustic oscillation feature can be clearly seen in
@@ -622,8 +622,8 @@ Figure~\ref{f:terms} in the cross term and both
 local-term curves. It may also be possible to extract the BAO feature
 from the integral
 term using tomography.
-This however requires that the contribution to dispersion measure from
-the source's environment and host halo be modest compared to the
+This however requires that the contribution to dispersion from
+the source's environment and host halo be small compared to the
 contribution from the IGM.
 
 
