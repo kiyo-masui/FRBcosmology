@@ -1,4 +1,4 @@
-\documentclass[twocolumn,prl,nofootinbib,floatfix]{revtex4-1}
+\documentclass[twocolumn,prl,floatfix]{revtex4-1}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -8,6 +8,8 @@
 \usepackage{times}
 \usepackage{afterpage}
 \usepackage{epstopdf}
+\usepackage{url}
+\usepackage{hyperref}
 
 
 
@@ -109,10 +111,10 @@ However, redshift is not the only measure of radial distance. Standard
 candles and standard rulers can be used to estimate distance using brightness
 and angular size respectively.  In the same way a \emph{standard ping}, a brief
 broadband radio impulse, can be used to measure dispersion through the
-characteristic wavelength-squared delay of electromagnetic signals. The disperion is
+characteristic wavelength-squared delay of electromagnetic signals. The dispersion is
 proportional to the amount of plasma along the
 line-of-sight and can thus be used to estimate radial distance.
-This technique, routinely done with
+This technique, routinely used for
 pulsars in the Galaxy, can be used to define a \emph{dispersion distance} to
 cosmological sources.
 %
@@ -130,8 +132,8 @@ events are observed to have dispersion measures of order $\sim\!\!1000\,{\rm pc}
 / {\rm cm}^3$, greatly in excess of the galactic expectation of order
 $\sim\!\!100\,{\rm pc} / {\rm cm}^3$ (depending on galactic latitude)
 \cite{2014arXiv1412.4829D}.  They thus appear to be of extra-galactic origin,
-with their dispersion produced either by the inter-galactic medium (IGM)
-surrounding galaxies along the line-of-sight \citep{2013Sci...341...53T}
+with their dispersion produced either by the inter-galactic medium (IGM),
+associated with structure along line-of-sight \citep{2013Sci...341...53T},
 or the environment of the
 source \citep{2014ApJ...785L..26L,2015arXiv150101341P,2015arXiv150505535C}.  If
 the dispersion is dominated by electrons along the line-of-sight, then the
@@ -142,7 +144,7 @@ Such cosmological distances permit the study of clustering of FRB sources in
 three dimensions with an expectation that these events trace the large-scale
 structure of the Universe on linear scales. We note that while our discussion
 here is framed in terms of FRBs, other bright radio transients that fluctuate
-on timescales less than the typical differential lag of $\sim 1s/100 \,{\rm
+on timescales shorter than the typical differential lag of $\sim 1s/100 \,{\rm
 MHz} $ might also be useful as standard pings.
 
 Neither redshift nor dispersion are perfect proxies for radial distance.
@@ -171,8 +173,7 @@ originating from comoving radial distance $\chi$ is
 Here
 $n_e(\vec{x}, \chi)$ is the free electron density as a function of location and
 conformal time. Note that we use $\chi$ as our radial distance and time
-coordinate, as opposed to redshift which is more appropriate for spectroscopic
-applications. We model the cosmological 
+coordinate, as opposed to redshift. We model the cosmological 
 electron density as containing a homogeneous part
 and perturbations,
 $n_e(\vec x, \chi) = \bar{n}_e(\chi) \left[1 + \delta_e(\vec x, \chi)\right]$.
@@ -235,9 +236,9 @@ The Jacobian in spherical coordinates is
 \begin{align}
 \left| \frac{\ud^3\vec x}{\ud^3\vec x_s} \right|
     &= \frac{\ud \chi}{\ud \chi_s}\frac{\chi^2}{\chi_s^2}\\
-    &= (1 + \delta_e)^{-1}
-       \left(1 + \frac{\int_0^\chi \ud \chi' \delta_e(\hat n \chi')}
-                      {\chi}\right)^{-2}\\
+%    &= (1 + \delta_e)^{-1}
+%       \left(1 + \frac{\int_0^\chi \ud \chi' \delta_e(\hat n \chi')}
+%                      {\chi}\right)^{-2}\\
     &\approx 1 - \delta_e
         - \frac{2}{\chi}\int_0^\chi \ud \chi' \delta_e(\hat n \chi').
         \label{e:jac}
@@ -252,11 +253,11 @@ we obtain
     + \frac{2}{\chi} \right)
         \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
 \end{equation}
-In the equation above, the $-\delta_e$ term is most analogous to the Kaiser
+In the above equation, the $-\delta_e$ term is most analogous to the Kaiser
 redshift-space distortions.  It is a dilution of tracers in dispersion space due to an
 excess of electrons between the tracers. However we note that this term is isotropic
 in contrast to the Kaiser term.  This is because any wave vector electron perturbation
-causes dispertion space distortions, whereas the radial velocities that cause
+causes dispersion space distortions, whereas the radial velocities that cause
 redshift-space distortions are only sourced by perturbations with radial wave
 vectors.
 
@@ -316,12 +317,15 @@ megaparsecs.  The evolution of the power spectrum is negligible over these time
 differences which leads to a straight-forward way to include the evolution of
 the perturbations:
 \begin{align}
-C^{xy}_\ell(\chi,\chi') 
-    \approx \frac{2}{\pi}
-    \int_0^\infty\ud k k^2
-    j_\ell(k\chi) j_{\ell}(k\chi')
-    P_{xy}(k,(\chi + \chi')/2),\nonumber &\\
-    |\chi - \chi'| \ll 1/aH.&
+    % I've tuned the alignment of the domain (using &)
+    % here to get the equation number and
+    % domain on the same line. Not elegant.
+    C^{xy}_\ell(\chi,\chi') \approx&
+        \frac{2}{\pi}
+        \int_0^\infty\ud k k^2
+        j_\ell(k\chi) j_{\ell}(k\chi')
+        P_{xy}(k,(\chi + \chi')/2),\nonumber \\
+    &|\chi - \chi'| \ll 1/aH.
 \end{align}
 
 The third term in Equation~\ref{e:delta_s} is not stationary but is an integral
@@ -456,15 +460,15 @@ scales from greater distances. The mixing of scales complicates the
 interpretation of measurements, since structure formation on scales smaller
 than $\sim10\,{\rm Mpc}/h$ is non-linear and hard to model. A similar issue
 exists in the field of weak gravitational lensing, where the formula for the
-angular power spectrum has a similar form.  In lensing, a kernel in
+shear angular power spectrum has a similar form.  In lensing, a kernel in
 the line-of-sight integral arising from geometric effects suppresses the
 contribution from small distances, partially alleviating the issue.
 
-There is an advantage to the lack of kernel in the dispersion-space integral term.
-Lensing tomography---the use of sources at multiple redshifts to un-mix
-spatial scales---is complicated by the kernel. The kernel's shape depends on
-the source redshift, re-weighting the line-of-sight integral and
-making tomography inexact.  In contrast, the integrand in the dispersion-space integral
+However, the lack of a kernel simplifies tomography---the use of sources at
+multiple redshifts to unmix spatial scales.
+Lensing tomography is inexact because the kernel's shape depends on
+the source redshift, thus re-weighting the line-of-sight integral.
+In contrast, the integrand in the dispersion-space integral
 term is completely independent of the limit of integration, meaning
 contributions from different parts of the line of sight (and thus different
 spatial scales) can be separated exactly. A detailed study of dispersion space
@@ -474,7 +478,7 @@ integral term from radial distances $\chi'' < 500\,{\rm Mpc}/h$ are well
 measured by the correlations with these radial slices. We thus ignore
 contributions to the integral term from below this distance and neglect the
 information from these slices in our sensitivity measurements. The smallest
-spatial scale that contributes the our plotted angular power spectra out to
+spatial scale that contributes to our plotted angular power spectra out to
 $\ell=1000$ is thus $k=2\,h/{\rm Mpc}$.
 
 For plotting the dispersion-space power spectra we use a toy model for the electron and
@@ -520,29 +524,26 @@ power spectrum in Figure~\ref{f:terms}.
     }
 \end{figure}
 
-
-There are a number of effects that will complicate the measurement of the
-above calculated angular power spectrum by a real survey of dispersion 
-measures.  The first effect is
-that the model that the free electron density decomposes into a homogeneous
-part plus a random field of perturbations is not complete. Firstly, all signals
-must pass through the Milky Way's galactic disk, halo, and local environment,
-which will contribute to the dispersion. However, this is only a
+In a real survey, measurement of the dispersion-space clustering
+will be complicated by extra contributions to the dispersion.
+Firstly, all signals
+must pass through the Milky Way's galactic disk, halo, and local environment.
+However, the resulting dispersion is only a
 single function of $\hat n$ which can presumably be well
-measured. In addition, this function could in principle be well characterized
-by independent data such as observations of pulsars.  As such, it should be
+measured. As such, it should be
 possible to subtract the local
 contribution, as was done in
 \citet{2014arXiv1412.4829D}, and this is unlikely to be a limiting obstacle.
 
-Perhapse, more concerning is the dispersion from the source's environment
+Perhaps, more concerning is the dispersion from the source's immediate environment
 as well as the halo in which it resides. These electrons will presumably be
-clustered around the source on scales far smaller than dispersion-space
-structure map pixels and thus are not accounted for in the $\delta_e$--$\delta_f$
+clustered around the source on scales far smaller than the survey
+resolution and are thus not accounted for in the
+$\delta_e$--$\delta_f$
 correlations included in the above formalism.  This will have a mean
 contribution, common to all sources and which may be epoch dependant, that will
 modify the mean dispersion--distance relation. This will need to be calibrated in some
-why or else fit with nuisance parameters during parameter estimation.  There
+way or else fit with nuisance parameters during parameter estimation.  There
 will also be a stochastic piece which varies from source to source.  This will
 limit the precision at which $\chi_s$ can be measured, thus limiting the
 resolution of dispersion space density maps in the radial direction.
@@ -550,7 +551,7 @@ resolution of dispersion space density maps in the radial direction.
 Detailed treatment of the above complications is beyond the scope of this
 work. The magnitude of the contribution from the progenitor is at present
 unknown. To crudely deal with it here we use relatively large
-bins widths of $\Delta\chi = 100\,{\rm Mpc}/h$ 
+bins widths of $\Delta\chi = 100\,{\rm Mpc}/h$
 and exclude the $\chi = \chi'$ bin pairs.
 Because the local term drops rapidly with radial separations, this effectively 
 discards the contribution from the local term which is most sensitive to having
@@ -558,14 +559,13 @@ precise radial distances.
 
 In first measurements of the angular power spectra, uncertainty will be
 dominated by the finite number of observed events, or shot noise.
-The noise power spectrum on shells with of width
+The noise power spectrum on shells at distance with of width
 $\Delta \chi$ is
 \begin{equation}
     C^N_{\ell, ij} = \frac{\delta_{ij}}{\bar n_f(\chi_i)\chi_i^2\Delta\chi}.
 \end{equation}
 Here, to indicate that we are now working with quantities binned in the radial
-direction instead of
-continuous functions, we've switched to $C_{\ell,ij}$ instead of
+direction, we've switched to $C_{\ell,ij}$ instead of
 $C_\ell(\chi, \chi')$. The uncertainty on the angular
 cross-power spectrum is then
 \begin{align}
@@ -576,9 +576,7 @@ cross-power spectrum is then
 where the second term in brackets only contributes for $i = j$.
 
 We consider the sensitivity of a survey with a total of $10000$ dispersion
-measures from FRB events distributed uniformly over half the sky. This is in rough
-approximation to what might be achieved by the Canadian Hydrogen Intensity
-Mapping Experiment (CHIME) telescope over a three year survey.
+measures from FRB events distributed uniformly over half the sky.
 To give an idea of the overall sensitivity of the survey, we collapse
 $C^{ss}_{\ell,ij}$ to a single function of $\ell$ by taking a weighted average
 of all pairs of radial bins over the
@@ -602,27 +600,31 @@ in Figure~\ref{f:sensitivity}.
 
 \section{Discussion and conclusions}
 
-We have proposed using FRB sources as 3D tracers of the large-scale structure,
+We have proposed using cosmological FRB sources as 3D tracers of the
+large-scale structure,
 using dispersion to estimate radial distance. It can be seen in
 Figure~\ref{f:terms} that the signal is dominated by inhomogeneities in the
-electron density along the line of sight inducing mis-estimates of radial
-distance and thus apparent clustering. These dispersion-space distortions could be used
-to study the distribution of free electrons in the Universe on large-scales and
-redshifts less than $\sim\!\!1$.
-There have been other proposals to use FRB events to study large-scale
-structure \citep{2014ApJ...780L..33M,2014MNRAS.443L..11D}, however these
-schemes have either been two dimensional or required externally measured redshifts
-for the sources. Additionally, there have been proposals to use the dispersion-redshift
-relation to probe the background density of electrons and thus the expansion
-history of the Universe
-\citep{2014ApJ...783L..35D,2014PhRvD..89j7303Z,2014ApJ...788..189G}.
+electron density along the line of sight, inducing mis-estimates of radial
+distance and thus apparent clustering. These dispersion-space distortions could
+be used
+to study the distribution of free electrons in the Universe on large-scales.
+There have been other proposals to use FRBs in cosmology 
+\citep{2014ApJ...780L..33M,2014MNRAS.443L..11D,
+2014ApJ...783L..35D,2014PhRvD..89j7303Z,2014ApJ...788..189G}, however these
+schemes have either not been three dimensional
+or required externally measured redshifts
+for the sources.
 
 We have
-shown that a survey detecting $10000$ fast radio bursts of cosmological
-origin (as might be achieved by the CHIME FRB instrument) could detect the
-clustering signal.
+shown in Figure~\ref{f:sensitivity}
+that a survey detecting $10000$ fast radio bursts of cosmological
+origin could detect the
+clustering signal. This is in rough
+approximation to what might be achieved by the Canadian Hydrogen Intensity
+Mapping Experiment (CHIME)\footnote{\url{http://chime.phas.ubc.ca/}}
+or other upcoming wide-field telescopes.
 Looking forward, dispersion-space
-clustering could become a powerful probe of large-scale structure should
+clustering could become a precision probe of large-scale structure should
 observational factors turn out to be favourable compared to spectroscopic
 surveys. The baryon acoustic oscillation feature can be clearly seen in
 Figure~\ref{f:terms} in the cross term and both
