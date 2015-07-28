@@ -1,0 +1,55 @@
+> ----------------------------------------------------------------------
+> Report of Referee A -- LF15118/Masui
+> ----------------------------------------------------------------------
+> 
+> In this paper, the authors consider the use the dispersion measure of
+> radio transients as a proxy for radial distance, and compute the
+> expected angular cross-power spectra of biased sources. With simple
+> estimates of shot noise, the authors then argue that such power
+> spectra should be observable, and suggest that this could be a
+> powerful probe of large scale structure.
+> 
+> The calculation that the authors perform is relatively straightforward
+> (though worthwhile) and uncontroversial. To be fair, there are a
+> number of details about fast radio bursts (such as their source
+> environments) that are swept under the rug. I agree with the authors,
+> however, that such issues are beyond the scope of this short paper,
+> since investigations into the nature of fast radio bursts is still an
+> active area of research for the community. I would be happy to
+> recommend publication once the authors explore the following points a
+> little more fully:
+> 
+> i) The authors pick b_f = 1.3 to be the bias of the FRB sources. Was
+> this arbitrary? 
+
+This was chosen to be roughly the value for star forming galaxies at these
+redshifts as measured by the WiggleZ survey. The assumption here is that FRBs
+might trace star formation, although this is entirely speculative. It also
+provides some contrast with the electrons, since some terms are proportional to
+b_e - b_f. This is now stated in the text.
+
+> Also, it would be good to discuss briefly (perhaps
+> with a new plot) the dependence of the paper’s conclusions on the
+> value of b_f. In principle, variations of b_f could cause interesting
+> effects, since b_f affects some of the terms but not others in Eq.
+> (22). My guess is that the effects won’t be too big, since Fig. 2
+> shows that the integral term is the dominant contribution, but it’d be
+> nice to numerically confirm this. If anything, it would be helpful to
+> know that the predictions are robust to uncertainties in b_f.
+
+
+
+> 
+> ii) To plot Fig. 3, the authors summed over pairs of radial bins.
+> However, this hides some of the interesting statistical properties of
+> the signal. For example, I would expect the cross power spectrum of
+> two widely separated radial bins to be much lower than the cross power
+> of two nearby bins. I would like to see some quantification of these
+> radial correlations, as it would give readers a better sense for how
+> the signal-to-noise scales with bin size, number of bins, etc.
+> 
+> Finally, just an extremely minor pet peeve of mine: can we replace the
+> error bars in Fig. 3 with a band around the curve? Real data would
+> have scatter, and the error bars wouldn’t be centered on the “truth”.
+> 
+> Thank you to the authors for an interesting read!
