@@ -487,13 +487,10 @@ calculate the time dependant dark-matter power spectrum using {\tt CAMB}, using
 the integrated {\tt HALOFIT} to approximate the non-linear evolution. We assume
 that the electron bias is $b_e=1$, which should be true on large scales due to
 the approximate conservation of free electrons. The bias of FRB sources is
-unconstrained by data and we choose it to be $b_f=1.3$, \blue{roughly
+unconstrained by data and we choose it to be $b_f=1.3$\blue{, roughly
 the value for star forming galaxies at the relevant
 redshifts \citep{2011MNRAS.415.2876B} and providing reasonable contrast to the
-electrons.}
-\blue{The amplitude of the local and cross terms depend on the difference
-    between 
-}
+electrons}.
 The coefficient
 $A(\chi)$ depends on the density of detected FRB sources, $\bar n_f(\chi)$.
 We use a simple model where all events above a fixed flux are detected,
@@ -530,6 +527,17 @@ power spectrum in Figure~\ref{f:terms}.
     }
 \end{figure}
 
+\blue{
+The amplitude of the local and cross terms depend on the difference
+between the electron bias and highly uncertain FRB bias
+and the sign of the cross term depends on
+which of these is larger. However, since the
+integral term dominates for most radial distance pairs, our final sensitivity
+estimates are largely unaffected by this uncertainty (as shown below). In a
+high-precision survey the sensitivity of the cross and local terms to the
+difference in the biases may help break measurement degeneracies between terms.
+}
+
 In a real survey, measurement of the dispersion-space clustering
 will be complicated by extra contributions to the dispersion.
 Firstly, all signals
@@ -541,7 +549,7 @@ possible to subtract the local
 contribution, as was done in
 \citet{2014arXiv1412.4829D}, and this is unlikely to be a limiting obstacle.
 
-Perhaps, more concerning is the dispersion from the source's immediate environment
+Perhaps more concerning is the dispersion from the source's immediate environment
 as well as the halo in which it resides. These electrons will presumably be
 clustered around the source on scales far smaller than the survey
 resolution and are thus not accounted for in the
@@ -593,6 +601,11 @@ range $500\,{\rm Mpc}/h$ to $3500\,{\rm Mpc}/h$.
 For weights we use the signal over noise-squared
 at $\ell=100$, which maximizes the signal to noise at that $\ell$ and
 is near optimal at other multipoles.
+\blue{
+To determine if such a survey would be
+able to distinguish between models of FRB clustering we plot the same quantity
+for $b_f=0.7$.
+}
 The result is shown
 in Figure~\ref{f:sensitivity}.
 
@@ -603,7 +616,8 @@ in Figure~\ref{f:sensitivity}.
         Sensitivity of a survey with $10000$ dispersion measures distributed
         uniformly over half the sky.  Plotted is the cross-correlation
         power spectrum weighted averaged over all pairs of radial bins. Weights
-        are chosen to maximize signal to noise at $\ell=100$.
+        are chosen to maximize signal to noise at $\ell=100$ for the $b_f=1.3$
+        case.
     }
 \end{figure}
 
@@ -615,10 +629,16 @@ large-scale structure of the Universe using dispersion distance. It can be seen 
 Figure~\ref{f:terms} that the signal is dominated by inhomogeneities in the
 electron density along the different lines-of-sight,
 inducing mis-estimates of radial
-distance and thus apparent clustering. These dispersion-space distortions could
+distance and thus apparent clustering.
+\blue{
+Because it is the line-of-sight integrated structure that correlates, the
+signal is fairly insensitive to radial distance and radial separation of
+slices, with these dependencies being dominated by the coefficient $A(\chi)$.
+}
+These dispersion-space distortions could
 be used
 to study the distribution of free electrons in the Universe on large-scales.
-There have been other proposals to use FRBs in cosmology 
+There have been other proposals to use FRBs for cosmology 
 \citep{2014ApJ...780L..33M,2014MNRAS.443L..11D,
 2014ApJ...783L..35D,2014PhRvD..89j7303Z,2014ApJ...788..189G}, however these
 schemes have either not been three dimensional
@@ -629,8 +649,11 @@ We have
 shown in Figure~\ref{f:sensitivity}
 that a survey detecting $10000$ fast radio bursts of cosmological
 origin could detect the
-clustering signal. This is in rough
-approximation to what might be achieved in a modest amount of time by the Canadian Hydrogen Intensity
+clustering signal\blue{, however such a survey would be mostly sensitive to the
+integral term and thus could not distinguish between FRB clustering models}.
+This is in rough
+approximation to what might be achieved in a reasonable amount of time by the
+Canadian Hydrogen Intensity
 Mapping Experiment (CHIME)\footnote{\url{http://chime.phas.ubc.ca/}}, the
 Square Kilometer Array\footnote{\url{http://www.skatelescope.org/}},
 or other upcoming wide-field telescopes.
