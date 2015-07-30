@@ -1,3 +1,8 @@
+We thank the review for the helpful suggestions and positive review. 
+In the revised version of the manuscript, changes are highlighted in blue for
+the reviewers and editor's convenience. Our responses to each of the reviewers
+comments are in-line below.
+
 > ----------------------------------------------------------------------
 > Report of Referee A -- LF15118/Masui
 > ----------------------------------------------------------------------
@@ -37,10 +42,14 @@ b_e - b_f. This is now stated in the text.
 > nice to numerically confirm this. If anything, it would be helpful to
 > know that the predictions are robust to uncertainties in b_f.
 
-This was a very helpful comment and led us to include a b_f=0.7 line in
-Figure 3. We conclude that the sensitivity is indeed dominated by the
-integral term and that a survey with 10000 events is unlikely to distinguish
-any signature of the intrinsic clustering.
+This was a very helpful comment and led us to include a b_f=0.7 line in Figure
+3. We conclude that the sensitivity is indeed dominated by the integral term
+and that a survey with 10000 events is unlikely to distinguish any signature of
+the intrinsic clustering.
+
+Time dependence of b_f should similarly be a small effect on the final
+sensitivity. We've added a paragraph about the affect of the biases on the
+various terms in the modelling section.
 
 > 
 > ii) To plot Fig. 3, the authors summed over pairs of radial bins.
@@ -58,8 +67,9 @@ dominated by A(\chi).  As shown in the figure, the local term drops rapidly at
 higher separations. We would very much like to show more curves in the style of
 Figure 2 but space constrains preclude this.
 
-We've added a brief statement about this in the discussion.
-We hope that the reviewer finds this satisfactory.
+We've added a brief statement about this in the discussion.  We hope that the
+reviewer finds this satisfactory.
+
 
 > 
 > Finally, just an extremely minor pet peeve of mine: can we replace the
