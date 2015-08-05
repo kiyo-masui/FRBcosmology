@@ -222,50 +222,51 @@ def my_plots(mult_ell=None, chi=1000):
 
     noise = 1. / n_bar_bins / chi_bins**2 / delta_chi_bins
 
-    cum_spectrum = 0.
-    cum_spectrum_1 = 0.
-    normalization = 0.
-    cum_var = 0.
-    global B_F
-    #cum_noise = 0.
-    for ii, chi1 in enumerate(chi_bins):
-        for jj, chi2 in enumerate(chi_bins):
-            if ii == jj:
-                continue
-            var = noise[ii]*noise[jj] / (ell_bins*(ell_bins + 1)*delta_l*F_SKY)
-            t1, t2, t3 = apply_coeffs(mult_ell, (chi1 + chi2)/2, chi1 - chi2)
-            spectrum = t1 + t2 + t3
-            weight = spectrum[ind_100] / (noise[ii]*noise[jj])
-            cum_spectrum += weight * spectrum
-            cum_var += weight**2 * var
-            normalization += abs(weight)
-            b_f_tmp = B_F
-            B_F = 0.7
-            t1, t2, t3 = apply_coeffs(mult_ell, (chi1 + chi2)/2, chi1 - chi2)
-            spectrum = t1 + t2 + t3
-            cum_spectrum_1 += weight * spectrum
-            B_F = b_f_tmp
-    errors = np.sqrt(cum_var) / normalization
-    spectrum = cum_spectrum / normalization
-    spectrum_1 = cum_spectrum_1 / normalization
-    # Effective noise power spectrum.
-    noise_spec = errors * np.sqrt(ell_bins*(ell_bins + 1)*delta_l*F_SKY)
-    
+
     plt.figure(tight_layout=True)
-    #plt.loglog(ell_bins, noise_spec, 'k--')
-    spectrum_bins = interpolate.interp1d(ells, spectrum)(ell_bins)
     ax = plt.subplot(111)
-    plt.bar(left=ell_bins_l,
-            height=2 * errors,
-            width=ell_bins_r - ell_bins_l,
-            bottom=spectrum_bins - errors, 
-            color='y',
-            lw=0.0,
-            )
-    #plt.errorbar(ell_bins, spectrum_bins, errors, color='k', marker='', ls='',
-    #        **kwargs)
-    s0 = plt.loglog(ells, spectrum, 'k-', **kwargs)
-    s1 = plt.loglog(ells, spectrum_1, 'b--', **kwargs)
+    global B_F
+    for min_sep in [12, 8, 4, 1]:
+        cum_spectrum = 0.
+        cum_spectrum_1 = 0.
+        normalization = 0.
+        cum_var = 0.
+        #cum_noise = 0.
+        for ii, chi1 in enumerate(chi_bins):
+            for jj, chi2 in enumerate(chi_bins):
+                if abs(ii - jj) < min_sep:
+                    continue
+                var = noise[ii]*noise[jj] / (ell_bins*(ell_bins + 1)*delta_l*F_SKY)
+                t1, t2, t3 = apply_coeffs(mult_ell, (chi1 + chi2)/2, chi1 - chi2)
+                spectrum = t1 + t2 + t3
+                weight = spectrum[ind_100] / (noise[ii]*noise[jj])
+                cum_spectrum += weight * spectrum
+                cum_var += weight**2 * var
+                normalization += abs(weight)
+                b_f_tmp = B_F
+                B_F = 0.8
+                t1, t2, t3 = apply_coeffs(mult_ell, (chi1 + chi2)/2, chi1 - chi2)
+                spectrum = t1 + t2 + t3
+                cum_spectrum_1 += weight * spectrum
+                B_F = b_f_tmp
+        errors = np.sqrt(cum_var) / normalization
+        spectrum = cum_spectrum / normalization
+        spectrum_1 = cum_spectrum_1 / normalization
+        # Effective noise power spectrum.
+        noise_spec = errors * np.sqrt(ell_bins*(ell_bins + 1)*delta_l*F_SKY)
+        #plt.loglog(ell_bins, noise_spec, 'k--')
+        spectrum_bins = interpolate.interp1d(ells, spectrum)(ell_bins)
+        plt.bar(left=ell_bins_l,
+                height=2 * errors,
+                width=ell_bins_r - ell_bins_l,
+                bottom=spectrum_bins - errors, 
+                color='y',
+                lw=0.5,
+                )
+        #plt.errorbar(ell_bins, spectrum_bins, errors, color='k', marker='', ls='',
+        #        **kwargs)
+        s0 = plt.loglog(ells, spectrum, 'k-', **kwargs)
+        s1 = plt.loglog(ells, spectrum_1, 'b--', **kwargs)
     ax.set_aspect(0.4)
     plt.ylabel(r"$\langle {C}^{ss}_\ell \rangle$", fontsize=18)
     plt.xlabel(r"$\ell$", fontsize=18)
@@ -273,7 +274,7 @@ def my_plots(mult_ell=None, chi=1000):
     Y_MAX = 2e-4
     plt.ylim([Y_MIN, Y_MAX])
     plt.xlim([X_MIN, X_MAX])
-    plt.legend((r'$b_f=1.3$', r'$b_f=0.7$'), loc=1, frameon=False)
+    plt.legend((r'$b_f=1.3$', r'$b_f=0.8$'), loc=1, frameon=False)
     plt.savefig('sensitivity.eps', tightlayout=True, bbox_inches='tight')
 
     
