@@ -112,8 +112,8 @@ def my_plots(mult_ell=None, chi=1000):
     if mult_ell is None:
         mult_ell = get_mult_ell()
     CHI = float(chi)
-    #DELTAS = [5., 10., 20., 50., 100.]
-    DELTAS = []
+    DELTAS = [5., 10., 20., 50., 100.]
+    #DELTAS = []
     Y_MIN = 5e-8
     Y_MAX = 5e-5
     X_MIN = 9
@@ -138,6 +138,9 @@ def my_plots(mult_ell=None, chi=1000):
                    fontsize=18,
                    )
         plt.legend(loc="upper right", labelspacing=.1, frameon=False)
+        plt.savefig("terms_chi%d_delta%d.pdf" % (CHI, delta),
+                tightlayout=True, bbox_inches='tight'
+                )
 
     
 
@@ -226,7 +229,8 @@ def my_plots(mult_ell=None, chi=1000):
     plt.figure(tight_layout=True)
     ax = plt.subplot(111)
     global B_F
-    for min_sep in [12, 8, 4, 1]:
+    #for min_sep in [12, 8, 4, 1]:
+    for min_sep in [1]:
         cum_spectrum = 0.
         cum_spectrum_1 = 0.
         normalization = 0.
