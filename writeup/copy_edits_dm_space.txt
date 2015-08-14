@@ -1,0 +1,32 @@
+Response to questions and comments
+==================================
+
+6) Please change to:
+"The noise power spectrum on shells at a distance $\chi_i$ and with width
+$\Delta \chi$ is"
+
+9) Ref 11 is now published: U.-L. Pen and L. Connor, ApJ 807, 179 (2015).
+doi 10.1088/0004-637X/807/2/179.
+
+12) Should be "baryon acoustic oscillation"
+
+13) This infomation is correct.
+
+15) We have confirmed that links are correct.
+
+
+Other corrections and comments
+==============================
+
+Figures have been type-set surprisingly small, about 30% smaller than we would
+have expected.  This is fine, but surprising.
+
+Line 40: \emph{standard pings} -> ``standard pings''.
+
+Line 64 and 277: The inteneded meaning of "dispersion--distance relation" is 
+"dispersion vs distance relation", which I believe needs a longer dash. In this
+instance dispersion-distance is not an adjective.
+
+Line 188: are -> is.  The subject of this sentence is "the Limber approximation"
+
+Line 249 "amplitude ... depends" -> "amplitudes ... depend"
