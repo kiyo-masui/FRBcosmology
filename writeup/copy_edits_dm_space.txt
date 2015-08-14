@@ -10,7 +10,7 @@ doi 10.1088/0004-637X/807/2/179.
 
 12) Should be "baryon acoustic oscillation"
 
-13) This infomation is correct.
+13) This information is correct.
 
 15) We have confirmed that links are correct.
 
@@ -18,15 +18,22 @@ doi 10.1088/0004-637X/807/2/179.
 Other corrections and comments
 ==============================
 
-Figures have been type-set surprisingly small, about 30% smaller than we would
-have expected.  This is fine, but surprising.
-
 Line 40: \emph{standard pings} -> ``standard pings''.
 
-Line 64 and 277: The inteneded meaning of "dispersion--distance relation" is 
-"dispersion vs distance relation", which I believe needs a longer dash. In this
-instance dispersion-distance is not an adjective.
+Line 64 and 277: The intended meaning of "dispersion--distance relation" is
+"dispersion vs. distance relation". In this instance dispersion--distance is not
+an adjective. For clarity, please use "dispersion vs. distance relation"
 
 Line 188: are -> is.  The subject of this sentence is "the Limber approximation"
 
 Line 249 "amplitude ... depends" -> "amplitudes ... depend"
+
+Lines 332 to 336: This paragraph is redundant with the following paragraph. The
+two sentences in this paragraph are duplicated verbatim in the following
+paragraph.  It was left in the manuscript in error. Please remove it.
+
+Figures have been type-set surprisingly small, about 30% smaller than we would
+have expected. If possible we would prefer, at least, figure 2 and 3 to be
+larger. We understand if this is not possible for length or style reasons.
+
+
