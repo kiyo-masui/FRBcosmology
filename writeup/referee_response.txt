@@ -77,9 +77,13 @@ reviewer finds this satisfactory.
 > have scatter, and the error bars wouldn’t be centered on the “truth”.
 
 Our error bars depend on \ell binning and thus a band is inappropriate.
+<<<<<<< Updated upstream
 However we agree with the points of the referee and we have thus switched to
 filled boxes to approximate a band.  This is consistent with the style in, for
 example, Scott Dodelson's text book.
+=======
+However we agree with the points of the referee and we have this switched to filled boxes to approximate a band.  This is consistent with the style in, for example, Scott Dodelson's text book.
+>>>>>>> Stashed changes
 
 > 
 > Thank you to the authors for an interesting read!
