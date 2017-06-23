@@ -18,7 +18,7 @@ class SingleEll(object):
         self._ell = ell
         self._chi_max = chi_max
 
-        nchi = 20
+        nchi = 3
         #delta_chi = chi_max / nchi
         #chi_list = np.arange(1, nchi + 1, dtype=float) / nchi * chi_max
         
@@ -32,11 +32,11 @@ class SingleEll(object):
         for chi in chi_list:
             this_chi_data = {}
             p_k_interp = matter_power.p_k_interp(chi)
-            # Put in Gaussian cut-off to control oscillations.
 
             if limber:
                 # Local term.
-                delta_k = 2 * np.pi / (2 * chi)
+                delta_max = 400 # XXX Pretty narrow, for speed.
+                delta_k = 2 * np.pi / (2 * delta_max)
                 k_max = np.sqrt(max(matter_power.K_MAX**2 - (ell/chi)**2, 0))
                 k = np.arange(0, k_max, delta_k)
                 k = np.concatenate((k, -k[:0:-1]))
@@ -44,15 +44,15 @@ class SingleEll(object):
                 if nk > 10:
                     p_k_local = p_k_interp(np.sqrt((ell/chi)**2 + k**2))
                     #window = fftpack.ifftshift(signal.kaiser(nk, beta=14, sym=True))
-                    window = fftpack.ifftshift(signal.hann(nk, sym=True))
+                    #window = fftpack.ifftshift(signal.hann(nk, sym=True))
+                    window = fftpack.ifftshift(signal.tukey(nk, alpha=0.5, sym=True))
                     p_k_local *= window
                     fft_norm = len(k) * delta_k / 2 / np.pi / chi**2
                     I1 = fftpack.ifft(p_k_local).real
                     I1 = fftpack.fftshift(I1) * fft_norm
-                    deltas = np.linspace(-chi, chi, len(I1), endpoint=True)
                 else:
                     I1 = np.zeros(10, dtype=float)
-                    deltas = np.linspace(-chi, chi, len(I1), endpoint=True)
+                deltas = np.linspace(-delta_max, delta_max, len(I1), endpoint=True)
 
                 # Limber term.
                 if ell/chi > matter_power.K_MAX:
@@ -108,8 +108,8 @@ class SingleEll(object):
             ii += ndelta
 
         self.i1 = interpolate.LinearNDInterpolator(chi_delta, I1, fill_value=0.)
-        self.i2 = interpolate.interp1d(chi_list, I2, kind="cubic")
-        self.i3 = interpolate.interp1d(chi_list, I3, kind="cubic")
+        self.i2 = interpolate.interp1d(chi_list, I2, kind="linear")
+        self.i3 = interpolate.interp1d(chi_list, I3, kind="linear")
         self.data = data
 
 

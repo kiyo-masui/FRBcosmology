@@ -7,9 +7,10 @@ from cora.util.cosmology import Cosmology
 
 
 DATA_DIR = path.join(path.dirname(__file__), 'data')
-FILE_PAT = "Pk_z%3.1f.dat"
+#FILE_PAT = "Pk_z%3.1f.dat"
+FILE_PAT = "camb_00891002_matterpower_z%3.1f.dat"
 REDSHIFTS = np.arange(0, 2.001, 0.2)
-K_MAX = 2.
+K_MAX = 20.
 
 # k values are the same for all redshifts.
 K = np.loadtxt(path.join(DATA_DIR, FILE_PAT % REDSHIFTS[0]))[:,0]
