@@ -10,11 +10,12 @@ import matter_power
 import angular_terms
 
 # Redshift at which we can detect event of luminocity L*.
-Z_STAR = 1.
+Z_STAR = 0.5
 ALPHA = -1.
 
 B_E = 1.0
 B_F = 1.3
+B_G = 1.3
 
 
 def d_ln_n(chi):
@@ -73,6 +74,21 @@ def apply_coeffs(mult_ell, chi, delta):
 
     return t1, t2, t3
 
+
+def apply_coeffs_cross(mult_ell, chi_gal, chi_frb):
+    chi_bar = (chi_gal + chi_frb) / 2
+    delta = chi_frb - chi_gal
+    i1, i2, i3 = mult_ell.get_integrals(chi_bar, delta)
+    t1 = (B_F - B_E) * B_G * i1
+    t3 = np.zeros_like(t1)
+    if chi_gal > chi_frb:
+        t2 = t3.copy()
+    else:
+        coeff = d_ln_n(chi_frb) + 2./chi_frb
+        t2 = - B_E * B_G * coeff * i2
+    return t1, t2, t3
+
+
 def plot_spectra(mult_ell, chi, delta, local_only=False, **kwargs):
     ells = mult_ell.ells
     t1, t2, t3 = apply_coeffs(mult_ell, chi, delta)
@@ -90,7 +106,7 @@ def plot_spectra(mult_ell, chi, delta, local_only=False, **kwargs):
 def get_ells():
     ells = range(10, 101, 10)
     factor = 1.1
-    max = 1000
+    max = 5000
     while ells[-1] < max:
         ells.append(int(factor * ells[-1]))
     return np.array(ells)
@@ -99,9 +115,83 @@ def get_ells():
 def get_mult_ell(ells=None, limber=True):
     if ells is None:
         ells = get_ells()
-    CHI_MAX = 3600.
+    CHI_MAX = 5000.
     mell = angular_terms.MultiEll(ells, CHI_MAX, limber)
     return mell
+
+
+def cross_corr_plots(mult_ell=None):
+    kwargs = {
+            "linewidth" : 2.,
+             }
+
+
+    # Mean source density plot
+    N_TOTAL = 10000
+    F_SKY = 0.5
+
+    chi_s = np.linspace(100, 3500, 50.)
+    coef_s = np.array([  d_ln_n(chi) + 2./chi for chi in chi_s ])
+
+    n_bar = n_chi(chi_s)
+    norm = integrate.simps(n_bar * chi_s**2, chi_s) * 4 * np.pi * F_SKY
+    norm /= N_TOTAL
+    n_bar /= norm
+
+    f = plt.figure()
+    grid = gridspec.GridSpec(2, 1, wspace=0.0, hspace=0.0)
+    ax1 = plt.subplot(grid[0])
+    d = chi_s**2 * n_bar * 4 * np.pi * F_SKY
+    #d /= np.amax(d)
+    ax1.plot(chi_s, d, 'k', **kwargs)
+    #plt.ylim(0., 1.1)
+    #plt.yticks(np.arange(0.1, 1.0,  0.2))
+    plt.ylabel(r"$4\pi f_{\rm sky} \chi^2\bar{n}_f$ ($h/\rm{Mpc})$",
+               fontsize=18,
+               )
+    
+    ax2 = plt.subplot(grid[1], sharex=ax1)
+    #f.subplots_adjust(hspace=0.001)
+    ax2.axhline(y=0.0, color='k', linestyle='--')
+    ax2.plot(chi_s, coef_s, 'k', **kwargs)
+    plt.ylim(-0.02, 0.02)
+    plt.yticks(np.arange(-0.005, 0.02,  0.005))
+    #plt.ylabel(r"$(\frac{1}{\bar{n}_f}\frac{d \bar{n}_f}{d \chi}"
+    #           r"+ \frac{2}{\chi})$  ($h/\rm{Mpc})$",
+    #           fontsize=18,
+    #           )
+    plt.ylabel(r"$A(\chi)$  ($h/\rm{Mpc})$",
+               fontsize=18,
+               )
+    plt.xlabel(r"$\chi$ ($\rm{Mpc}/h$)",
+               fontsize=18,
+               )
+    xticklabels = ax1.get_xticklabels()
+    plt.setp(xticklabels, visible=False)
+    #plt.ticklabel_format(axis='y',style='sci',scilimits=(1,1))
+    #plt.savefig('n_f.eps', tightlayout=True, bbox_inches='tight')
+
+    if mult_ell is None:
+        mult_ell = get_mult_ell()
+
+    plt.figure()
+    ells = mult_ell.ells
+    trans = lambda t: abs(t)
+    t1, t2, t3 = apply_coeffs_cross(mult_ell, 60, 4500)
+    plt.loglog(ells, trans(t1 + t2 + t3), label='4500', **kwargs)
+    t1, t2, t3 = apply_coeffs_cross(mult_ell, 60, 3000)
+    plt.loglog(ells, trans(t1 + t2 + t3), label='1000', **kwargs)
+    t1, t2, t3 = apply_coeffs_cross(mult_ell, 60, 1000)
+    plt.loglog(ells, trans(t1 + t2 + t3), label='1000', **kwargs)
+    t1, t2, t3 = apply_coeffs_cross(mult_ell, 90, 100)
+    plt.loglog(ells, trans(t1 + t2 + t3), label='100', **kwargs)
+    plt.legend(loc="upper right", labelspacing=.1, frameon=False)
+    plt.legend(loc="upper right", labelspacing=.1, frameon=False)
+
+
+
+    return mult_ell
+
 
 
 def my_plots(mult_ell=None, chi=1000):

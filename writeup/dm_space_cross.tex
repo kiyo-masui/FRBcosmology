@@ -1,0 +1,332 @@
+\documentclass[twocolumn,nofootinbib,prl,floatfix]{revtex4-1}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{times}
+\usepackage{afterpage}
+\usepackage{epstopdf}
+\usepackage{url}
+\usepackage{hyperref}
+
+
+
+% shortcuts
+%\newcommand{\ud}{\,\mathrm{d}}
+\newcommand{\bD}{\boldsymbol D}
+\newcommand{\bC}{\boldsymbol C}
+\newcommand{\bDelta}{\boldsymbol \Delta}
+\newcommand{\Dgal}{D^{\rm gal}}
+\newcommand{\Dne}{D^{\bar{n}_e}}
+\newcommand{\Dde}{D^{\delta_e}}
+\newcommand{\Dsrc}{D^{\rm src}}
+\newcommand{\del}{\delta\!}
+\newcommand{\calP}{{\cal P}}
+%\newcommand{\ud}{\,\mathrm{d}}
+\newcommand{\ud}{\,d}
+
+
+
+% for draft comments.
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\blue}{}
+%\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\green}{\textcolor{green}}
+
+% Command to consume spaces and newlines.  Used to PRL style sections.
+\makeatletter
+\def\ignorespacesandimplicitepars{%
+  \begingroup
+  \catcode13=10
+  \@ifnextchar\relax
+    {\endgroup}%
+    {\endgroup}%
+}
+
+
+\renewcommand{\section}[1]{\emph{#1.}---\ignorespacesandimplicitepars}
+\renewcommand{\subsection}[1]{}
+
+\input{AAS_macros.tex}
+
+\makeatother
+
+\begin{document}
+
+%\title{The large-scale structure of the Universe in dispersion measure space}
+\title{Cross-Correlations Between Galaxies and Dispersion-Space Fast Radio
+Bursts}
+
+\author{Kiyoshi Wesley Masui}
+
+
+\begin{abstract}
+
+\end{abstract}
+
+\maketitle
+\section{Clustering in dispersion space}
+
+The dispersion measure of a signal observed in some angular direction $\hat{n}$ and
+originating from comoving radial distance $\chi$ is
+\begin{equation}
+    {\rm DM}(\hat{n}, \chi) = \int_0^{\chi} \ud\chi' a(\chi)^2
+        n_e(\hat{n}\chi', \chi').
+\end{equation}
+Here
+$n_e(\vec{x}, \chi)$ is the free electron density as a function of location and
+conformal time. Note that we use $\chi$ as our radial distance and time
+coordinate, as opposed to redshift. We model the cosmological 
+electron density as containing a homogeneous part
+and perturbations,
+$n_e(\vec x, \chi) = \bar{n}_e(\chi) \left[1 + \delta_e(\vec x, \chi)\right]$.
+The dispersion
+measure is thus
+\begin{equation}
+    {\rm DM}(\hat n, \chi) = \int_0^\chi \ud\chi' a(\chi')^2 \bar{n}_e(\chi')
+       \left[1 + \delta_e(\hat{n}\chi',\chi')\right].
+\end{equation}
+
+\emph{Dispersion space} is the three-dimensional coordinates,
+$\vec x_s$, inferred from the dispersion measure assuming that the electrons are
+homogeneous. This only affects the radial coordinate such that $\vec x_s = \hat
+n \chi_s$, with $\chi_s$ defined by the equation
+\begin{equation}
+    {\rm DM}(\chi_s) = \int_0^{\chi_s} \ud\chi' a(\chi')^2 \bar{n}_e(\chi').
+\end{equation}
+
+Combining the above equations (keeping only terms first order in the density
+perturbations), we find that
+\begin{equation}
+\frac{\ud \chi_s}{\ud \chi} = 1 + \delta_e(\hat n \chi, \chi),
+\end{equation}
+and thus
+\begin{equation}
+\chi_s - \chi = \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
+\end{equation}
+
+We wish to relate the density of a tracer, $f$, measured in dispersion space to its
+density in real space. We follow the derivation in \citet{1987MNRAS.227....1K}
+of the
+redshift-space distortions. Start by noting that the total number of tracers
+in a volume element is the same in both spaces:
+\begin{equation}
+n_{fs}(\vec x_s) \ud^3\vec x_s = n_{f}(\vec x) \ud^3\vec x.
+\end{equation}
+We split the density into a homogeneous part plus perturbations,
+\begin{equation}
+\label{e:density}
+    \bar{n}_{fs}(\chi_s)\left[ 1 + \delta_{fs}(\vec x_s)\right] \ud^3\vec x_s
+    = \bar{n}_{f}(\chi)\left[ 1 + \delta_f(\vec x)\right] \ud^3\vec x.
+\end{equation}
+Averaged over the sky, $\langle \chi_s \rangle = \chi$, and thus the background
+density should
+be the same in dispersion space as in real space,
+\begin{equation}
+\bar{n}_{fs}(\chi) = \bar{n}_f(\chi).
+\end{equation}
+Therefore,
+\begin{align}
+\bar{n}_{fs}(\chi_s) 
+    &= \bar{n}_{f}(\chi) + (\chi_s - \chi)\frac{\ud \bar{n}_f}{\ud \chi}\\
+    &= \bar{n}_{f}(\chi)
+       + \frac{\ud \bar{n}_f}{\ud \chi}\int_0^\chi \ud \chi' \delta_e(\hat n
+       \chi').
+       \label{e:nfs}
+\end{align}
+
+The Jacobian in spherical coordinates is
+\begin{align}
+\left| \frac{\ud^3\vec x}{\ud^3\vec x_s} \right|
+    &= \frac{\ud \chi}{\ud \chi_s}\frac{\chi^2}{\chi_s^2}\\
+%    &= (1 + \delta_e)^{-1}
+%       \left(1 + \frac{\int_0^\chi \ud \chi' \delta_e(\hat n \chi')}
+%                      {\chi}\right)^{-2}\\
+    &\approx 1 - \delta_e
+        - \frac{2}{\chi}\int_0^\chi \ud \chi' \delta_e(\hat n \chi').
+        \label{e:jac}
+\end{align}
+
+Substituting Eqs.~\ref{e:nfs}~and~\ref{e:jac} into Eq.~\ref{e:density},
+we obtain
+\begin{equation}
+\label{e:delta_s}
+    \delta_{fs} = \delta_f - \delta_e
+    - \left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi} \right)
+        \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
+\end{equation}
+In the above equation, the $-\delta_e$ term is most analogous to the Kaiser
+redshift-space distortions.  It is a dilution of tracers in dispersion space due to an
+excess of electrons between the tracers. However we note that this term is isotropic
+in contrast to the Kaiser term.  This is because any wave vector electron perturbation
+causes dispersion-space distortions, whereas the radial velocities that cause
+redshift-space distortions are only sourced by perturbations with radial wave
+vectors.
+
+The $\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}$ term arises because the
+misinterpretation of the radial distance causes the observed tracer density to
+be compared to the wrong background density. The $\frac{2}{\chi}$ term is
+caused by a misinterpretation of angular distances when the radial distance is
+mismeasured.  In both cases, analogous terms are, in principle, present in 
+redshift space but are
+negligible. Because radial velocities are only sourced by modes with a large
+radial wave vector, there is near perfect cancellation along the line of sight,
+and thus there is very little net error in the radial distance.
+
+For brevity in the following sections, we define the coefficient of the integral
+term as
+\begin{equation}
+    \label{e:A}
+    A(\chi) \equiv \frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi}
+    + \frac{2}{\chi}.
+\end{equation}
+
+
+\section{Cross-correlation}
+
+Large-scale structure is usually studied through its two-point statistics, most
+commonly the power spectrum, $P(k)$.
+Unlike the redshift-space distortions, Eq.~\ref{e:delta_s} does not have a
+simple form in harmonic space. The equation's third term couples harmonic
+modes,
+and thus the two-point statistics cannot be phrased as a simple power spectrum.
+We will instead use $C^{gs}_\ell(\chi,\chi')$, which is
+the cross-correlation angular power spectrum of the dispersion-space overdensity,
+on shells at $\chi$ and $\chi'$:
+\begin{align}
+    &C^{gs}_\ell(\chi, \chi') =
+    \int\ud\Omega\ud\Omega' Y_{\ell m}(\hat n) Y^*_{\ell m}(\hat n')
+    \langle \delta_{g}(\hat n \chi) \delta_{fs}(\hat n' \chi')
+        \rangle.
+\end{align}
+The first two terms in Eq.~\ref{e:delta_s} are stationary. For stationary,
+isotropic tracers $x$ and $y$, we have 
+$\langle \delta_x(\vec k, \chi) \delta_y(\vec k', \chi) \rangle = (2\pi)^3
+\delta^3(\vec k - \vec k') P_{xy}(k, \chi)$.  If, for a moment, we ignore
+structure evolution, the angular cross-power spectrum of such tracers is
+\begin{align}
+    %\delta_{\ell\ell'}\delta_{mm'}C^{xy}_\ell(\chi, \chi')
+    %&= \int\ud\Omega\ud\Omega'Y_{\ell m}(\hat n) Y_{\ell' m'}(\hat n')
+    %    \langle \delta_x(\hat n \chi) \delta_y(\hat n' \chi') \rangle,
+    %    \\
+    C^{xy}_\ell(\chi,\chi')
+    &= \frac{2}{\pi}
+\int_0^\infty\ud k k^2 j_\ell(k\chi) j_{\ell}(k\chi')P_{xy}(k).
+\end{align}
+In reality the power spectrum evolves on the order of a Hubble time.
+The angular cross correlations will be very small unless $\chi$ and $\chi'$ are
+within a few correlation lengths of one another, roughly a hundred
+megaparsecs.  The evolution of the power spectrum is negligible over these time
+differences, which leads to a straightforward way to include the evolution:
+\begin{align}
+    % I've tuned the alignment of the domain (using &)
+    % here to get the equation number and
+    % domain on the same line. Not elegant.
+    C^{xy}_\ell(\chi,\chi') \approx&
+        \frac{2}{\pi}
+        \int_0^\infty\ud k k^2
+        j_\ell(k\chi) j_{\ell}(k\chi')
+        P_{xy}(k,(\chi + \chi')/2),\nonumber \\
+    &|\chi - \chi'| \ll 1/aH.
+\end{align}
+
+The third term in Eq.~\ref{e:delta_s} is not stationary but is an integral
+over the stationary field $\delta_e$.
+Define $\delta_d$ as
+\begin{equation}
+    \delta_d(\hat n \chi) \equiv \int_0^\chi \ud \chi' \delta_e(\hat n \chi').
+\end{equation}
+It is straightforward to show that
+\begin{widetext}
+\begin{equation}
+C^{dd}_\ell(\chi,\chi')
+    =
+    \frac{2}{\pi}
+    \int_0^\chi\ud\chi''
+    \int_0^{\chi'}\ud\chi'''
+    \int_0^\infty\ud k k^2 j_\ell(k\chi'') j_{\ell}(k\chi''')
+    P_{ee}(k, (\chi''+\chi''')/2).
+\end{equation}
+
+Finally, $C^{gs}_\ell$ will contain cross terms between the stationary terms
+and the integral terms.  These will have the form
+\begin{equation}
+C^{dx}_\ell(\chi,\chi')
+    =
+    \frac{2}{\pi}
+    \int_0^\chi\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi') j_{\ell}(k\chi'')P_{ex}(k, (\chi' + \chi'')/2).
+\end{equation}
+
+Assembling all of these expressions with the proper coefficients, we have
+\begin{align}
+    \label{e:Clss}
+C^{gs}_\ell(\chi,\chi') = &~
+    \frac{2}{\pi}
+    \int_0^\infty\ud k k^2
+    j_\ell(k\chi) j_{\ell}(k\chi')
+    P_{[gf - ge]}(k, (\chi + \chi')/2)
+    %\left[
+    %P_{ff}(k, \bar\chi)
+    %+ P_{ee}(k, \bar\chi)
+    %- 2P_{fe}(k, \bar\chi)
+    %\right]
+    \nonumber\\
+    & +
+    \frac{2}{\pi}
+    %\left(\frac{1}{\bar{n}_f}\frac{\ud \bar{n}_f}{\ud \chi'}
+    %+ \frac{2}{\chi'} \right)
+    A(\chi')
+    \int_0^{\chi'}\ud\chi''
+    \int_0^\infty\ud k k^2 
+    j_\ell(k\chi) j_{\ell}(k\chi'')
+    P_{[-ge]}(k, (\chi + \chi'')/2).
+    %\left[ 
+    %P_{ee}(k, (\chi + \chi'')/2)
+    %- P_{fe}(k, (\chi + \chi'')/2) 
+    %\right].
+\end{align}
+\end{widetext}
+Here, expressions such as $P_{[ff + ee - 2ef]}$ are shorthand for $P_{ff} +
+P_{ee} - 2P_{ef}$.
+
+Equation~\ref{e:Clss} can be simplified substantially by adopting the small
+angle and Limber approximations \citep{1953ApJ...117..134L,
+1992ApJ...388..272K, 1998ApJ...498...26K}.  The small angle
+approximation eliminates the $k$ integral over spherical Bessel functions, replacing it
+with a Fourier transform, and is valid for $\ell \gg 1$. The Limber
+approximation assumes that only modes with a small radial component of their wave
+vector contribute to the radial integrals and is valid if the power spectra
+evolve slowly compared to the correlation length \citep{2008PhRvD..78l3506L}
+(which has already been
+assumed). With these approximations, we have
+\begin{align}
+    &C^{gs}_\ell(\chi, \chi') \approx
+    \nonumber \\ & \quad
+    \frac{1}{\bar\chi^2}
+        \int_{-\infty}^\infty\frac{\ud k_\parallel}{(2 \pi)} 
+        e^{i k_\parallel (\chi - \chi')}
+        P_{[gf - ge]}
+        (\sqrt{k_\parallel^2 + \nu^2/\bar\chi^2}, \bar\chi)
+    \nonumber \\ & \quad +
+    H(\chi' - \chi)
+    \frac{A(\chi')}{\chi^2}
+    P_{[- ge]}(\nu/\chi, \chi),
+    \label{e:Clss_limber}
+\end{align}
+where $\nu\equiv\ell + 1/2$, $\chi_{\min} \equiv \min(\chi, \chi')$,
+$\chi_{\max} \equiv \max(\chi, \chi')$, and $H$ is the Heaviside step function.
+We have found that these approximations are accurate to within $3\%$ at
+$\ell \gtrsim 10$
+and use this form for the remainder of the Letter. 
+
+
+\bibliography{refs}
+
+\end{document}
+
+
