@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy import special, integrate
+from scipy import special, integrate, interpolate
+from cora.util.cosmology import Cosmology
 
 import matter_power
 
@@ -71,15 +72,20 @@ plt.semilogx(np.degrees(thetas), wtheta)
 
 
 # Redshift at which we can detect event of luminocity L*.
-Z_STAR = 0.5
-ALPHA = -1.
+#Z_STAR = 1.5
+#ALPHA = -1.
 
+Z_STAR = 0.9
+ALPHA = -0.4
+
+#Z_STAR = 2.
+#ALPHA = -1
 
 def n_chi(chi):
     """Vectorized."""
     # Invert the distance redshift relation by interpolating.
     c = Cosmology()
-    redshifts_s = np.linspace(0.01, 3, 50)
+    redshifts_s = np.linspace(0.0, 5, 50)
     chi_s = c.comoving_distance(redshifts_s)
     redshift_interp = interpolate.interp1d(chi_s, redshifts_s, kind='cubic')
     redshifts = redshift_interp(chi)
@@ -99,23 +105,63 @@ def n_chi(chi):
     return n
 
 
-def d_ln_n(chi):
-    """Not vecotized"""
+def dndchi(chi):
 
-    delta_chi = 0.01 * chi
-    n = n_chi(np.array([chi, chi + delta_chi]))
+    delta_chi = 1.
+    chi = chi[:, None] + [-delta_chi / 2, delta_chi / 2]
+    s = chi.shape
+    n = n_chi(chi.flat)
+    n.shape = s
 
-    d_ln_n_d_chi = (n[1] - n[0]) / delta_chi / n[0]
-    #print n
-    #print d_ln_n_d_chi
-
-    #plt.plot(redshifts, n*chi_s**2)
-    #plt.figure()
-    #plt.plot(redshifts, n)
+    dndchi = (n[:, 1] - n[:, 0]) / delta_chi
 
     # Finite difference derivative and normalize.
-    return d_ln_n_d_chi
+    return dndchi
 
+
+def dm_to_z(dm):
+    return dm / 1000.
+
+
+dm_bin_edges = np.array([0, 300, 800, 5000])
+c = Cosmology()
+chi_bin_edges = c.comoving_distance(dm_to_z(dm_bin_edges))
+print chi_bin_edges
+
+delta = 10
+chis = np.arange(1, 5000, delta)
+
+
+#plt.figure()
+#plt.plot(chis, chis**2 * dndchi(chis))
+
+
+#plt.figure()
+#plt.plot(chis, chis**2 * dndchi(chis))
+
+#A_n_chi2 = chis**2 * dndchi(chis) + 2 * chis * n_chi(chis)
+#plt.figure()
+#plt.plot(chis, A_n_chi2)
+
+
+#plt.figure()
+#plt.plot(chis, np.cumsum(A_n_chi2))
+
+norm = np.sum(chis**2 * n_chi(chis)) / delta
+
+plt.figure()
+plt.plot(chis, chis**2 * n_chi(chis) / norm)
+plt.axvline(chi_bin_edges[1])
+plt.axvline(chi_bin_edges[2])
+
+
+coeffs = chi_bin_edges**2 *  n_chi(chi_bin_edges) / norm
+coeffs = -np.diff(coeffs)
+print coeffs
+
+plt.figure()
+for c in coeffs:
+    plt.semilogx(np.degrees(thetas), c * wtheta)
 
 
 

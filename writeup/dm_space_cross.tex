@@ -324,6 +324,21 @@ We have found that these approximations are accurate to within $3\%$ at
 $\ell \gtrsim 10$
 and use this form for the remainder of the Letter. 
 
+One thing that should be true is that the disperion-space distortions
+should no effect
+on observations that do not use DM information. Lets say we did not bin the
+FRBs by dispersion measure but just took the angular cross-power spectrum of the
+unbinned FRBs with the galaxies (which may still be binned), $C^{gf}_\ell(\chi)$.
+The number of FRBs per unit comoving distance is proportional to
+$\chi^2 \bar{n}_{f}(\chi)$, and so
+\begin{equation}
+    C^{gf}_\ell(\chi) \propto \int \ud\chi' {\chi'}^2 \bar{n}_{f}(\chi')
+    C^{gs}_\ell(\chi, \chi').
+\end{equation}
+Substituting Equation~\ref{e:Clss}, we find that integrating the cross term by
+parts gives exact expression required to cancel the $P_{ge}$ part of the local
+term and everything is miraculously consistent.
+
 
 \bibliography{refs}
 
